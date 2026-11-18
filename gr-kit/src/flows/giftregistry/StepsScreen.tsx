@@ -17,6 +17,7 @@ import { addresses, copy, defaultName, flowSteps, occasionOf, occasions, registr
 import { arrive, fade, fadeOut, MOVE, move, STAGGER_IN } from './motion';
 import { grStore } from './store';
 import { themeOf } from './theme';
+import type { OccasionKey } from './tokens';
 import styles from './steps.module.css';
 
 /**
@@ -68,7 +69,14 @@ export function StepsScreen({ params }: ScreenProps<{ morph?: string; step?: Ste
   // recolour queue (HeroLottie.tsx): on 1.1 the hero, page wash and CTA play one recolour at a time and then jump to
   // the latest pick; the tiles (s.occ) answer every pick at once
   const queuedOcc = useRecolourQueue(s.occ);
-  const shownOcc = cur === 'occ' ? queuedOcc : s.occ;
+  // a later step opened without an occasion (a reload or a deep link: the store starts fresh) plays the Birthday hero
+  // (Baby shower on Due date, assets.ts heroLottie), so the page takes that occasion too instead of the blue default,
+  // and the store keeps it so the rest of the flow and the registry page match
+  const fallbackOcc: OccasionKey | null = cur !== 'occ' && !s.occ ? (cur === 'due' ? 'babyshower' : 'birthday') : null;
+  useEffect(() => {
+    if (fallbackOcc) grStore.patch({ occ: fallbackOcc });
+  }, [fallbackOcc]);
+  const shownOcc = cur === 'occ' ? queuedOcc : (s.occ ?? fallbackOcc);
   const theme = themeOf(shownOcc);
   const order = flowSteps(s.occ);
   const st = steps[cur];
