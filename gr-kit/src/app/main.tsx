@@ -52,7 +52,15 @@ function useDeviceFit() {
   };
   const [fit, setFit] = useState(read);
   useEffect(() => {
-    const on = () => setFit(read());
+    // a webview that shrinks the window for the keyboard (Android adjustResize) must not squash the screen: while a
+    // field has focus and the width is unchanged, height changes are the keyboard and are ignored
+    let lastW = window.innerWidth;
+    const on = () => {
+      const typing = document.activeElement instanceof HTMLInputElement || document.activeElement instanceof HTMLTextAreaElement;
+      if (typing && window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      setFit(read());
+    };
     window.addEventListener('resize', on);
     window.addEventListener('orientationchange', on);
     return () => {
@@ -60,6 +68,36 @@ function useDeviceFit() {
       window.removeEventListener('orientationchange', on);
     };
   }, []);
+  // The keyboard lays over the screen instead of pushing it up. iOS pans the visual viewport to bring a focused field
+  // above the keyboard, which carries the whole fixed screen up with it; the screen follows the pan back down
+  // (--nk-vv-top = the pan), and any document scroll iOS adds is undone. Android Chrome: interactive-widget in index.html.
+  useEffect(() => {
+    if (!fit) return;
+    const vv = window.visualViewport;
+    const root = document.documentElement;
+    let raf = 0;
+    const pin = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        if (window.scrollY || window.scrollX) window.scrollTo(0, 0);
+        root.style.setProperty('--nk-vv-top', `${vv ? Math.max(0, vv.offsetTop) : 0}px`);
+      });
+    };
+    vv?.addEventListener('scroll', pin);
+    vv?.addEventListener('resize', pin);
+    window.addEventListener('scroll', pin);
+    document.addEventListener('focusin', pin);
+    document.addEventListener('focusout', pin);
+    return () => {
+      cancelAnimationFrame(raf);
+      vv?.removeEventListener('scroll', pin);
+      vv?.removeEventListener('resize', pin);
+      window.removeEventListener('scroll', pin);
+      document.removeEventListener('focusin', pin);
+      document.removeEventListener('focusout', pin);
+      root.style.removeProperty('--nk-vv-top');
+    };
+  }, [!!fit]);
   useEffect(() => {
     document.documentElement.classList.toggle('nk-fit', !!fit);
   }, [fit]);
