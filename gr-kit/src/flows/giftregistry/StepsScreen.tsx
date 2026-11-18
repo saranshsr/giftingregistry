@@ -534,8 +534,18 @@ function BigField({
     setPhW(c.measureText(placeholder).width);
   }, [placeholder]);
   const empty = !value;
+  // Touch: the real input sits invisibly at the top of the screen and the answer is drawn in its place (mirror + caret).
+  // iOS, Android (adjustPan) and prototype-player apps all slide the page up when the focused field would land under the
+  // keyboard; with the field already at the top nothing moves, so the keyboard simply lays over the screen.
+  const ghost = TOUCH;
   return (
-    <div className={styles.bigField} data-empty={empty || undefined} onClick={() => ref.current?.focus()}>
+    <div className={styles.bigField} data-empty={empty || undefined} data-ghost={ghost || undefined} onClick={() => ref.current?.focus({ preventScroll: true })}>
+      {ghost && (
+        <div className={styles.mirror} data-empty={empty || undefined} aria-hidden>
+          {empty ? placeholder : value}
+          {!empty && focused && <span className={styles.caretInline} />}
+        </div>
+      )}
       <TextField
         ref={ref}
         value={value}
