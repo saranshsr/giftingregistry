@@ -6,6 +6,7 @@ import { accountFlow } from '../flows/account';
 import { wishlistFlow } from '../flows/wishlist';
 import type { FlowDef } from '../kit/types';
 import { NoonPrototype } from '../kit/NoonPrototype';
+import { layout } from '../foundations/tokens';
 import { createRegistry } from '../kit/registry';
 import { parsePageUrl } from '../kit/routes';
 import type { Route, StackEntry } from '../kit/types';
@@ -36,7 +37,37 @@ const readUrl = (): { route?: Route; params: Record<string, string> } => {
   return { route: route ? registry.resolve(route)?.route : undefined, params };
 };
 
+// On a phone (a narrow viewport: a browser, a home-screen app or a prototype-player webview) the screen fills the
+// device instead of sitting in a 390 × 844 frame with padding, which overflowed and scrolled. It keeps the 390 pt layout
+// width, scales to the viewport width and takes the viewport's height, so nothing scrolls and nothing is letterboxed.
+// innerHeight, not visualViewport: the keyboard must not resize the screen.
+const FIT_MAX_WIDTH = 600;
+function useDeviceFit() {
+  const read = () => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    if (w > FIT_MAX_WIDTH) return undefined;
+    const scale = w / layout.deviceWidth;
+    return { scale, height: Math.round((h / scale) * 100) / 100 };
+  };
+  const [fit, setFit] = useState(read);
+  useEffect(() => {
+    const on = () => setFit(read());
+    window.addEventListener('resize', on);
+    window.addEventListener('orientationchange', on);
+    return () => {
+      window.removeEventListener('resize', on);
+      window.removeEventListener('orientationchange', on);
+    };
+  }, []);
+  useEffect(() => {
+    document.documentElement.classList.toggle('nk-fit', !!fit);
+  }, [fit]);
+  return fit;
+}
+
 function Preview({ initialFlows }: { initialFlows: FlowDef[] }) {
+  const fit = useDeviceFit();
   const [page, setPage] = useState(() => ({ ...readUrl(), nonce: 0 }));
   const [allLoaded, setAllLoaded] = useState(initialFlows);
   useEffect(() => {
@@ -74,7 +105,7 @@ function Preview({ initialFlows }: { initialFlows: FlowDef[] }) {
 
   return (
     <div className="pg-stage">
-      <NoonPrototype key={page.nonce} flows={allLoaded} initialRoute={page.route} initialParams={page.params} onRouteChange={onRouteChange} />
+      <NoonPrototype key={page.nonce} fit={fit} flows={allLoaded} initialRoute={page.route} initialParams={page.params} onRouteChange={onRouteChange} />
       {/* review shell: the Gift Registry flows, collapsed to a handle (opens a slim panel, or a sheet on phones) */}
       <FlowSelector
         title={reviewTitle}

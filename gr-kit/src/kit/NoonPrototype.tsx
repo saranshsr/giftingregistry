@@ -20,6 +20,8 @@ export interface NoonPrototypeProps {
   /** wrap in an iPhone frame (default true) */
   frame?: boolean;
   scale?: number;
+  /** fill a real device's viewport: the 390 pt-wide screen scaled to the viewport width, `height` pt tall (PhoneFrame) */
+  fit?: { scale: number; height: number };
   rtl?: boolean;
   /** global token overrides (rebrand / A-B a colour across every flow) */
   tokens?: TokenOverrides;
@@ -42,7 +44,7 @@ export interface NoonPrototypeProps {
  *   import '@noon/flow-kit/style.css';
  *   <NoonPrototype flows={[homeFlow, plpFlow, pdpFlow, cartFlow]} initialRoute="home/home" />
  */
-export function NoonPrototype({ flows, initialRoute, initialParams, frame = true, scale = 1, rtl, tokens, emptyCart, reducedMotion = 'user', onRouteChange, resetSignal }: NoonPrototypeProps) {
+export function NoonPrototype({ flows, initialRoute, initialParams, frame = true, scale = 1, fit, rtl, tokens, emptyCart, reducedMotion = 'user', onRouteChange, resetSignal }: NoonPrototypeProps) {
   const registry = useMemo(() => createRegistry(flows), [flows]);
   const start = initialRoute ?? `${flows[0].id}/${flows[0].initial}`;
   const [screenTone, setScreenTone] = useState<StatusBarTone>('dark');
@@ -79,7 +81,7 @@ export function NoonPrototype({ flows, initialRoute, initialParams, frame = true
       <MotionConfig reducedMotion={reducedMotion}>
         <ReducedMotionScope>
           <DemoStoreProvider emptyCart={emptyCart}>
-            <PhoneFrame frameless={!frame} scale={scale} statusBar={statusBar}>
+            <PhoneFrame frameless={!frame} scale={scale} fit={fit} statusBar={statusBar}>
               <StatusBarCtx.Provider value={setOverride}>
                 <Navigator registry={registry} initialRoute={start} initialParams={initialParams} onChange={onChange} resetSignal={resetSignal} />
               </StatusBarCtx.Provider>

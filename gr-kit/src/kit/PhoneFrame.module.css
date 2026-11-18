@@ -1,6 +1,7 @@
 /* No bezel: the screen itself is the device. drop-shadow (not box-shadow) so the shadow follows the squircle clip. */
 .device { transform-origin: top center; flex-shrink: 0; filter: drop-shadow(0 24px 48px var(--nk-palette-charcoal-navy-alpha16)) drop-shadow(0 2px 6px var(--nk-palette-charcoal-navy-alpha8)); }
 .frameless { transform-origin: top center; flex-shrink: 0; box-shadow: 0 10px 40px var(--nk-palette-charcoal-navy-alpha12); border-radius: 12px; overflow: hidden; }
+.fit { position: fixed; top: 0; left: 0; transform-origin: 0 0; }
 .viewport { position: relative; overflow: hidden; background: var(--nk-color-bg-surface); container-type: inline-size; }
 .frameless .viewport { border-radius: 12px; }
 .statusBar { position: absolute; top: 0; left: 0; right: 0; height: 54px; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 6px 30px 0 44px; pointer-events: none; color: var(--nk-palette-black); }

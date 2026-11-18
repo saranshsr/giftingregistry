@@ -9,16 +9,19 @@ const screenClip = `path('${squirclePath(layout.deviceWidth, layout.deviceHeight
  * iPhone-style screen (390×844) with status bar + home indicator: no bezel, no island, corners clipped to a
  * smoothed squircle (layout.screenRadius, layout.screenSmoothing). `frameless` renders the bare viewport.
  */
-export function PhoneFrame({ children, statusBar = 'dark', frameless, scale = 1, time = '9:41' }: { children: ReactNode; statusBar?: 'dark' | 'light'; frameless?: boolean; scale?: number; time?: string }) {
+export function PhoneFrame({ children, statusBar = 'dark', frameless, scale = 1, fit, time = '9:41' }: { children: ReactNode; statusBar?: 'dark' | 'light'; frameless?: boolean; scale?: number; fit?: { scale: number; height: number }; time?: string }) {
+  // `fit`: on a real phone the screen is the device's own, so it fills the viewport (no squircle clip or shadow; the
+  // device's corners round it) at the viewport's aspect: 390 pt wide, scaled to the viewport width, as tall as it needs.
   const vars = {
     '--nk-inset-top': `${layout.statusBar}px`,
     '--nk-inset-bottom': `${layout.homeIndicator}px`,
     width: layout.deviceWidth,
-    height: layout.deviceHeight,
-    clipPath: frameless ? undefined : screenClip,
+    height: fit ? fit.height : layout.deviceHeight,
+    clipPath: frameless || fit ? undefined : screenClip,
   } as CSSProperties;
+  const s = fit ? fit.scale : scale;
   return (
-    <div className={frameless ? styles.frameless : styles.device} style={{ transform: scale !== 1 ? `scale(${scale})` : undefined }}>
+    <div className={fit ? styles.fit : frameless ? styles.frameless : styles.device} style={{ transform: s !== 1 ? `scale(${s})` : undefined }}>
       <div className={styles.viewport} style={vars}>
         {children}
         <div className={styles.statusBar} data-tone={statusBar}>

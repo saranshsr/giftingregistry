@@ -13,3 +13,12 @@ body,
   padding: 24px 0;
 }
 
+
+/* a phone: the screen fills the viewport (main.tsx useDeviceFit), so the page itself never scrolls or bounces */
+html.nk-fit,
+html.nk-fit body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+html.nk-fit .pg-stage { padding: 0; }
