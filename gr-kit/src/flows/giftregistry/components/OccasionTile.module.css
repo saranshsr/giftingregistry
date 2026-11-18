@@ -1,0 +1,122 @@
+/*
+ * Reference prototype OCC_CSS (components/form-controls.js) for flow 6 (`.occ.occ-v2.occ-v5` under html.exp), 1:1 in
+ * geometry and colour: 98 × 120 on #F9F9FB; selected = white fill, 1 px stroke, a 202 pt glow ellipse at (−52, −16)
+ * (#F9F9FB → occasion glow) rising y 16 → 0, bold label in the occasion colour, art lifted −2 pt at 1.04.
+ * Timing is the reference's (fill .2 s; stroke / glow fade / label .5 s), refined onto the kit:
+ *  - fades on ease-out cubic (`easing.out`) instead of CSS `ease`
+ *  - the two moves (glow rise, art lift) on the MOVE spring, Spring(300, 28), as a CSS linear() (sampled every 20 ms
+ *    over its 540 ms settle; 1.3 % overshoot = 0.2 pt on the glow, invisible) instead of the one-off
+ *    cubic-bezier(0.2, 0.9, 0.1, 1)
+ *  - CSS transitions retarget from wherever they are, so re-picking mid-transition is smooth both ways
+ * Press: the kit Pressable's 0.96 spring plus the reference's brightness(0.96).
+ */
+.tile {
+  --occ-move: linear(
+    0,
+    0.0497,
+    0.1646,
+    0.3062,
+    0.4502,
+    0.5825,
+    0.696,
+    0.7885,
+    0.8606,
+    0.9145,
+    0.953,
+    0.9793,
+    0.9962,
+    1.0062,
+    1.0113,
+    1.0133,
+    1.0131,
+    1.0119,
+    1.0101,
+    1.0081,
+    1.0063,
+    1.0047,
+    1.0033,
+    1.0022,
+    1.0014,
+    1.0008,
+    1.0004,
+    1
+  );
+  --occ-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --occ-move-ms: 0.54s;
+  position: absolute;
+  width: 98px;
+  height: 120px;
+  padding: 0 !important;
+  border-radius: var(--nk-radius-r12) !important;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--nk-color-bg-subtle) !important;
+  transition:
+    background-color 0.2s var(--occ-out),
+    filter 0.18s var(--occ-out);
+}
+.tile:active {
+  filter: brightness(0.96);
+}
+.bg {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--nk-radius-r12);
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: box-shadow 0.5s var(--occ-out);
+}
+.glow {
+  position: absolute;
+  left: -52px;
+  top: calc(-1 * var(--nk-space-s16));
+  width: 202px;
+  height: 202px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--nk-color-bg-subtle) 0%, var(--occ-glow) 100%);
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s var(--occ-out),
+    transform var(--occ-move-ms) var(--occ-move);
+}
+.label {
+  position: absolute;
+  left: var(--nk-space-s6);
+  top: var(--nk-space-s12);
+  width: 86px;
+  text-align: center;
+  white-space: nowrap;
+  font: var(--nk-type-text12-medium-lh18);
+  letter-spacing: -0.0083em;
+  color: var(--nk-color-text-muted);
+  transition: color 0.5s var(--occ-out);
+}
+.art {
+  position: absolute;
+  left: 0.5px;
+  top: var(--nk-space-s36);
+  width: 97.5px;
+  height: 84px;
+  display: block;
+  pointer-events: none;
+  transition: transform var(--occ-move-ms) var(--occ-move);
+}
+
+.tile[data-selected] {
+  background: var(--nk-color-bg-surface) !important;
+}
+.tile[data-selected] .bg {
+  box-shadow: inset 0 0 0 1px var(--occ-stroke);
+}
+.tile[data-selected] .glow {
+  opacity: 1;
+  transform: none;
+}
+.tile[data-selected] .label {
+  font: var(--nk-type-text12-bold-lh18);
+  letter-spacing: -0.0083em;
+  color: var(--occ-label);
+}
+.tile[data-selected] .art {
+  transform: translateY(-2px) scale(1.04);
+}

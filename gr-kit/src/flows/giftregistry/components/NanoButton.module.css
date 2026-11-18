@@ -1,0 +1,251 @@
+/*
+ * nano Button v3 (Button_v3_Handoff.pdf + tokens.md). Every face is stacked layers, never animated colours:
+ *   fill (1 pt in) → inner shadows → 2 pt inside stroke (top → bottom gradient); the pressed face sits over the rest
+ *   face and only its opacity moves (20 ms ease-in-out); the disabled flat fill cross-fades over both (200 ms).
+ * Scale / translateY run on spring S1 in NanoButton.tsx.
+ *
+ * Colour inputs (CSS variables, inheritable, or set by the `colors` prop):
+ *   --nano-btn-deep   rest fill and the pressed radial's edge             (guide #212121)
+ *   --nano-btn-glow   pressed radial centre                               (guide #424242 = deep 15% toward white)
+ *   --nano-btn-tint   how far the guide's greys and blacks lean to the occasion hue (0% = the guide's neutral values)
+ */
+.root {
+  /* the guide's neutral values that have no kit token (tokens.md "Dark, primary" / "White, secondary") */
+  --nb-g210: #d2d2d2; /* token-lint-ignore — nano button v3 stroke / lip grey */
+  --nb-g138: #8a8a8a; /* token-lint-ignore — nano button v3 pressed stroke foot */
+  --nb-white-pressed: #f3f4f7; /* token-lint-ignore — nano button v3 white pressed fill */
+  --nb-white-rim: #dbdfe6; /* token-lint-ignore — nano button v3 white stroke foot */
+  --nb-ink-tertiary: #7924ff; /* token-lint-ignore — nano button v3 tertiary label (Kids-Side 884:15810) */
+
+  --nb-deep: var(--nano-btn-deep, var(--nk-palette-ink-black));
+  --nb-glow: var(--nano-btn-glow, color-mix(in srgb, var(--nb-deep) 85%, var(--nk-palette-white)));
+  --nb-tint: var(--nano-btn-tint, 0%);
+  /* greys lean toward the glow (the occasion's bright shade), blacks toward the deep shade */
+  --nb-rim-a: color-mix(in srgb, var(--nk-color-gr-cta-rim), var(--nb-glow) var(--nb-tint));
+  --nb-rim-b: color-mix(in srgb, var(--nb-g210), var(--nb-glow) var(--nb-tint));
+  --nb-rim-c: color-mix(in srgb, var(--nb-g138), var(--nb-deep) var(--nb-tint));
+  --nb-shade: color-mix(in srgb, var(--nk-palette-black), var(--nb-deep) var(--nb-tint));
+  --nb-grey: var(--nk-field-text-muted); /* #989FB3 */
+
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transform-origin: 50% 50%;
+  outline: none;
+}
+.root[aria-disabled='true'] {
+  cursor: default;
+}
+
+/* ── filled (primary, secondary): 52 tall, the full slot, r16 ─────────────────────────────────────────────────── */
+.filled {
+  display: flex;
+  width: 100%;
+  height: 52px;
+  min-height: 52px;
+  padding: 0 var(--nk-space-s16);
+  border-radius: var(--nb-r);
+  corner-shape: var(--nb-corner);
+}
+/* corner 16, continuous: circular r16 where CSS has no corner-shape; where it does, the superellipse that best fits
+   iOS's continuous r16 corner (fitted against UIBezierPath's curve: ~3× closer than the circle) */
+.root {
+  --nb-r: var(--nk-radius-r16);
+  --nb-corner: round;
+}
+@supports (corner-shape: superellipse(1.35)) {
+  .root {
+    --nb-r: 19.5px; /* token-lint-ignore — superellipse(1.35) radius matching a continuous r16 corner */
+    --nb-corner: superellipse(1.35);
+  }
+}
+.filled:focus-visible {
+  outline: 2px solid var(--nb-focus);
+  outline-offset: 3px;
+}
+.primary {
+  --nb-focus: var(--nb-deep);
+}
+.secondary {
+  --nb-focus: var(--nk-color-text-primary);
+}
+
+.surface,
+.face,
+.layer,
+.muted {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--nb-r);
+  corner-shape: var(--nb-corner);
+  pointer-events: none;
+}
+.surface {
+  z-index: 0;
+}
+.face {
+  transition: opacity 0.2s ease-in-out;
+}
+/* the fill stops 1 pt in (half the stroke), so its anti-aliased edge can't show outside the stroke */
+.fill {
+  inset: 1px;
+  border-radius: calc(var(--nb-r) - 1px); /* design-ignore — concentric with the 1 pt fill inset */
+}
+/* 2 pt inside stroke: the gradient box, with its content box punched out */
+.stroke {
+  padding: var(--nk-space-s2);
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  -webkit-mask:
+    linear-gradient(var(--nk-palette-black) 0 0) content-box,
+    linear-gradient(var(--nk-palette-black) 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(var(--nk-palette-black) 0 0) content-box exclude,
+    linear-gradient(var(--nk-palette-black) 0 0);
+}
+/* pressed face: only its opacity moves, 20 ms ease-in-out (about one frame) */
+.pressedFace {
+  opacity: 0;
+  transition: opacity 0.02s ease-in-out;
+}
+.root[data-pressed] .pressedFace {
+  opacity: 1;
+}
+
+/* dark primary · rest (Figma 1105:19232) */
+.primary .rest .fill {
+  background: var(--nb-deep);
+}
+.primary .rest .shadows {
+  box-shadow:
+    inset 0 4px 8px 0 color-mix(in srgb, var(--nb-rim-b) 50%, transparent),
+    inset 0 -9px 9px 0 var(--nb-shade);
+}
+/* #EFEFEF → #D2D2D2 from 7.9% above the top edge to the bottom edge: a 107.9%-tall gradient pinned to the bottom */
+.primary .rest .stroke {
+  background-image: linear-gradient(to bottom, var(--nb-rim-a), var(--nb-rim-b));
+  background-size: 100% 107.9%;
+  background-position: 50% 100%;
+}
+/* dark primary · pressed (Figma 1105:19256): radial from 50% / 14.1%, radius 57.5% W across and 130.6% H down */
+.primary .pressedFace .fill {
+  background: radial-gradient(57.5% 130.6% at 50% 14.1%, var(--nb-glow) 0%, var(--nb-deep) 100%);
+}
+.primary .pressedFace .shadows {
+  box-shadow:
+    0 4px 5px 0 color-mix(in srgb, var(--nb-shade) 15%, transparent),
+    inset 0 0 10px 4px color-mix(in srgb, var(--nb-shade) 50%, transparent);
+}
+.primary .pressedFace .stroke {
+  background-image: linear-gradient(to bottom, var(--nb-rim-b), var(--nb-rim-c));
+  background-size: 100% 107.9%;
+  background-position: 50% 100%;
+}
+
+/* white secondary · rest (Figma 1088:18515) */
+.secondary .rest .fill {
+  background: var(--nk-palette-white);
+}
+.secondary .rest .shadows {
+  box-shadow:
+    inset 0 4px 4px 0 color-mix(in srgb, var(--nb-grey) 10%, transparent),
+    inset 0 -6px 6px 0 color-mix(in srgb, var(--nb-grey) 22%, transparent);
+}
+/* #FFFFFF → #DBDFE6 to 11.5% past the bottom: a 111.5%-tall gradient pinned to the top. Pressed keeps it (a changing
+   stroke reads as the button changing size), so the pressed face has no stroke of its own */
+.secondary .stroke {
+  background-image: linear-gradient(to bottom, var(--nk-palette-white), var(--nb-white-rim));
+  background-size: 100% 111.5%;
+  background-position: 50% 0;
+}
+/* white secondary · pressed (built in the app, 1096:19130); drawn under the rest stroke */
+.secondary .pressedFace .fill {
+  background: var(--nb-white-pressed);
+}
+.secondary .pressedFace .shadows {
+  box-shadow:
+    inset 0 1.5px 3px 0 color-mix(in srgb, var(--nb-grey) 21%, transparent),
+    inset 0 -3px 6px 0 var(--nk-palette-white);
+}
+.secondary .rest {
+  z-index: 0;
+}
+.secondary .pressedFace {
+  z-index: 1;
+}
+.secondary .keepStroke {
+  z-index: 2;
+}
+
+/* disabled: no surface at all. A flat #F2F3F7 fill (white variant: + 1 pt #989FB3 45% border), cross-fading with the
+   surface over 200 ms */
+.muted {
+  background: var(--nk-palette-anti-flash-white);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+.secondary .muted {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nb-grey) 45%, transparent);
+}
+.root[aria-disabled='true'] .muted {
+  opacity: 1;
+}
+.root[aria-disabled='true'] .face {
+  opacity: 0;
+}
+
+/* label: Noontree SemiBold 16, tracking 0 */
+.label {
+  position: relative;
+  z-index: 1;
+  font: var(--nk-type-field-a16-semibold);
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition:
+    opacity 0.02s ease-in-out,
+    color 0.2s ease-in-out;
+}
+.primary .label {
+  color: var(--nk-field-text-on-surface-bold);
+}
+.secondary .label {
+  color: var(--nk-color-text-primary);
+}
+/* the label dims to 80% on the white variant only */
+.secondary[data-pressed] .label {
+  opacity: 0.8;
+}
+.root[aria-disabled='true'] .label {
+  color: var(--nb-grey);
+}
+
+/* ── tertiary: text only, hugs its label, 8 × 12; pressed dims the label to 60% ──────────────────────────────── */
+.tertiary {
+  padding: var(--nk-space-s8) var(--nk-space-s12);
+  border-radius: var(--nk-radius-r8);
+}
+.tertiary .label {
+  font: var(--nk-type-text15-semibold-lh20);
+  color: var(--nb-ink, var(--nb-ink-tertiary));
+}
+.tertiary[data-pressed] .label {
+  opacity: 0.6;
+}
+.tertiary:focus-visible {
+  outline: 2px solid var(--nb-ink, var(--nb-ink-tertiary));
+  outline-offset: 0;
+}

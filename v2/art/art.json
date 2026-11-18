@@ -1,0 +1,241 @@
+{
+ "comp": [
+  1053,
+  618
+ ],
+ "bg_base": {
+  "file": "gr2_bg_base.png",
+  "x": 0,
+  "y": 0,
+  "w": 263,
+  "h": 154,
+  "scale": 400.0
+ },
+ "bg_fade": {
+  "file": "gr2_bg_fade.png",
+  "x": 0,
+  "y": 0,
+  "w": 263,
+  "h": 154,
+  "scale": 400.0
+ },
+ "bg_waves": {
+  "file": "gr2_bg_waves.png",
+  "x": 0,
+  "y": 0,
+  "w": 175,
+  "h": 103,
+  "scale": 600.0
+ },
+ "bg_h": 618,
+ "corner_r": 72.0,
+ "star_grey": {
+  "file": "gr2_star_grey.png",
+  "x": 666.0,
+  "y": 264.0,
+  "w": 55,
+  "h": 61,
+  "scale": 100.0
+ },
+ "spark1": {
+  "file": "gr2_spark1.png",
+  "x": 405.0,
+  "y": 238.0,
+  "w": 31,
+  "h": 43,
+  "scale": 100.0
+ },
+ "spark2": {
+  "file": "gr2_spark2.png",
+  "x": 381.0,
+  "y": 270.0,
+  "w": 40,
+  "h": 29,
+  "scale": 100.0
+ },
+ "spark3": {
+  "file": "gr2_spark3.png",
+  "x": 351.0,
+  "y": 284.0,
+  "w": 17,
+  "h": 21,
+  "scale": 100.0
+ },
+ "spark4": {
+  "file": "gr2_spark4.png",
+  "x": 367.0,
+  "y": 295.0,
+  "w": 20,
+  "h": 48,
+  "scale": 100.0
+ },
+ "star_green": {
+  "file": "gr2_star_green.png",
+  "x": 359.0,
+  "y": 126.0,
+  "w": 87,
+  "h": 90,
+  "scale": 100.0
+ },
+ "gift_box": {
+  "file": "gr2_gift_box.jpg",
+  "x": 369.0,
+  "y": 96.0,
+  "w": 299,
+  "h": 421,
+  "scale": 100.0
+ },
+ "gift_box_a": {
+  "file": "gr2_gift_box_a.png",
+  "x": 369.0,
+  "y": 96.0,
+  "w": 299,
+  "h": 421,
+  "scale": 100.0
+ },
+ "spark_keys": [
+  "spark1",
+  "spark2",
+  "spark3",
+  "spark4"
+ ],
+ "box_center": [
+  518.5,
+  357.02
+ ],
+ "box_back": {
+  "file": "gr2_box_back.jpg",
+  "x": 357.0,
+  "y": 302.0,
+  "w": 298,
+  "h": 91,
+  "scale": 100.0
+ },
+ "box_back_a": {
+  "file": "gr2_box_back_a.png",
+  "x": 357.0,
+  "y": 302.0,
+  "w": 298,
+  "h": 91,
+  "scale": 100.0
+ },
+ "box_front": {
+  "file": "gr2_box_front.jpg",
+  "x": 369.0,
+  "y": 355.0,
+  "w": 286,
+  "h": 162,
+  "scale": 100.0
+ },
+ "box_front_a": {
+  "file": "gr2_box_front_a.png",
+  "x": 369.0,
+  "y": 355.0,
+  "w": 286,
+  "h": 162,
+  "scale": 100.0
+ },
+ "lid": {
+  "file": "gr2_lid.jpg",
+  "x": 423.0,
+  "y": 96.0,
+  "w": 245,
+  "h": 205,
+  "scale": 100.0
+ },
+ "lid_a": {
+  "file": "gr2_lid_a.png",
+  "x": 423.0,
+  "y": 96.0,
+  "w": 245,
+  "h": 205,
+  "scale": 100.0
+ },
+ "heart_big": {
+  "file": "gr2_heart_big.png",
+  "x": 449.0,
+  "y": 256.0,
+  "w": 90,
+  "h": 82,
+  "scale": 100.0
+ },
+ "heart_small": {
+  "file": "gr2_heart_small.png",
+  "x": 532.0,
+  "y": 306.0,
+  "w": 51,
+  "h": 48,
+  "scale": 100.0
+ },
+ "split": true,
+ "swoosh": {
+  "file": "gr2_swoosh.png",
+  "x": 226.8,
+  "y": 257.33,
+  "w": 615,
+  "h": 163,
+  "scale": 100.0
+ },
+ "swoosh_path": {
+  "v": [
+   [
+    231.97,
+    348.31
+   ],
+   [
+    652.23,
+    399.28
+   ],
+   [
+    839.91,
+    270.79
+   ]
+  ],
+  "i": [
+   [
+    0,
+    0
+   ],
+   [
+    -144.24,
+    -172.3
+   ],
+   [
+    -127.05,
+    -26.38
+   ]
+  ],
+  "o": [
+   [
+    79.98,
+    -54.8
+   ],
+   [
+    9.62,
+    -53.82
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "c": false
+ },
+ "baseline_y": 528.0,
+ "title_grad": {
+  "file": "gr2_title_grad.png",
+  "x": 165,
+  "y": 411,
+  "w": 181,
+  "h": 46,
+  "scale": 400.0
+ },
+ "title_shadow": {
+  "file": "gr2_title_shadow.png",
+  "x": 168,
+  "y": 414.0,
+  "w": 358,
+  "h": 89,
+  "scale": 200.0
+ }
+}

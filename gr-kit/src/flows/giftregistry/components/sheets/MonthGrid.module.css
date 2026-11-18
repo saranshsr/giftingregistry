@@ -1,0 +1,85 @@
+/* reference createCalendar: 44 pt discs on 50 pt rows, columns a seventh of the width (45.83 pt on 375) */
+.month {
+  padding-bottom: var(--nk-space-s8);
+}
+.label {
+  margin: 0;
+  padding: var(--nk-space-s12) var(--nk-space-s4) var(--nk-space-s8);
+  font: var(--nk-type-field-b14-semibold);
+  letter-spacing: var(--nk-field-tracking-b);
+  color: var(--nk-field-text-primary);
+}
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 50px;
+}
+.discTrack {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% / 7);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.disc {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+.day {
+  position: relative;
+  justify-self: center;
+  align-self: center;
+  width: 44px;
+  height: 44px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  color: var(--nk-field-text-primary);
+}
+/* the reference's press tint, kept faint */
+.day:active:not(:disabled) {
+  background: var(--nk-field-surface-tertiary) !important;
+}
+.day[data-selected]:active {
+  background: transparent !important;
+}
+.digit {
+  font: var(--nk-type-field-b14-medium);
+  letter-spacing: var(--nk-field-tracking-b);
+  transition: color 0.18s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.day[data-selected] .digit {
+  font: var(--nk-type-field-b14-semibold);
+  color: var(--nk-field-text-on-surface-bold);
+}
+.day:disabled {
+  cursor: default;
+}
+.day:disabled .digit {
+  color: var(--nk-field-border-medium);
+}
+/* today: the reference's 4 pt action dot under the digit (hidden under the disc once picked) */
+.day[data-today]::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: var(--nk-space-s6);
+  width: 4px;
+  height: 4px;
+  margin-left: calc(-1 * var(--nk-space-s2));
+  border-radius: 50%;
+  background: var(--nk-field-text-action);
+  transition: opacity 0.18s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.day[data-today][data-selected]::after {
+  opacity: 0;
+}

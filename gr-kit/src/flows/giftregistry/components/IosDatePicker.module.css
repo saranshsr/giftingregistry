@@ -1,0 +1,128 @@
+/*
+ * iOS 17 compact date picker popover, inline calendar style (UIDatePicker .inline in a popover), drawn for desktop
+ * review where no native picker exists. System font stack (the iOS look is the point here), iOS system greys and the
+ * regular material; the picked day takes the occasion tint (`--tint`), like an app's tintColor.
+ */
+.native {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+  padding: 0;
+}
+.dismiss {
+  position: absolute;
+  inset: 0;
+  z-index: 70;
+}
+.popover {
+  position: absolute;
+  z-index: 71;
+  width: 320px;
+  padding: var(--nk-space-s12) var(--nk-space-s10) var(--nk-space-s10);
+  border-radius: 13px; /* design-ignore — iOS popover corner */
+  background: var(--nk-palette-white-alpha90);
+  -webkit-backdrop-filter: blur(30px) saturate(1.8);
+  backdrop-filter: blur(30px) saturate(1.8);
+  box-shadow:
+    0 10px 40px var(--nk-palette-black-alpha18),
+    0 0 0 0.5px var(--nk-palette-black-alpha10);
+  font-family: -apple-system, 'SF Pro Text', 'SF Pro', system-ui, sans-serif; /* token-lint-ignore — iOS system picker stand-in */
+  color: var(--nk-palette-black);
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--nk-space-s6) var(--nk-space-s10);
+}
+.month {
+  display: flex;
+  align-items: center;
+  gap: var(--nk-space-s6);
+  font-size: 17px; /* token-lint-ignore — iOS headline */
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+.month svg {
+  color: var(--tint);
+}
+.nav {
+  display: flex;
+  gap: var(--nk-space-s24);
+  color: var(--tint);
+}
+.nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding-bottom: var(--nk-space-s4);
+}
+.week span {
+  text-align: center;
+  font-size: 13px; /* token-lint-ignore — iOS footnote caps */
+  font-weight: 600;
+  color: var(--nk-palette-black-alpha30);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: var(--nk-space-s2);
+}
+.day {
+  position: relative;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 20px; /* token-lint-ignore — iOS calendar day */
+  font-weight: 400;
+  color: var(--nk-palette-black);
+  -webkit-tap-highlight-color: transparent;
+}
+.day:disabled {
+  color: var(--nk-palette-black-alpha24);
+  cursor: default;
+}
+.day[data-today] {
+  color: var(--tint);
+}
+.disc {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin: calc(-1 * var(--nk-space-s20)) 0 0 calc(-1 * var(--nk-space-s20));
+  border-radius: 50%;
+  background: var(--tint);
+  opacity: 0.16;
+}
+.num {
+  position: relative;
+}
+.day[data-selected] .num {
+  color: var(--tint);
+  font-weight: 600;
+}

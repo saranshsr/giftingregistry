@@ -1,0 +1,13 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  padding: var(--nk-space-s2) var(--nk-space-s6);
+  border-radius: var(--nk-radius-r12);
+  background: linear-gradient(180deg, var(--nk-color-gr-new-top) 0%, var(--nk-color-success) 100%);
+  font: var(--nk-type-field-b11-bold, var(--nk-type-gr-b11-bold));
+  letter-spacing: -0.1px;
+  color: var(--nk-color-text-inverse);
+  white-space: nowrap;
+}

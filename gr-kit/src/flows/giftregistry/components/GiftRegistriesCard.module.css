@@ -1,0 +1,71 @@
+/* Kit Account action card shell (account.module.css .actionCard: white, 1px white border, r12) at the Figma 136 height */
+.card {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 136px;
+  display: block !important;
+  padding: 0 !important;
+  border: 1px solid var(--nk-palette-white) !important;
+  border-radius: var(--nk-radius-r12) !important;
+  background: var(--nk-color-bg-surface) !important;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: start;
+}
+.layer {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+.thumb {
+  border-radius: var(--nk-radius-r8);
+}
+
+.copy {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* title: the kit action-title style, where the My Orders card puts its title (padding 10 + 1px border) */
+.title {
+  /* Figma Component 225 header: 12 padding, 15/18 Bold, −0.1 */
+  position: absolute;
+  left: var(--nk-space-s12);
+  top: var(--nk-space-s12);
+  font: var(--nk-type-gr-card-title);
+  letter-spacing: -0.1px;
+  color: var(--nk-color-text-primary);
+  white-space: nowrap;
+}
+.sub {
+  /* B11 Regular in text/tertiary, 4 below the title */
+  position: absolute;
+  left: var(--nk-space-s12);
+  top: 34px; /* design-ignore — 12 + 18 + 4 */
+  font: var(--nk-type-gr-b11);
+  letter-spacing: -0.1px;
+  color: var(--nk-color-text-tertiary);
+  white-space: nowrap;
+}
+.badge {
+  position: absolute;
+  left: var(--nk-space-s12);
+  top: var(--nk-space-s12);
+  transform-origin: 0 50%;
+  display: flex;
+}
+/* one highlight sweep over the title glyphs (reference shimmer: 105deg, white 0.95 at the centre; softened to 0.7) */
+.shimmer {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: linear-gradient(105deg, transparent 35%, var(--nk-palette-white-alpha70) 50%, transparent 65%) no-repeat;
+  background-size: 300% 100%;
+  background-position: 100% 0; /* resting: the band parked off the text's right edge */
+  -webkit-background-clip: text;
+  background-clip: text;
+}

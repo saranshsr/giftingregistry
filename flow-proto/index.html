@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=overlays-content">
+  <title>Gift Registry Flow</title>
+  <link rel="icon" href="data:,">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="motion.css?v=1">
+  <link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+  <div class="stage">
+    <div class="phone" id="phone">
+      <div class="screen" id="screen">
+
+        <!-- 0.1 Account (Figma 843:719904, exported as is: dimmed on the board) -->
+        <section class="scr" id="account">
+          <img class="full" src="img/account.png" width="375" height="812" alt="">
+          <button class="hot" id="hotLists" style="left:190px; top:326px; width:174px; height:148px" aria-label="Gift Registries"></button>
+        </section>
+
+        <!-- 0.2 My Lists (Figma 843:720073): header, collections strip, saved items -->
+        <section class="scr" id="lists">
+          <div class="lists-body">
+            <div class="strip" id="strip">
+              <div class="new-card" id="newCard" hidden>
+                <div class="nc-tab"></div>
+                <div class="nc-art"><div class="nc-frame"><img id="newCardArt" alt=""></div></div>
+                <p class="nc-title" id="newCardTitle"></p>
+                <p class="nc-sub">0 Items</p>
+              </div>
+              <img class="strip-img" id="stripImg" src="img/lists-strip.png" width="360" height="150" alt="">
+            </div>
+            <img class="saved" src="img/lists-saved.png" width="375" height="529" alt="">
+          </div>
+          <img class="lists-header" src="img/lists-header.png" width="375" height="103" alt="">
+          <button class="hot" id="hotListsBack" style="left:16px; top:55px; width:40px; height:40px" aria-label="Back"></button>
+          <button class="hot press" id="hotCreate" style="left:270px; top:59px; width:89px; height:32px; border-radius:16px" aria-label="Create"></button>
+        </section>
+
+        <!-- sheets: 0.3 Create (Collection Drawer 843:756638) and 0.4 What is a Gift Registry (v2 sheet, 843:763414) -->
+        <div class="layer" id="layer">
+          <div class="scrim" id="scrim"></div>
+
+          <div class="drawer" id="drawer">
+            <div class="d-grabber"></div>
+            <img class="d-card" src="img/create-card.png" width="351" height="276" alt="">
+            <button class="hot press" id="hotNewCollection" style="left:24px; top:40px; width:327px; height:120px; border-radius:16px" aria-label="Create new collection"></button>
+            <button class="hot press" id="hotCreateRegistry" style="left:24px; top:172px; width:327px; height:120px; border-radius:16px" aria-label="Create your gift registry"></button>
+            <div class="d-home"></div>
+          </div>
+
+          <div class="sheet-wrap" id="sheetWrap">
+            <div class="grabber"></div>
+            <div class="sheet" id="sheet">
+              <img class="hero-bg" src="img/hero-bg.jpg" alt="">
+              <div class="hero" id="xpHero"></div>
+              <div class="col c1">
+                <img class="ico" src="img/ico1.png" alt="">
+                <img class="num" src="img/num1.png" alt="01">
+                <p class="txt">Create &amp; <b>add items</b> you want</p>
+              </div>
+              <div class="div d1"></div>
+              <div class="col c2">
+                <img class="ico" src="img/ico2.png" alt="">
+                <img class="num" src="img/num2.png" alt="02">
+                <p class="txt"><b>Share it</b> with your family &amp; friends</p>
+              </div>
+              <div class="div d2"></div>
+              <div class="col c3">
+                <img class="ico" src="img/ico3.png" alt="">
+                <img class="num" src="img/num3.png" alt="03">
+                <p class="txt"><b>Track your gifts</b> as they come</p>
+              </div>
+              <button class="cta" id="xpCta"><img src="img/btn.png" alt="Continue"></button>
+            </div>
+          </div>
+          <div class="home-ind" id="homeInd"></div>
+        </div>
+
+        <!-- registry steps (1.1 Occasion ... 1.4 Delivery details): one modal screen, the steps swap inside it -->
+        <section class="scr steps" id="steps">
+          <div class="bg" id="bg"></div>
+          <div class="hero-lottie" id="hero"></div>
+          <div class="body" id="body"></div>
+
+          <div class="topbar">
+            <div class="statusbar">
+              <span class="sb-time">9:41</span>
+              <span class="sb-icons"><img src="img/sb-1.svg" width="19.2" height="12.23" alt=""><img src="img/sb-2.svg" width="17.14" height="12.33" alt=""><img src="img/sb-3.svg" width="27.33" height="13" alt=""></span>
+            </div>
+            <button class="back press" id="back" aria-label="Back"><img src="img/chevron-left.svg" width="20" height="20" alt=""></button>
+            <div class="progress"><div class="progress-fill" id="progress"></div></div>
+          </div>
+
+          <div class="footer" id="footer">
+            <div class="actionbar">
+              <button class="ncta" id="cta"><span id="ctaLabel">Continue</span></button>
+            </div>
+            <div class="kb" id="kb">
+              <img class="kb-img kb-qwerty" src="img/keyboard.png" width="375" height="296" alt="">
+              <div class="kb-img kb-num" id="numpad">
+                <img src="img/numpad.png" width="375" height="296.5" alt="">
+              </div>
+            </div>
+            <div class="homebar"></div>
+          </div>
+        </section>
+
+        <div class="toast" id="toast"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dock" id="dock">
+    <button class="dk" id="restart">Restart</button>
+  </div>
+
+  <input class="kb-proxy" id="proxy" type="text" tabindex="-1" aria-hidden="true">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>

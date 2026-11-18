@@ -1,0 +1,78 @@
+/* ───────── calendar (reference createCalendar, 375 × 540 pt sheet) ───────── */
+
+/* the reference's 92 × 40 year pill: white, 1px #EAECF0, r20, B16 SemiBold + caret */
+.yearPill {
+  display: inline-flex !important;
+  align-items: center;
+  gap: var(--nk-space-s4);
+  height: 40px;
+  padding: 0 var(--nk-space-s12) 0 var(--nk-space-s16) !important;
+  border-radius: var(--nk-radius-r20) !important;
+  border: 1px solid var(--nk-field-border-primary) !important;
+  background: var(--nk-field-surface-primary) !important;
+  font: var(--nk-type-field-b16-semibold);
+  letter-spacing: var(--nk-field-tracking-b16);
+  color: var(--nk-field-text-primary);
+}
+.calBody {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden !important;
+}
+/* Su–Sa stays put; the months scroll under it */
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  flex: none;
+  padding: var(--nk-space-s12) 0 var(--nk-space-s4);
+}
+.weekday {
+  text-align: center;
+  font: var(--nk-type-field-b12-medium);
+  letter-spacing: var(--nk-field-tracking-b);
+  color: var(--nk-field-text-muted);
+}
+/* about five rows of days in view, as the reference (178 → 428 pt) */
+.months {
+  height: 316px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* the field Neutral bar, its Confirm repainted in the occasion's CTA colour (reference calendar-confirm-enabled-*),
+   waking from the disabled grey over .2 s ease-out (reference: .confirm-on opacity .2s) */
+.calFooter {
+  display: contents;
+  --nk-button-field-neutral-bg: var(--cal-accent);
+  --nk-button-field-neutral-border: var(--cal-accent);
+  --nk-button-field-neutral-bg-pressed: color-mix(in srgb, var(--cal-accent) 86%, black);
+  --nk-button-field-press-color-duration: 0.2s;
+  --nk-button-field-press-ease: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* ───────── address sheet (reference address-sheet.png, 375 × 717 pt on #F9F9FB) ───────── */
+
+.addrBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nk-space-s12);
+  min-height: min(640px, calc(var(--nk-sheet-max-height) - 8px));
+  padding-top: var(--nk-space-s16) !important;
+  padding-bottom: var(--nk-space-s16) !important;
+  background: var(--nk-field-surface-secondary);
+}
+.addrTools {
+  border-radius: var(--nk-radius-r12);
+  background: var(--nk-field-surface-primary);
+  overflow: hidden;
+}
+.addrRule {
+  padding: 0 var(--nk-space-s12);
+}
+.enableTitle {
+  color: var(--nk-color-link);
+}
+.addrList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nk-space-s12);
+}

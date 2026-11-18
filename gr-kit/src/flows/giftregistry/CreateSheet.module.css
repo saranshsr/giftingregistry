@@ -1,0 +1,210 @@
+.body {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+.panel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Create sheet: Figma "0.3 Create · bottom sheet" 843:755739, drawer card 843:756642 (p12, gap 12) holding two
+   "Empty state landscape" cards (120 tall, #F9F9FB, r12, p16 / gap 16) */
+.cards {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nk-space-s12);
+  padding: var(--nk-space-s12);
+}
+.card {
+  position: relative;
+  display: block !important;
+  width: 100%;
+  height: 120px;
+  padding: 0 !important;
+  border-radius: var(--nk-radius-r12) !important;
+  background: var(--nk-color-bg-subtle) !important;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: start;
+}
+/* title B16/Bold 16/22 −0.15, at p16 */
+.cardTitle {
+  position: absolute;
+  left: var(--nk-space-s16);
+  top: var(--nk-space-s16);
+  display: flex;
+  align-items: center;
+  gap: var(--nk-space-s6);
+  z-index: 1;
+}
+.titleText {
+  position: relative;
+  font: var(--nk-type-text16-bold-lh20);
+  line-height: 22px;
+  letter-spacing: -0.15px;
+  color: var(--nk-color-text-primary);
+  white-space: nowrap;
+}
+/* subtitle Label3/Regular 14/18 −0.14, 4 under the title */
+.cardSub {
+  position: absolute;
+  left: var(--nk-space-s16);
+  top: 42px;
+  font: var(--nk-type-text14-regular-lh20);
+  line-height: 18px;
+  letter-spacing: -0.14px;
+  color: var(--nk-color-text-secondary);
+  white-space: nowrap;
+  z-index: 1;
+}
+/* "+" chip: white, 1 px #F2F3F7 stroke (inside), fully round, p4 around the 20 pt Origin plus; 16 under the copy */
+.plus {
+  position: absolute;
+  left: var(--nk-space-s16);
+  top: 76px;
+  box-sizing: border-box;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--nk-color-border-subtle);
+  border-radius: var(--nk-radius-full);
+  background: var(--nk-color-bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.tag {
+  display: flex;
+  transform-origin: 0 50%;
+}
+.shimmer {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: linear-gradient(105deg, transparent 35%, var(--nk-palette-white-alpha70) 50%, transparent 65%) no-repeat;
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+/* Figma "Visuals": 200 × 120, pinned top-right, clips its layers */
+.visuals {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 200px;
+  height: 120px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.piece {
+  position: absolute;
+  display: block;
+  max-width: none;
+  object-fit: contain;
+  transform-origin: 50% 80%;
+}
+.cloud {
+  mix-blend-mode: overlay;
+}
+
+/* "What is a Gift Registry" (Figma v2 card 843:763418, 351 × 481.45; here as wide as the kit sheet) */
+.explainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 482px;
+}
+/* 843:763419: 206 tall, clips the background */
+.hero {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 206px;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* 843:763446 Onboarding background as Figma renders it inside the hero (its 3x export is the visible 351 × 206 window);
+   it fills the hero edge to edge, stretched a few % to the kit card's width (366), so no strip is ever left */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+  display: block;
+}
+/* the lottie comp is the card's 351 × 206 hero (Figma "Onboarding hero" is centred on the card) */
+.heroLottie {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 175.5px);
+  width: 351px;
+  height: 206px;
+}
+/* three equal columns (843:763454), contents centred in each (absolute boxes with left/right 0 + auto margins) */
+.col {
+  position: absolute;
+  top: 0;
+  width: calc(100% / 3);
+  height: 100%;
+}
+.ico,
+.num,
+.txt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.ico {
+  top: 226px;
+  width: 56px;
+  height: 53.45px;
+}
+.num {
+  top: 287.5px;
+  height: 30.14px;
+  width: 33.2px;
+}
+.num[data-n='2'] {
+  width: 36.18px;
+}
+.num[data-n='3'] {
+  width: 35.84px;
+}
+/* B14 text box 93 wide (Figma wraps at 93) */
+.txt {
+  top: 323.5px;
+  width: 93px;
+  text-align: center;
+  font: var(--nk-type-text14-regular-lh20);
+  line-height: 18px;
+  letter-spacing: -0.1px;
+  color: var(--nk-color-text-primary);
+}
+.txt b {
+  font-weight: 700;
+}
+.divider {
+  position: absolute;
+  right: 0;
+  top: 231.7px;
+  width: 1px;
+  height: 140px;
+  background: var(--nk-color-border-subtle);
+}
+/* M-StackedActionBar (843:763469): p12, button at 417.45 */
+.cta {
+  position: absolute;
+  left: var(--nk-space-s12);
+  right: var(--nk-space-s12);
+  top: 417.45px;
+}

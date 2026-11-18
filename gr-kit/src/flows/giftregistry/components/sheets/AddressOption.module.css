@@ -1,0 +1,94 @@
+/* reference address-card (329 × 136 pt): border #EAECF0 → #E1EFFF, header #F9F9FB → #EFF7FF, icon #666D85 → #0076FF.
+   The reference cross-fades two pictures over .2s ease; here the same colours ease over .2s ease-out cubic. */
+.card {
+  display: block !important;
+  width: 100%;
+  padding: 0 !important;
+  text-align: start;
+  border-radius: var(--nk-radius-r12) !important;
+  background: var(--nk-field-surface-primary) !important;
+  border: 1px solid var(--nk-field-border-primary);
+  overflow: hidden;
+  isolation: isolate;
+  transition: border-color 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.card[data-selected] {
+  border-color: var(--nk-palette-lavender);
+}
+.head {
+  background: var(--nk-field-surface-secondary);
+  transition: background-color 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.card[data-selected] .head {
+  background: var(--nk-palette-alice-blue);
+}
+/* the ListRow paints its own white; here the header colour shows through */
+.head > * {
+  background: transparent !important;
+}
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  /* the reference's white icon tile; 2 pt wider than the ListRow's 24 pt leading slot on each side */
+  width: 28px;
+  height: 28px;
+  border-radius: var(--nk-radius-r8);
+  background: var(--nk-field-surface-primary);
+  color: var(--nk-field-text-tertiary);
+  transition: color 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.card[data-selected] .tile {
+  color: var(--nk-color-link);
+}
+.titleLine {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nk-space-s8);
+  max-width: 100%;
+}
+.titleText {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* the reference's distance chip: white r6, B12; its text turns link blue with the selection */
+.distance {
+  flex: none;
+  padding: var(--nk-space-s2) var(--nk-space-s6);
+  border-radius: var(--nk-radius-r6);
+  background: var(--nk-field-surface-primary);
+  font: var(--nk-type-field-b12-medium);
+  letter-spacing: var(--nk-field-tracking-b);
+  color: var(--nk-field-text-primary);
+  transition: color 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.card[data-selected] .distance {
+  color: var(--nk-color-link);
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nk-space-s10);
+  padding: var(--nk-space-s10) var(--nk-space-s12) var(--nk-space-s12);
+}
+/* the design sets the address and contact at 13 (measured against address-card-work.png) */
+.line,
+.contact {
+  margin: 0;
+  font: var(--nk-type-text13-regular-lh18);
+  color: var(--nk-field-text-primary);
+}
+.line {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.contact {
+  display: flex;
+  align-items: center;
+  gap: var(--nk-space-s4);
+}

@@ -1,0 +1,135 @@
+{
+ "comp": [
+  1053,
+  516
+ ],
+ "bg_base": {
+  "file": "gr_bg_base.png",
+  "x": 0,
+  "y": 0,
+  "w": 263,
+  "h": 114,
+  "scale": 400.0
+ },
+ "bg_fade": {
+  "file": "gr_bg_fade.png",
+  "x": 0,
+  "y": 0,
+  "w": 263,
+  "h": 114,
+  "scale": 400.0
+ },
+ "bg_waves": {
+  "file": "gr_bg_waves.png",
+  "x": 0,
+  "y": 0,
+  "w": 263,
+  "h": 114,
+  "scale": 400.0
+ },
+ "bg_h": 459,
+ "corner_r": 72.0,
+ "star_green": {
+  "file": "gr_star_green.png",
+  "x": 325.5,
+  "y": 114.27,
+  "w": 102,
+  "h": 100,
+  "scale": 100.0
+ },
+ "star_grey": {
+  "file": "gr_star_grey.png",
+  "x": 649.5,
+  "y": 132.27,
+  "w": 58,
+  "h": 57,
+  "scale": 100.0
+ },
+ "gift_box": {
+  "file": "gr_gift_box.jpg",
+  "x": 337.5,
+  "y": 116.27,
+  "w": 340,
+  "h": 312,
+  "scale": 100.0
+ },
+ "gift_box_a": {
+  "file": "gr_gift_box_a.png",
+  "x": 337.5,
+  "y": 116.27,
+  "w": 340,
+  "h": 312,
+  "scale": 100.0
+ },
+ "gift_charm": null,
+ "swoosh": {
+  "file": "gr_swoosh.png",
+  "x": 226.8,
+  "y": 179.33,
+  "w": 615,
+  "h": 163,
+  "scale": 100.0
+ },
+ "swoosh_path": {
+  "v": [
+   [
+    231.97,
+    270.31
+   ],
+   [
+    652.23,
+    321.28
+   ],
+   [
+    839.91,
+    192.79
+   ]
+  ],
+  "i": [
+   [
+    0,
+    0
+   ],
+   [
+    -144.24,
+    -172.3
+   ],
+   [
+    -127.05,
+    -26.38
+   ]
+  ],
+  "o": [
+   [
+    79.98,
+    -54.8
+   ],
+   [
+    9.62,
+    -53.82
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "c": false
+ },
+ "baseline_y": 450.0,
+ "title_grad": {
+  "file": "gr_title_grad.png",
+  "x": 165,
+  "y": 333,
+  "w": 181,
+  "h": 46,
+  "scale": 400.0
+ },
+ "title_shadow": {
+  "file": "gr_title_shadow.png",
+  "x": 168,
+  "y": 336.0,
+  "w": 358,
+  "h": 89,
+  "scale": 200.0
+ }
+}

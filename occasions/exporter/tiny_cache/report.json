@@ -1,0 +1,704 @@
+{
+ "01b22a65bc15bde3b758202c88964c8a": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p1/gr_title_grad.01b22a65.png",
+  "orig": 1329,
+  "tiny": 554,
+  "mean": 0.708320677280426,
+  "p995": 2.0,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "049635a28871f8d3ce446dc796695f54": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/wedding/p3/gr_title_shadow.049635a2.png",
+  "orig": 5641,
+  "tiny": 2044,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "06004dc71b82008b48a9e6cb3ec177a0": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/anniversary/p3/gr_sw.06004dc7.png",
+  "orig": 20755,
+  "tiny": 5765,
+  "mean": 0.03667132183909416,
+  "p995": 1.173857569694519,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "08ececa081241abe7997ef4f54854d18": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/other/p2/gr_sw.08ececa0.png",
+  "orig": 14966,
+  "tiny": 6067,
+  "mean": 0.038711708039045334,
+  "p995": 1.503265380859375,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "09b3c1a0070f33818af1b0fcfaed6a9b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/other/p6/gr_sw.09b3c1a0.png",
+  "orig": 13315,
+  "tiny": 5753,
+  "mean": 0.04268161579966545,
+  "p995": 1.499346375465393,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "1000bc425e379afd0483e5be78919a59": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/default/p5/gr_sw.1000bc42.png",
+  "orig": 13468,
+  "tiny": 5099,
+  "mean": 0.058143846690654755,
+  "p995": 1.7568613290786743,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "19ca75caadaa84fb20265bd87a17c468": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/babyshower/p3/gr_title_grad.19ca75ca.png",
+  "orig": 1478,
+  "tiny": 817,
+  "mean": 0.5870358943939209,
+  "p995": 2.0,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "1a00d22862a03364e91dfcdbb69ad0e3": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p2/gr_ill_a.1a00d228.png",
+  "orig": 11443,
+  "tiny": 5725,
+  "mean": 0.1041678935289383,
+  "p995": 5.0,
+  "amax": 7.0,
+  "keep_orig": false
+ },
+ "1f36b6c0b0090276b4655bb2f7f45817": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit2.1f36b6c0.png",
+  "orig": 2171,
+  "tiny": 1504,
+  "mean": 0.4785137474536896,
+  "p995": 3.0690174102783203,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "1f5667507059bdf3928d116fdc91f12d": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/eid/p5/gr_sw.1f566750.png",
+  "orig": 13719,
+  "tiny": 6679,
+  "mean": 0.032208558171987534,
+  "p995": 1.4348845481872559,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "227af6de8e9aaf511ca1da782c104cc4": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p6/gr_title_grad.227af6de.png",
+  "orig": 1940,
+  "tiny": 662,
+  "mean": 0.7208806872367859,
+  "p995": 2.3333332538604736,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "239942162e16bd2d37501a24048d9827": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/housewarming/p1/gr_sw.23994216.png",
+  "orig": 15075,
+  "tiny": 5897,
+  "mean": 0.03735051304101944,
+  "p995": 1.4559928178787231,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "24c43cf7d8e17f8de1a5eecebd56d917": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/anniversary/p1/gr_sw.24c43cf7.png",
+  "orig": 14890,
+  "tiny": 5751,
+  "mean": 0.03504156693816185,
+  "p995": 1.2496744394302368,
+  "amax": 13.0,
+  "keep_orig": false
+ },
+ "25c709e70a704a282233a2a026469abe": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/other/p3/gr_title_shadow.25c709e7.png",
+  "orig": 5128,
+  "tiny": 1843,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "295dac341172e1dc9a97a807bbde53a5": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/eid/p1/gr_sw.295dac34.png",
+  "orig": 14749,
+  "tiny": 5761,
+  "mean": 0.03375982120633125,
+  "p995": 1.252288818359375,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "2a1f02e5f3dc3bff7ad11c24639e8f2b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/eid/p2/gr_sw.2a1f02e5.png",
+  "orig": 14470,
+  "tiny": 5846,
+  "mean": 0.032847970724105835,
+  "p995": 1.34771728515625,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "2b6adc43c6f6845439c7252ee3cfea12": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p2/gr_ill_bit2.2b6adc43.png",
+  "orig": 2102,
+  "tiny": 1715,
+  "mean": 0.2128174602985382,
+  "p995": 2.203014850616455,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "2bc9ad4d8c3ab6f8e1dd35f01a86dc19": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/housewarming/p2/gr_sw.2bc9ad4d.png",
+  "orig": 14807,
+  "tiny": 6025,
+  "mean": 0.034982118755578995,
+  "p995": 1.24967360496521,
+  "amax": 14.0,
+  "keep_orig": false
+ },
+ "2d2135896d740c01dca6d51c3a676283": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/anniversary/p5/gr_sw.2d213589.png",
+  "orig": 14546,
+  "tiny": 6476,
+  "mean": 0.04093855246901512,
+  "p995": 1.5620931386947632,
+  "amax": 17.0,
+  "keep_orig": false
+ },
+ "35a6cbff6690ee2a459841a8ba617847": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p6/gr_ill_a.35a6cbff.png",
+  "orig": 11138,
+  "tiny": 5072,
+  "mean": 0.09622487425804138,
+  "p995": 5.0,
+  "amax": 8.0,
+  "keep_orig": false
+ },
+ "39196c9b6b93ff158797d99609d271c8": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/eid/p6/gr_sw.39196c9b.png",
+  "orig": 12877,
+  "tiny": 5355,
+  "mean": 0.04279777780175209,
+  "p995": 1.7281036376953125,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "3ffd52276c4b6746dc3caad9d113916f": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/birthday/p2/gr_sw.3ffd5227.png",
+  "orig": 15245,
+  "tiny": 6655,
+  "mean": 0.04104314371943474,
+  "p995": 1.6823539733886719,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "4440fcc51a1b5d6e473a8721de750848": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p6/gr_ill_bit2.4440fcc5.png",
+  "orig": 2438,
+  "tiny": 1813,
+  "mean": 0.30116531252861023,
+  "p995": 2.8106777667999268,
+  "amax": 6.0,
+  "keep_orig": false
+ },
+ "45ba6acbebde0cf8e9c2aa2af2090e7b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/birthday/p5/gr_sw.45ba6acb.png",
+  "orig": 15187,
+  "tiny": 6989,
+  "mean": 0.037699416279792786,
+  "p995": 1.670915961265564,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "46ac7e03c448718fa0daced58eb3ffe8": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p6/gr_title_shadow.46ac7e03.png",
+  "orig": 4795,
+  "tiny": 1884,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 6.0,
+  "keep_orig": false
+ },
+ "47d5391735efb6724d73215a12c163a6": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit8.47d53917.png",
+  "orig": 2124,
+  "tiny": 1561,
+  "mean": 0.5054540634155273,
+  "p995": 2.141120672225952,
+  "amax": 4.0,
+  "keep_orig": false
+ },
+ "49427523fdc8f4f59603f3dd589e1b2b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/birthday/p6/gr_sw.49427523.png",
+  "orig": 13620,
+  "tiny": 6425,
+  "mean": 0.043138500303030014,
+  "p995": 1.523245096206665,
+  "amax": 13.0,
+  "keep_orig": false
+ },
+ "4f51c2b7419475e14b94c0216b455a44": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p1/gr_title_shadow.4f51c2b7.png",
+  "orig": 4107,
+  "tiny": 1587,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "532f5de25520785db86ca64dd1fdcda1": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/housewarming/p3/gr_title_shadow.532f5de2.png",
+  "orig": 6282,
+  "tiny": 2130,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "539103ffe8f38d5fdff2a9012897417c": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/housewarming/p3/gr_title_grad.539103ff.png",
+  "orig": 1617,
+  "tiny": 847,
+  "mean": 0.5773568749427795,
+  "p995": 2.0,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "56951591b6f3fafd18f0402573b88950": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p4/gr_ill2.56951591.png",
+  "orig": 9869,
+  "tiny": 4130,
+  "mean": 0.2742401957511902,
+  "p995": 5.429433345794678,
+  "amax": 22.0,
+  "keep_orig": false
+ },
+ "574e9f8cf949fcfbf0358d172960c848": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/anniversary/p6/gr_sw.574e9f8c.png",
+  "orig": 13040,
+  "tiny": 5606,
+  "mean": 0.04460945725440979,
+  "p995": 1.5058822631835938,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "5805c540ff4dedec8decf151831c72f9": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/housewarming/p6/gr_sw.5805c540.png",
+  "orig": 13098,
+  "tiny": 5515,
+  "mean": 0.04344193637371063,
+  "p995": 1.6313743591308594,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "58e5beafd695d771b5dbb115203cb314": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/eid/p3/gr_title_grad.58e5beaf.png",
+  "orig": 1749,
+  "tiny": 740,
+  "mean": 0.6271177530288696,
+  "p995": 2.3333332538604736,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "62ad94b5bfa16a2de1dcf32265a9b8b1": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit3.62ad94b5.png",
+  "orig": 2369,
+  "tiny": 1877,
+  "mean": 0.4547809958457947,
+  "p995": 2.6643118858337402,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "63bf298da5b3f85518817193cefb0328": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p6/gr_ill_bit1.63bf298d.png",
+  "orig": 6085,
+  "tiny": 2812,
+  "mean": 0.6594399213790894,
+  "p995": 6.430948257446289,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "65cf3349472950954114e316c876bb4e": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/other/p3/gr_sw.65cf3349.png",
+  "orig": 21122,
+  "tiny": 6206,
+  "mean": 0.03276372700929642,
+  "p995": 1.2470591068267822,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "6744720de320342a2c8c6fb8593920ea": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p3/gr_ill_a.6744720d.png",
+  "orig": 9650,
+  "tiny": 5770,
+  "mean": 0.09557375311851501,
+  "p995": 5.0,
+  "amax": 11.0,
+  "keep_orig": false
+ },
+ "6a85733d89d41dbfeb830640494e2fed": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p2/gr_ill_bit1.6a85733d.png",
+  "orig": 5985,
+  "tiny": 2668,
+  "mean": 0.8624286651611328,
+  "p995": 8.10433578491211,
+  "amax": 20.0,
+  "keep_orig": false
+ },
+ "7397752c569922d1c5e09cff7f06c994": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/babyshower/p2/gr_sw.7397752c.png",
+  "orig": 14255,
+  "tiny": 6114,
+  "mean": 0.031553857028484344,
+  "p995": 1.2481515407562256,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "7ab5381ae1e351d7d8914e9e60507be3": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/anniversary/p2/gr_sw.7ab5381a.png",
+  "orig": 14706,
+  "tiny": 5792,
+  "mean": 0.038163959980010986,
+  "p995": 1.2483673095703125,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "854b2a944d026f32f9c106a4ee32c5ee": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit7.854b2a94.png",
+  "orig": 2447,
+  "tiny": 1894,
+  "mean": 0.5358592867851257,
+  "p995": 3.3453986644744873,
+  "amax": 6.0,
+  "keep_orig": false
+ },
+ "8cba9dea9181a426673fcb746a0f2656": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/anniversary/p3/gr_title_shadow.8cba9dea.png",
+  "orig": 5906,
+  "tiny": 1999,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "8e4f9468c9e5031c83455a10c4f76b1d": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/other/p5/gr_sw.8e4f9468.png",
+  "orig": 13468,
+  "tiny": 6711,
+  "mean": 0.03645665943622589,
+  "p995": 1.7308813333511353,
+  "amax": 17.0,
+  "keep_orig": false
+ },
+ "9332955d05aa5162a645ad531fc0bda2": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p2/gr_title_grad.9332955d.png",
+  "orig": 1093,
+  "tiny": 675,
+  "mean": 0.619132399559021,
+  "p995": 2.3333332538604736,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "95089dbe25e20b3e339940a8ef8fc07b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/babyshower/p3/gr_title_shadow.95089dbe.png",
+  "orig": 6019,
+  "tiny": 2196,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "966bab8660991b557e73b2f6131fafc6": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/housewarming/p3/gr_sw.966bab86.png",
+  "orig": 20993,
+  "tiny": 6049,
+  "mean": 0.03532934933900833,
+  "p995": 1.4806973934173584,
+  "amax": 17.0,
+  "keep_orig": false
+ },
+ "96f273ccaf7dd5529bab4743d0138509": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/anniversary/p3/gr_title_grad.96f273cc.png",
+  "orig": 1593,
+  "tiny": 796,
+  "mean": 0.6001676917076111,
+  "p995": 2.0,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "9a1ef26d860aaa0b0b524b5b7b20d7c3": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p4/gr_title_shadow.9a1ef26d.png",
+  "orig": 5389,
+  "tiny": 2059,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "9c07a52fc4ded88ed12b79342147206d": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit4.9c07a52f.png",
+  "orig": 9124,
+  "tiny": 4005,
+  "mean": 0.31993257999420166,
+  "p995": 3.505098342895508,
+  "amax": 9.0,
+  "keep_orig": false
+ },
+ "a01a4219a27a7abca5c95e201830d392": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/birthday/p3/gr_title_shadow.a01a4219.png",
+  "orig": 6239,
+  "tiny": 2144,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "a1406b8a179f5b0acdde3f87fc6a9789": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_title_shadow.a1406b8a.png",
+  "orig": 3816,
+  "tiny": 1235,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 6.0,
+  "keep_orig": false
+ },
+ "a1a87a485604629db541d48f33e33519": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/birthday/p3/gr_sw.a1a87a48.png",
+  "orig": 21476,
+  "tiny": 6930,
+  "mean": 0.03319823369383812,
+  "p995": 1.2470601797103882,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "abfd406f20929fc8b258d659d58f9188": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit5.abfd406f.png",
+  "orig": 31429,
+  "tiny": 8028,
+  "mean": 0.5064239501953125,
+  "p995": 5.452517032623291,
+  "amax": 24.0,
+  "keep_orig": false
+ },
+ "af4ba0c6e7732a0bdb736181a6f2d591": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/wedding/p3/gr_title_grad.af4ba0c6.png",
+  "orig": 1760,
+  "tiny": 742,
+  "mean": 0.6456288695335388,
+  "p995": 2.3333332538604736,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "b0e4b1259acc3dfa95c1aedef70a3115": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p4/gr_ill_bit2.b0e4b125.png",
+  "orig": 2876,
+  "tiny": 1965,
+  "mean": 0.2723865211009979,
+  "p995": 2.9970788955688477,
+  "amax": 6.0,
+  "keep_orig": false
+ },
+ "bcab72271958ef9a2cb425be9bd07dd1": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/birthday/p3/gr_title_grad.bcab7227.png",
+  "orig": 1819,
+  "tiny": 754,
+  "mean": 0.6502267122268677,
+  "p995": 2.3333332538604736,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "c5c427a94f0172d884814ee072f6cc5e": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/babyshower/p6/gr_sw.c5c427a9.png",
+  "orig": 12624,
+  "tiny": 5625,
+  "mean": 0.040840793401002884,
+  "p995": 1.5973867177963257,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "c91389435a54f604cecdd2a7ece45a41": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/eid/p3/gr_title_shadow.c9138943.png",
+  "orig": 6274,
+  "tiny": 2341,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "caf9b738ece25d2eb3f6fd49e19c30b1": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/other/p3/gr_title_grad.caf9b738.png",
+  "orig": 1809,
+  "tiny": 749,
+  "mean": 0.61924809217453,
+  "p995": 2.3333332538604736,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "ccef71e558ddd8e6c09a9ed16931c4a1": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/babyshower/p3/gr_sw.ccef71e5.png",
+  "orig": 20070,
+  "tiny": 5550,
+  "mean": 0.041371576488018036,
+  "p995": 1.4549015760421753,
+  "amax": 13.0,
+  "keep_orig": false
+ },
+ "d897d0e359377e57950628186c9a19e5": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit1.d897d0e3.png",
+  "orig": 2149,
+  "tiny": 1869,
+  "mean": 0.4709740877151489,
+  "p995": 2.6666667461395264,
+  "amax": 4.0,
+  "keep_orig": false
+ },
+ "dad0531d4d86928ecb687d877bf32879": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/eid/p3/gr_sw.dad0531d.png",
+  "orig": 20446,
+  "tiny": 5797,
+  "mean": 0.03668250888586044,
+  "p995": 1.35073721408844,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "dbdb22988aa34d8c30b7ae87f7baa77b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/housewarming/p5/gr_sw.dbdb2298.png",
+  "orig": 13494,
+  "tiny": 6706,
+  "mean": 0.03366486355662346,
+  "p995": 1.6627451181411743,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "dda16bd536a1fea238de0debd9e44be9": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/babyshower/p5/gr_sw.dda16bd5.png",
+  "orig": 13939,
+  "tiny": 6707,
+  "mean": 0.033890411257743835,
+  "p995": 1.4941177368164062,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "e1d7436f39d81bee4c8fc34d4dd5c9c6": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/other/p1/gr_sw.e1d7436f.png",
+  "orig": 15196,
+  "tiny": 6032,
+  "mean": 0.033941905945539474,
+  "p995": 1.4222221374511719,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "e20dab0f0a8e9b3fc3d5149ad276d3ce": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/babyshower/p4/gr_sw.e20dab0f.png",
+  "orig": 13001,
+  "tiny": 5900,
+  "mean": 0.03809672221541405,
+  "p995": 1.457518458366394,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "e2d87a417bc95a792caacfe7de183c51": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/birthday/p1/gr_sw.e2d87a41.png",
+  "orig": 15454,
+  "tiny": 6392,
+  "mean": 0.036537423729896545,
+  "p995": 1.3383475542068481,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "e6f204f495d0a646400e9546fcbadce2": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit10.e6f204f4.png",
+  "orig": 2261,
+  "tiny": 1845,
+  "mean": 0.41118156909942627,
+  "p995": 2.4249913692474365,
+  "amax": 4.0,
+  "keep_orig": false
+ },
+ "e970cb6f473f281ba7100a82a164e2ce": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit9.e970cb6f.png",
+  "orig": 2251,
+  "tiny": 1635,
+  "mean": 0.4715333580970764,
+  "p995": 2.3614625930786133,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "f19319e2029a6a4a98bf3cbdff3f06da": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_title_grad.f19319e2.png",
+  "orig": 1525,
+  "tiny": 543,
+  "mean": 0.7190795540809631,
+  "p995": 2.23828125,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "f3a80e7c4ab9da875b3d76a1c8e4424b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_bit6.f3a80e7c.png",
+  "orig": 9145,
+  "tiny": 4021,
+  "mean": 0.34878429770469666,
+  "p995": 3.3053932189941406,
+  "amax": 10.0,
+  "keep_orig": false
+ },
+ "f3eda243781c9218f9d173fc7a0f98e7": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p5/gr_ill_a.f3eda243.png",
+  "orig": 9156,
+  "tiny": 4236,
+  "mean": 0.07713325321674347,
+  "p995": 5.0,
+  "amax": 8.0,
+  "keep_orig": false
+ },
+ "f5510a51859d2514c790b4f8bd94e9b4": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p2/gr_title_shadow.f5510a51.png",
+  "orig": 5880,
+  "tiny": 1744,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "fc4752c3b36cd32f217caf03847334ba": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p4/gr_title_grad.fc4752c3.png",
+  "orig": 2349,
+  "tiny": 652,
+  "mean": 0.7638148069381714,
+  "p995": 2.6666667461395264,
+  "amax": 0.0,
+  "keep_orig": false
+ },
+ "fc67a9d2b19ffbf8f9381973626eb62f": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p4/gr_ill_a.fc67a9d2.png",
+  "orig": 11683,
+  "tiny": 6022,
+  "mean": 0.09536327421665192,
+  "p995": 4.0,
+  "amax": 7.0,
+  "keep_orig": false
+ },
+ "fcb6d78f0657cd70cf3d1d908a886afb": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/occasions/art/babyshower/p1/gr_sw.fcb6d78f.png",
+  "orig": 14445,
+  "tiny": 5647,
+  "mean": 0.03228823468089104,
+  "p995": 1.33856201171875,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "fd7d5021d6abd7e4a48761c8f10a6283": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/heroes/art/p1/gr_ill_a.fd7d5021.png",
+  "orig": 7801,
+  "tiny": 3787,
+  "mean": 0.0689820647239685,
+  "p995": 4.0,
+  "amax": 8.0,
+  "keep_orig": false
+ }
+}

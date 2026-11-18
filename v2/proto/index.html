@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gift Registry Sheet</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="motion.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+  <div class="stage">
+    <div class="phone" id="phone">
+      <div class="screen" id="screen">
+        <!-- Screen behind the sheet: one flat 2x export of Figma 843:762516 (Items nudge as stories) -->
+        <div class="home">
+          <img class="home-img" src="img/backdrop.jpg" width="375" height="812" alt="">
+          <button class="hot" id="hot" aria-label="What is a Gift Registry"></button>
+        </div>
+
+        <!-- Gift Registry bottom sheet (Figma 843:763414 Collection Drawer · card 843:763418) -->
+        <div class="layer" id="layer">
+          <div class="scrim" id="scrim"></div>
+          <div class="sheet-wrap" id="sheetWrap">
+            <div class="grabber"></div>
+            <div class="sheet" id="sheet">
+              <!-- static hero background (Figma 843:763446 Onboarding background) drawn by the app; the lottie has no bg -->
+              <img class="hero-bg" src="img/hero-bg.jpg" alt="">
+              <!-- hero lottie: AE comp 'gifting v2 (no bg)' 1053x618 (3x) = 351x206 pt, top of the card -->
+              <div class="hero" id="hero"></div>
+
+              <div class="col c1">
+                <img class="ico" src="img/ico1.png" alt="">
+                <img class="num" src="img/num1.png" alt="01">
+                <p class="txt">Create &amp; <b>add items</b> you want</p>
+              </div>
+              <div class="div d1"></div>
+              <div class="col c2">
+                <img class="ico" src="img/ico2.png" alt="">
+                <img class="num" src="img/num2.png" alt="02">
+                <p class="txt"><b>Share it</b> with your family &amp; friends</p>
+              </div>
+              <div class="div d2"></div>
+              <div class="col c3">
+                <img class="ico" src="img/ico3.png" alt="">
+                <img class="num" src="img/num3.png" alt="03">
+                <p class="txt"><b>Track your gifts</b> as they come</p>
+              </div>
+
+              <button class="cta" id="cta"><img src="img/btn.png" alt="Continue"></button>
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dock" id="dock">
+    <button class="dk" id="replay">Replay</button>
+    <a class="dk" id="specLink" href="spec/?v=1">Spec Sheet</a>
+  </div>
+
+  <script src="motion.js?v=3"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="app.js?v=2"></script>
+</body>
+</html>

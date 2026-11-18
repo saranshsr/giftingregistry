@@ -1,0 +1,34 @@
+/* reference flow 4 s3-instr: 343 × 68 pt, surface/secondary, r12, door on a white 40 pt r8 tile, label B14 Medium,
+   20 pt checkbox at the end */
+.card {
+  display: flex !important;
+  align-items: center;
+  gap: var(--nk-space-s12);
+  width: 100%;
+  min-height: 68px;
+  padding: var(--nk-space-s12) var(--nk-space-s16) var(--nk-space-s12) var(--nk-space-s12) !important;
+  text-align: start;
+  border-radius: var(--nk-radius-r12) !important;
+  background: var(--nk-field-surface-secondary) !important;
+}
+.icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--nk-radius-r8);
+  background: var(--nk-field-surface-primary);
+}
+.label {
+  flex: 1;
+  min-width: 0;
+  font: var(--nk-type-field-b14-medium);
+  letter-spacing: var(--nk-field-tracking-b);
+  color: var(--nk-field-text-primary);
+}
+.box {
+  display: flex;
+  flex: none;
+}

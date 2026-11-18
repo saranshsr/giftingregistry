@@ -1,0 +1,372 @@
+/* Registry steps: pt positions on the 375 × 812 Figma frames (843:719902). Theme vars (--accent, --tint-a, --tint-b,
+   --cta) are set per occasion on .stage and cross-fade where they paint. */
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 812px;
+  overflow: hidden;
+  background: var(--nk-color-bg-surface);
+}
+.frame {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 375px;
+  margin-left: -187.5px; /* design-ignore — Figma geometry / caret ink */
+}
+.body {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+.part {
+  position: absolute;
+}
+
+/* top bar: kit IconButton (back, or the X on Name your registry) + the 72 pt progress bar */
+.topbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 118px;
+  z-index: 4;
+  pointer-events: none;
+}
+.topbar > * {
+  pointer-events: auto;
+}
+.back {
+  position: absolute;
+  left: var(--nk-space-s16);
+  top: 70px;
+  width: 40px;
+  height: 40px;
+}
+.progress {
+  position: absolute;
+  left: 153.5px;
+  top: var(--nk-space-s88);
+  width: 72px;
+  height: 4px;
+  border-radius: var(--nk-radius-r8);
+  background: var(--nk-palette-white-alpha50);
+  overflow: hidden;
+  pointer-events: none;
+}
+.progressFill {
+  height: 4px;
+  border-radius: var(--nk-radius-r8);
+  background: var(--nk-palette-white);
+}
+
+/* footer: white action bar (r20 top, soft upward shadow) with the keyboard under it */
+.footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 372px;
+  border-radius: var(--nk-radius-r20) var(--nk-radius-r20) 0 0;
+  overflow: hidden;
+  background: var(--nk-color-bg-surface);
+  box-shadow:
+    0 -7px 15px var(--nk-palette-black-alpha3),
+    0 -27px 27px var(--nk-palette-black-alpha2);
+}
+.actionbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 76px;
+  padding: var(--nk-space-s12);
+  background: var(--nk-color-bg-surface);
+}
+/*
+ * The CTA is the flow's NanoButton (nano Button v3) in the occasion's colours (`nanoColors(theme)`). Its two colour
+ * inputs are registered here so a new occasion cross-fades them (.25 s, as the Figma nano button did) instead of
+ * jumping; the initial values are the guide's neutral pair (#212121 rest, #424242 pressed centre) for the Default
+ * page, where `nanoColors` leaves them unset.
+ */
+@property --nano-btn-deep {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #212121; /* token-lint-ignore — nano button v3 neutral rest fill (palette inkBlack) */
+}
+@property --nano-btn-glow {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #424242; /* token-lint-ignore — nano button v3 neutral pressed centre */
+}
+.ctaNano {
+  transition:
+    --nano-btn-deep 0.25s ease,
+    --nano-btn-glow 0.25s ease;
+}
+/* Figma "Back button": 40 circle, white, 1 pt border/primary */
+.navBtn {
+  width: 40px;
+  height: 40px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  border-radius: var(--nk-radius-full) !important;
+  background: var(--nk-color-bg-surface) !important;
+  border: 1px solid var(--nk-field-border-primary) !important;
+}
+.kb {
+  position: absolute;
+  left: 0;
+  top: 76px;
+  width: 100%;
+  height: 296px;
+  background: var(--nk-palette-kit-gray97v2, var(--nk-color-bg-subtle));
+  transition: background-color 0.2s linear;
+}
+.kb[data-mode='none'] {
+  background: var(--nk-color-bg-surface);
+}
+.kbImg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 375px;
+  height: 296px;
+  transition: opacity 0.2s linear;
+}
+.kbImg img {
+  width: 375px;
+  display: block;
+}
+.kb[data-mode='none'] .kbImg,
+.kb[data-mode='text'] [data-kb='num'],
+.kb[data-mode='num'] [data-kb='text'] {
+  opacity: 0;
+  pointer-events: none;
+}
+/* reference r3Numpad keys: 116.5 × 46.64, r7.93; press = navy 12% (+ the kit press scale .96, flow 6) */
+.numkey {
+  position: absolute;
+  width: 116.5px;
+  height: 46.64px;
+  border: 0;
+  padding: 0;
+  border-radius: var(--nk-radius-r8);
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.12s ease;
+}
+.numkey:active {
+  background: var(--nk-palette-black-alpha12);
+}
+
+/* the big centred answer (kit TextField, restyled to Figma Medium 32/40; border only for the error state) */
+.bigField {
+  position: relative;
+  width: 311px;
+  height: 40px;
+  cursor: text;
+}
+.tf.tf.tf > div {
+  height: 40px;
+  padding: 0 var(--nk-space-s4);
+  border-color: transparent;
+  background: transparent;
+  border-radius: var(--nk-radius-r10);
+}
+.tf.tf.tf[data-state='error'] > div {
+  border-color: var(--nk-field-border-error-bold);
+}
+/* (×4: beats the TextField's filled / focus input rules) */
+.tf.tf.tf.tf input {
+  text-align: center;
+  font: var(--nk-type-gr-step-title);
+  letter-spacing: -0.25px;
+  color: var(--nk-color-text-primary);
+  caret-color: var(--nk-color-text-tertiary);
+}
+.tf.tf.tf.tf input::placeholder {
+  color: var(--nk-color-text-disabled, var(--nk-palette-blue-gray400, var(--nk-color-text-tertiary)));
+}
+.bigField[data-empty] .tf.tf.tf.tf input {
+  caret-color: transparent;
+}
+.caret {
+  position: absolute;
+  top: 5px;
+  width: 2px;
+  height: 30px;
+  border-radius: 1px; /* design-ignore — Figma geometry / caret ink */
+  background: var(--nk-color-text-tertiary); /* design-ignore — Figma geometry / caret ink */
+  animation: grBlink 1.06s steps(1) infinite;
+  pointer-events: none;
+}
+@keyframes grBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* date: dd/mm/yyyy, typed with the slashes added as you go */
+.date {
+  width: 311px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: var(--nk-type-gr-step-title);
+  letter-spacing: -0.25px;
+  white-space: pre;
+  transition: color 0.2s ease;
+}
+.dg {
+  display: inline-block;
+  color: var(--nk-color-text-primary);
+  transition: color 0.2s ease;
+}
+.ph {
+  color: var(--nk-color-text-disabled, var(--nk-color-text-tertiary));
+}
+.date[data-bad] .dg {
+  color: var(--nk-color-text-error, var(--nk-field-text-error));
+}
+.caretInline {
+  display: inline-block;
+  width: 2px;
+  height: 30px;
+  margin: 0 1px;
+  border-radius: 1px; /* design-ignore — Figma geometry / caret ink */
+  background: var(--nk-color-text-tertiary); /* design-ignore — Figma geometry / caret ink */
+  animation: grBlink 1.06s steps(1) infinite;
+  vertical-align: middle;
+}
+
+/* "Pick from calendar" (Figma 843:723079) */
+.chip {
+  display: flex !important;
+  align-items: center;
+  gap: var(--nk-space-s6);
+  height: 36px;
+  padding: var(--nk-space-s8) var(--nk-space-s10) !important;
+  border-radius: var(--nk-radius-r10) !important;
+  background: linear-gradient(var(--tint-a), var(--tint-b)) !important;
+  font: var(--nk-type-field-b14-semibold);
+  letter-spacing: -0.1px;
+  color: var(--accent) !important;
+  white-space: nowrap;
+}
+
+/* 1.4 delivery card + note (Figma 843:723111) */
+.addr {
+  position: relative;
+  display: block !important;
+  width: 343px;
+  height: 116px;
+  padding: 0 !important;
+  border-radius: var(--nk-radius-r12) !important;
+  background: var(--nk-color-bg-surface) !important;
+  border: 1px solid var(--nk-color-border-subtle, var(--nk-palette-anti-flash-white)) !important;
+  text-align: start;
+}
+.addrInner {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--nk-color-bg-surface);
+}
+.addrIco {
+  position: absolute;
+  left: 11px;
+  top: 17px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--nk-radius-r10);
+  background: linear-gradient(var(--tint-a), var(--tint-b));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.addrT1 {
+  position: absolute;
+  left: 57px;
+  top: var(--nk-space-s15);
+  font: var(--nk-type-text14-semibold-lh20);
+  letter-spacing: -0.1px;
+  color: var(--nk-color-text-primary);
+}
+.addrT2 {
+  position: absolute;
+  left: 57px;
+  top: 35px;
+  right: 52px;
+  font: var(--nk-type-text13-regular-lh20);
+  letter-spacing: -0.1px;
+  color: var(--nk-color-text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.addrEdit {
+  position: absolute;
+  left: 296px;
+  top: 17px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.addrDash {
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  top: 67px;
+}
+.addrT3 {
+  position: absolute;
+  left: 11px;
+  top: 79px;
+  font: var(--nk-type-text13-regular-lh20);
+  letter-spacing: -0.1px;
+  color: var(--nk-color-text-tertiary);
+  white-space: pre;
+}
+.note {
+  position: relative;
+  width: 343px;
+  height: 50px;
+}
+.noteTip {
+  position: absolute;
+  left: 22px;
+  top: 0;
+  width: 16px;
+  height: 8px;
+  background: var(--tint-a);
+  clip-path: path('M6.3029 1.69705L0 8H16L9.6971 1.69706C8.7598 0.759798 7.2402 0.759796 6.3029 1.69705Z');
+}
+.noteBox {
+  position: absolute;
+  left: 0;
+  top: var(--nk-space-s8);
+  width: 343px;
+  height: 42px;
+  padding: var(--nk-space-s12);
+  border-radius: var(--nk-radius-r10);
+  background: linear-gradient(var(--tint-a), var(--tint-b));
+  font: var(--nk-type-text12-regular-lh18);
+  letter-spacing: -0.1px;
+  color: var(--accent);
+}
+.noteBox b {
+  font-weight: 700;
+}
+.instrHead {
+  font: var(--nk-type-text14-semibold-lh20);
+  color: var(--nk-color-text-primary);
+}

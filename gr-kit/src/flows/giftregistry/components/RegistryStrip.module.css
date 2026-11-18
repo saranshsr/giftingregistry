@@ -1,0 +1,112 @@
+/* Strip cards, reference geometry (126 × 148; art exports are the 128 × 150 card with its 1 pt outline) */
+.slot {
+  flex-shrink: 0;
+  display: flex;
+}
+.tile {
+  position: relative;
+  flex-shrink: 0;
+  width: 126px;
+  height: 148px;
+  display: block !important;
+  padding: 0 !important;
+  border-radius: var(--nk-radius-r12) !important;
+  background: var(--nk-color-bg-subtle) !important;
+  overflow: hidden;
+}
+/* the card art above the name (cut at 96 pt) */
+.art {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  width: 128px;
+  height: 96px;
+  display: block;
+  pointer-events: none;
+} /* design-ignore — reference export geometry */
+/* the registry card: the whole export (name / count are erased from it) */
+.cardArt {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  width: 128px;
+  height: 150px;
+  display: block;
+  pointer-events: none;
+} /* design-ignore — reference export geometry */
+.icon {
+  position: absolute;
+  left: 50.4px;
+  top: 42.5px;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+} /* design-ignore — reference icon slot */
+/* the occasion tag over the front card (it covers the export's baked Eid tag); solid ink, no gradient text */
+.tag {
+  position: absolute;
+  left: 50%;
+  top: 77px;
+  height: 22px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--nk-space-s2); /* design-ignore — reference tag slot */
+  padding: 0 var(--nk-space-s6) 0 var(--nk-space-s4);
+  border: 1px solid var(--nk-palette-white);
+  border-radius: var(--nk-radius-r6);
+  background: var(--nk-color-bg-surface);
+  box-shadow: var(--nk-shadow-raised);
+  white-space: nowrap;
+}
+.tag img {
+  width: 14px;
+  height: 14px;
+}
+.tag b {
+  font: var(--nk-type-text11-semibold-lh14);
+}
+/* the grey tab every collection card carries at its top centre (measured off the card art: 28 × 6, bottom corners r3,
+   #D0D4DD), so the new registry's card has the same chrome */
+.tab {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 28px;
+  height: 6px;
+  margin-left: -14px; /* design-ignore — centred */
+  border-radius: 0 0 3px 3px; /* design-ignore — card-art tab geometry */
+  background: var(--nk-color-border-strong);
+  pointer-events: none;
+}
+.name,
+.count {
+  position: absolute;
+  left: var(--nk-space-s12);
+  right: var(--nk-space-s12);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.name {
+  top: 100px;
+  font: var(--nk-type-body-bold);
+  color: var(--nk-color-text-strong);
+} /* design-ignore — reference text slot */
+.count {
+  top: 120px;
+  font: var(--nk-type-caption);
+  color: var(--nk-color-text-tertiary);
+} /* design-ignore — reference text slot */
+
+/* Figma "Uncoloured - Empty states - Collection tray" art (102 × 76 frame, the tray itself 88 × 72) */
+.tray {
+  position: absolute;
+  left: 50%;
+  top: var(--nk-space-s16);
+  width: 88px;
+  height: 72px;
+  margin-left: -44px; /* design-ignore — centred tray */
+  pointer-events: none;
+}
