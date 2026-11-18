@@ -5,8 +5,10 @@ import styles from './IosDatePicker.module.css';
 
 /**
  * "Pick from calendar" opens the system date picker.
- * - Touch devices (iPhone): a real `<input type="date">`, hidden but in the DOM, opened with `showPicker()` inside the
- *   tap (focus / click as the fallback), so iOS shows its own date popover. `min` is today.
+ * - Touch devices (iPhone, Android, prototype-player webviews): a real `<input type="date">` laid invisibly over the
+ *   chip (`chipInput`), so the finger lands on the input itself and the OS opens its own date picker. Opening a hidden
+ *   input from script (`showPicker()`, focus / click) is ignored by iOS and many webviews, which is why the chip did
+ *   nothing there. `min` is today.
  * - Desktop (no native iOS picker): a stand-in drawn like iOS 17's compact date picker popover with the inline calendar
  *   (month / year header with chevrons, weekday row, the picked day in the tint), the system font and material, and
  *   the iOS popover motion: a quick scale-and-fade from the chip.
@@ -29,57 +31,49 @@ export function useIosDatePicker({ value, tint, onPick }: { value: Date | null; 
     return d;
   }, []);
 
+  // touch: the overlay input already took the tap and the OS picker is opening, so the chip has nothing more to do
   const open = (el: HTMLElement | null) => {
-    if (TOUCH && input.current) {
-      const i = input.current;
-      try {
-        (i as HTMLInputElement & { showPicker?: () => void }).showPicker?.();
-      } catch {
-        i.focus();
-        i.click();
-      }
-      return;
-    }
+    if (TOUCH) return;
     setAnchor(el?.getBoundingClientRect() ?? null);
   };
 
+  const chipInput = TOUCH ? (
+    <input
+      ref={input}
+      type="date"
+      className={styles.native}
+      min={isoOf(today)}
+      value={value ? isoOf(value) : ''}
+      aria-label="Pick from calendar"
+      onChange={(e) => {
+        const v = e.currentTarget.value;
+        if (!v) return;
+        const [y, m, d] = v.split('-').map(Number);
+        onPick(new Date(y, m - 1, d));
+      }}
+    />
+  ) : null;
+
   const node = (
-    <>
-      <input
-        ref={input}
-        type="date"
-        className={styles.native}
-        min={isoOf(today)}
-        defaultValue={value ? isoOf(value) : undefined}
-        tabIndex={-1}
-        aria-hidden
-        onChange={(e) => {
-          const v = e.currentTarget.value;
-          if (!v) return;
-          const [y, m, d] = v.split('-').map(Number);
-          onPick(new Date(y, m - 1, d));
-        }}
-      />
-      <AnimatePresence>
-        {anchor && (
-          <Popover
-            key="pop"
-            anchor={anchor}
-            value={value}
-            today={today}
-            tint={tint}
-            onClose={() => setAnchor(null)}
-            onPick={(d) => {
-              onPick(d);
-              // iOS keeps the popover a beat so the pick registers, then it goes
-              setTimeout(() => setAnchor(null), 220);
-            }}
-          />
-        )}
-      </AnimatePresence>
-    </>
+    <AnimatePresence>
+      {anchor && (
+        <Popover
+          key="pop"
+          anchor={anchor}
+          value={value}
+          today={today}
+          tint={tint}
+          onClose={() => setAnchor(null)}
+          onPick={(d) => {
+            onPick(d);
+            // iOS keeps the popover a beat so the pick registers, then it goes
+            setTimeout(() => setAnchor(null), 220);
+          }}
+        />
+      )}
+    </AnimatePresence>
   );
-  return { open, node };
+  return { open, node, chipInput };
 }
 
 const WEEK = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

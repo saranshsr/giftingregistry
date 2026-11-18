@@ -312,6 +312,10 @@ export function StepsScreen({ params }: ScreenProps<{ morph?: string; step?: Ste
                     <Pressable
                       className={styles.chip}
                       scale={0.96}
+                      // a div, not a button: on touch it holds the date input the tap lands on (an input inside a button
+                      // never gets the tap on iOS)
+                      asDiv
+                      style={{ position: 'relative' }}
                       onClick={(e) => {
                         // the pad goes away, then the system date picker opens (native on iPhone, an iOS stand-in on desktop)
                         haptics.tap();
@@ -321,6 +325,7 @@ export function StepsScreen({ params }: ScreenProps<{ morph?: string; step?: Ste
                     >
                       <OriginIcon name="calendar-filled" size={20} color="var(--accent)" />
                       {copy.steps.pickFromCalendar}
+                      {picker.chipInput}
                     </Pressable>
                   </motion.span>,
                   { left: 0, top: DATE_TOP + 56, width: 375, display: 'flex', justifyContent: 'center' },
