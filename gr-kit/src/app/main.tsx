@@ -32,6 +32,10 @@ setWasmUrl(new URL('../../node_modules/@lottiefiles/dotlottie-web/dist/dotlottie
 // used by scripts/check-routes.mjs
 (window as unknown as { __NK_ROUTES__: string[] }).__NK_ROUTES__ = registry.all().map((r) => r.route);
 
+// the Animation Spec Sheet (public/spec/) runs the prototype through public/spec/proto.html, which sets `__NK_SPEC__`
+// before it loads this bundle (or the page carries ?spec=): the bare phone only, without the review shell
+const SPEC_MODE = new URLSearchParams(window.location.search).has('spec') || !!(window as unknown as { __NK_SPEC__?: boolean }).__NK_SPEC__;
+
 const readUrl = (): { route?: Route; params: Record<string, string> } => {
   const { route, params } = parsePageUrl(window.location);
   return { route: route ? registry.resolve(route)?.route : undefined, params };
@@ -145,7 +149,7 @@ function Preview({ initialFlows }: { initialFlows: FlowDef[] }) {
     <div className="pg-stage">
       <NoonPrototype key={page.nonce} fit={fit} flows={allLoaded} initialRoute={page.route} initialParams={page.params} onRouteChange={onRouteChange} />
       {/* review shell: the Gift Registry flows, collapsed to a handle (opens a slim panel, or a sheet on phones) */}
-      <FlowSelector
+      {!SPEC_MODE && <FlowSelector
         title={reviewTitle}
         groups={reviewGroups}
         current={route}
@@ -157,7 +161,7 @@ function Preview({ initialFlows }: { initialFlows: FlowDef[] }) {
           const start = registry.resolve(f?.route ?? route ?? '');
           window.location.assign(start ? `/${registry.pathFor(start.route)}` : '/');
         }}
-      />
+      />}
     </div>
   );
 }

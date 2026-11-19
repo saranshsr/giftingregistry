@@ -1,0 +1,374 @@
+{
+ "Registry_Name": [
+  {
+   "name": "Registry_Name_Pen",
+   "file": "01_Registry_Name/03_Registry_Name_Pen.png",
+   "x": 386.1,
+   "y": 202.29,
+   "s": 0.54192,
+   "err": 0.2404
+  },
+  {
+   "name": "Registry_Name_Iridescent_Cross",
+   "file": "01_Registry_Name/06_Registry_Name_Iridescent_Cross.png",
+   "x": 114.63,
+   "y": 383.32,
+   "s": 0.3745,
+   "err": 0.2117
+  },
+  {
+   "name": "Registry_Name_Ring",
+   "file": "01_Registry_Name/02_Registry_Name_Ring.png",
+   "x": 44.06,
+   "y": 110.02,
+   "s": 0.49548,
+   "err": 0.6155
+  },
+  {
+   "name": "Registry_Name_Tag",
+   "file": "01_Registry_Name/01_Registry_Name_Tag.png",
+   "x": 116.25,
+   "y": 150.52,
+   "s": 0.93721,
+   "err": 0.2631
+  },
+  {
+   "name": "Registry_Name_Green_Sparkle",
+   "file": "01_Registry_Name/04_Registry_Name_Green_Sparkle.png",
+   "x": 181.44,
+   "y": 52.25,
+   "s": 0.34453,
+   "err": 0.2491
+  },
+  {
+   "name": "Registry_Name_Silver_Sparkle",
+   "file": "01_Registry_Name/05_Registry_Name_Silver_Sparkle.png",
+   "x": 402.63,
+   "y": 124.45,
+   "s": 0.3199,
+   "err": 0.3182
+  }
+ ],
+ "Occasion": [
+  {
+   "name": "Occasion_Purple_Cross",
+   "file": "02_Occasion/16_Occasion_Purple_Cross.png",
+   "x": 371.32,
+   "y": 480.53,
+   "s": 0.41954,
+   "err": 0.1795
+  },
+  {
+   "name": "Occasion_Canister",
+   "file": "02_Occasion/01_Occasion_Canister.png",
+   "x": 161.57,
+   "y": 346.09,
+   "s": 1.03061,
+   "err": 0.2909
+  },
+  {
+   "name": "Occasion_Spray_Inner_Left",
+   "file": "02_Occasion/03_Occasion_Spray_Inner_Left.png",
+   "x": 222.25,
+   "y": 235.47,
+   "s": 0.47451,
+   "err": 0.4196
+  },
+  {
+   "name": "Occasion_Spray_Inner_Right",
+   "file": "02_Occasion/04_Occasion_Spray_Inner_Right.png",
+   "x": 302.29,
+   "y": 233.57,
+   "s": 0.49946,
+   "err": 0.412
+  },
+  {
+   "name": "Occasion_Spray_Left",
+   "file": "02_Occasion/02_Occasion_Spray_Left.png",
+   "x": 129.39,
+   "y": 275.44,
+   "s": 0.54274,
+   "err": 0.3493
+  },
+  {
+   "name": "Occasion_Spray_Right",
+   "file": "02_Occasion/05_Occasion_Spray_Right.png",
+   "x": 329.41,
+   "y": 279.88,
+   "s": 0.5223,
+   "err": 0.3344
+  },
+  {
+   "name": "Occasion_Large_Sparkle",
+   "file": "02_Occasion/06_Occasion_Large_Sparkle.png",
+   "x": 195.61,
+   "y": 34.22,
+   "s": 0.77902,
+   "err": 0.182
+  },
+  {
+   "name": "Occasion_Left_Sparkle",
+   "file": "02_Occasion/07_Occasion_Left_Sparkle.png",
+   "x": 127.86,
+   "y": 161.08,
+   "s": 0.53536,
+   "err": 0.2394
+  },
+  {
+   "name": "Occasion_Right_Sparkle",
+   "file": "02_Occasion/08_Occasion_Right_Sparkle.png",
+   "x": 362.93,
+   "y": 163.4,
+   "s": 0.53243,
+   "err": 0.3677
+  },
+  {
+   "name": "Occasion_Purple_Capsule_Left",
+   "file": "02_Occasion/09_Occasion_Purple_Capsule_Left.png",
+   "x": 150.7,
+   "y": 83.9,
+   "s": 0.3,
+   "err": 0.2007
+  },
+  {
+   "name": "Occasion_Cyan_Capsule_Right",
+   "file": "02_Occasion/10_Occasion_Cyan_Capsule_Right.png",
+   "x": 408.49,
+   "y": 83.58,
+   "s": 0.31807,
+   "err": 0.2142
+  },
+  {
+   "name": "Occasion_Cyan_Capsule_Left",
+   "file": "02_Occasion/11_Occasion_Cyan_Capsule_Left.png",
+   "x": 62.08,
+   "y": 246.86,
+   "s": 0.30808,
+   "err": 0.24
+  },
+  {
+   "name": "Occasion_Purple_Capsule_Right",
+   "file": "02_Occasion/12_Occasion_Purple_Capsule_Right.png",
+   "x": 474.24,
+   "y": 266.27,
+   "s": 0.29836,
+   "err": 0.1643
+  },
+  {
+   "name": "Occasion_Sphere_Left",
+   "file": "02_Occasion/13_Occasion_Sphere_Left.png",
+   "x": 97.57,
+   "y": 147.69,
+   "s": 0.25548,
+   "err": 0.3069
+  },
+  {
+   "name": "Occasion_Sphere_Right",
+   "file": "02_Occasion/14_Occasion_Sphere_Right.png",
+   "x": 469.08,
+   "y": 172.19,
+   "s": 0.25542,
+   "err": 0.2972
+  },
+  {
+   "name": "Occasion_Sphere_Bottom",
+   "file": "02_Occasion/15_Occasion_Sphere_Bottom.png",
+   "x": 436.52,
+   "y": 338.14,
+   "s": 0.24978,
+   "err": 0.3084
+  }
+ ],
+ "Date": [
+  {
+   "name": "Date_Iridescent_Cross",
+   "file": "03_Date/06_Date_Iridescent_Cross.png",
+   "x": 74.73,
+   "y": 418.53,
+   "s": 0.3049,
+   "err": 0.2973
+  },
+  {
+   "name": "Date_Hanging_Tag",
+   "file": "03_Date/04_Date_Hanging_Tag.png",
+   "x": 356.7,
+   "y": 319.27,
+   "s": 0.52411,
+   "err": 0.2744
+  },
+  {
+   "name": "Date_Connector_Ring",
+   "file": "03_Date/05_Date_Connector_Ring.png",
+   "x": 364.65,
+   "y": 333.57,
+   "s": 0.37813,
+   "err": 0.5423
+  },
+  {
+   "name": "Date_Ring_Left",
+   "file": "03_Date/02_Date_Ring_Left.png",
+   "x": 199.99,
+   "y": 94.3,
+   "s": 0.28315,
+   "err": 0.637
+  },
+  {
+   "name": "Date_Ring_Right",
+   "file": "03_Date/03_Date_Ring_Right.png",
+   "x": 353.24,
+   "y": 98.65,
+   "s": 0.29482,
+   "err": 0.5689
+  },
+  {
+   "name": "Date_Calendar",
+   "file": "03_Date/01_Date_Calendar.png",
+   "x": 118.75,
+   "y": 142.25,
+   "s": 0.89875,
+   "err": 0.372
+  }
+ ],
+ "Name": [
+  {
+   "name": "Name_Plus",
+   "file": "04_Name/04_Name_Plus.png",
+   "x": 361.7,
+   "y": 371.38,
+   "s": 0.35647,
+   "err": 0.2524
+  },
+  {
+   "name": "Name_Badge_Disc",
+   "file": "04_Name/03_Name_Badge_Disc.png",
+   "x": 326.93,
+   "y": 337.06,
+   "s": 0.43688,
+   "err": 0.2862
+  },
+  {
+   "name": "Name_Front_Person",
+   "file": "04_Name/02_Name_Front_Person.png",
+   "x": 158.5,
+   "y": 111.04,
+   "s": 0.57883,
+   "err": 0.2832
+  },
+  {
+   "name": "Name_Rear_Person",
+   "file": "04_Name/01_Name_Rear_Person.png",
+   "x": 90.69,
+   "y": 160.97,
+   "s": 0.57342,
+   "err": 0.2889
+  }
+ ],
+ "Due_Date": [
+  {
+   "name": "Due_Date_Iridescent_Cross",
+   "file": "05_Due_Date/07_Due_Date_Iridescent_Cross.png",
+   "x": 71.13,
+   "y": 391.63,
+   "s": 0.36336,
+   "err": 0.2282
+  },
+  {
+   "name": "Due_Date_Page_Sparkle",
+   "file": "05_Due_Date/08_Due_Date_Page_Sparkle.png",
+   "x": 194.89,
+   "y": 262.32,
+   "s": 0.41046,
+   "err": 0.4901
+  },
+  {
+   "name": "Due_Date_Ring_Left",
+   "file": "05_Due_Date/02_Due_Date_Ring_Left.png",
+   "x": 203.19,
+   "y": 122.42,
+   "s": 0.29783,
+   "err": 0.5153
+  },
+  {
+   "name": "Due_Date_Ring_Right",
+   "file": "05_Due_Date/03_Due_Date_Ring_Right.png",
+   "x": 340.04,
+   "y": 125.77,
+   "s": 0.27614,
+   "err": 0.5265
+  },
+  {
+   "name": "Due_Date_Calendar",
+   "file": "05_Due_Date/01_Due_Date_Calendar.png",
+   "x": 115.86,
+   "y": 163.81,
+   "s": 1.04195,
+   "err": 0.3335
+  },
+  {
+   "name": "Due_Date_Balloon_String",
+   "file": "05_Due_Date/04_Due_Date_Balloon_String.png",
+   "x": 429.55,
+   "y": 8.52,
+   "s": 0.57024,
+   "err": 0.3594
+  },
+  {
+   "name": "Due_Date_Large_Sparkle",
+   "file": "05_Due_Date/05_Due_Date_Large_Sparkle.png",
+   "x": 52.2,
+   "y": 30.96,
+   "s": 0.49479,
+   "err": 0.5673
+  },
+  {
+   "name": "Due_Date_Small_Sparkle",
+   "file": "05_Due_Date/06_Due_Date_Small_Sparkle.png",
+   "x": 498.51,
+   "y": 245.01,
+   "s": 0.33324,
+   "err": 0.3826
+  }
+ ],
+ "Address": [
+  {
+   "name": "Address_Flag",
+   "file": "06_Address/03_Address_Flag.png",
+   "x": 384.64,
+   "y": 224.84,
+   "s": 0.41562,
+   "err": 0.3441
+  },
+  {
+   "name": "Address_Pin",
+   "file": "06_Address/02_Address_Pin.png",
+   "x": 157.95,
+   "y": 94.28,
+   "s": 0.69174,
+   "err": 0.149
+  },
+  {
+   "name": "Address_Map",
+   "file": "06_Address/01_Address_Map.png",
+   "x": 96.41,
+   "y": 328.4,
+   "s": 0.87194,
+   "err": 0.4149
+  },
+  {
+   "name": "Address_Green_Sparkle",
+   "file": "06_Address/04_Address_Green_Sparkle.png",
+   "x": 91.3,
+   "y": 80.59,
+   "s": 0.30642,
+   "err": 0.3221
+  },
+  {
+   "name": "Address_Silver_Sparkle",
+   "file": "06_Address/05_Address_Silver_Sparkle.png",
+   "x": 419.7,
+   "y": 100.32,
+   "s": 0.26849,
+   "err": 0.3023
+  }
+ ]
+}

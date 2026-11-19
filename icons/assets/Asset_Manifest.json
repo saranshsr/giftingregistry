@@ -1,0 +1,482 @@
+[
+  {
+    "name": "Registry_Name",
+    "layers": [
+      {
+        "file": "01_Registry_Name/01_Registry_Name_Tag.png",
+        "name": "Registry_Name_Tag",
+        "box": [
+          116,
+          161,
+          392,
+          333
+        ]
+      },
+      {
+        "file": "01_Registry_Name/02_Registry_Name_Ring.png",
+        "name": "Registry_Name_Ring",
+        "box": [
+          49,
+          112,
+          169,
+          160
+        ]
+      },
+      {
+        "file": "01_Registry_Name/03_Registry_Name_Pen.png",
+        "name": "Registry_Name_Pen",
+        "box": [
+          391,
+          205,
+          166,
+          188
+        ]
+      },
+      {
+        "file": "01_Registry_Name/04_Registry_Name_Green_Sparkle.png",
+        "name": "Registry_Name_Green_Sparkle",
+        "box": [
+          178,
+          49,
+          105,
+          104
+        ]
+      },
+      {
+        "file": "01_Registry_Name/05_Registry_Name_Silver_Sparkle.png",
+        "name": "Registry_Name_Silver_Sparkle",
+        "box": [
+          402,
+          122,
+          57,
+          58
+        ]
+      },
+      {
+        "file": "01_Registry_Name/06_Registry_Name_Iridescent_Cross.png",
+        "name": "Registry_Name_Iridescent_Cross",
+        "box": [
+          111,
+          382,
+          109,
+          103
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Occasion",
+    "layers": [
+      {
+        "file": "02_Occasion/01_Occasion_Canister.png",
+        "name": "Occasion_Canister",
+        "box": [
+          169,
+          360,
+          252,
+          206
+        ]
+      },
+      {
+        "file": "02_Occasion/02_Occasion_Spray_Left.png",
+        "name": "Occasion_Spray_Left",
+        "box": [
+          124,
+          279,
+          151,
+          120
+        ]
+      },
+      {
+        "file": "02_Occasion/03_Occasion_Spray_Inner_Left.png",
+        "name": "Occasion_Spray_Inner_Left",
+        "box": [
+          224,
+          236,
+          75,
+          162
+        ]
+      },
+      {
+        "file": "02_Occasion/04_Occasion_Spray_Inner_Right.png",
+        "name": "Occasion_Spray_Inner_Right",
+        "box": [
+          298,
+          237,
+          79,
+          161
+        ]
+      },
+      {
+        "file": "02_Occasion/05_Occasion_Spray_Right.png",
+        "name": "Occasion_Spray_Right",
+        "box": [
+          321,
+          284,
+          142,
+          113
+        ]
+      },
+      {
+        "file": "02_Occasion/06_Occasion_Large_Sparkle.png",
+        "name": "Occasion_Large_Sparkle",
+        "box": [
+          204,
+          34,
+          196,
+          251
+        ]
+      },
+      {
+        "file": "02_Occasion/07_Occasion_Left_Sparkle.png",
+        "name": "Occasion_Left_Sparkle",
+        "box": [
+          132,
+          162,
+          104,
+          117
+        ]
+      },
+      {
+        "file": "02_Occasion/08_Occasion_Right_Sparkle.png",
+        "name": "Occasion_Right_Sparkle",
+        "box": [
+          365,
+          162,
+          103,
+          117
+        ]
+      },
+      {
+        "file": "02_Occasion/09_Occasion_Purple_Capsule_Left.png",
+        "name": "Occasion_Purple_Capsule_Left",
+        "box": [
+          151,
+          83,
+          45,
+          49
+        ]
+      },
+      {
+        "file": "02_Occasion/10_Occasion_Cyan_Capsule_Right.png",
+        "name": "Occasion_Cyan_Capsule_Right",
+        "box": [
+          409,
+          84,
+          47,
+          51
+        ]
+      },
+      {
+        "file": "02_Occasion/11_Occasion_Cyan_Capsule_Left.png",
+        "name": "Occasion_Cyan_Capsule_Left",
+        "box": [
+          63,
+          249,
+          49,
+          41
+        ]
+      },
+      {
+        "file": "02_Occasion/12_Occasion_Purple_Capsule_Right.png",
+        "name": "Occasion_Purple_Capsule_Right",
+        "box": [
+          476,
+          265,
+          48,
+          45
+        ]
+      },
+      {
+        "file": "02_Occasion/13_Occasion_Sphere_Left.png",
+        "name": "Occasion_Sphere_Left",
+        "box": [
+          98,
+          148,
+          41,
+          40
+        ]
+      },
+      {
+        "file": "02_Occasion/14_Occasion_Sphere_Right.png",
+        "name": "Occasion_Sphere_Right",
+        "box": [
+          469,
+          172,
+          40,
+          41
+        ]
+      },
+      {
+        "file": "02_Occasion/15_Occasion_Sphere_Bottom.png",
+        "name": "Occasion_Sphere_Bottom",
+        "box": [
+          437,
+          338,
+          38,
+          40
+        ]
+      },
+      {
+        "file": "02_Occasion/16_Occasion_Purple_Cross.png",
+        "name": "Occasion_Purple_Cross",
+        "box": [
+          372,
+          484,
+          88,
+          86
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Date",
+    "layers": [
+      {
+        "file": "03_Date/01_Date_Calendar.png",
+        "name": "Date_Calendar",
+        "box": [
+          116,
+          148,
+          365,
+          354
+        ]
+      },
+      {
+        "file": "03_Date/02_Date_Ring_Left.png",
+        "name": "Date_Ring_Left",
+        "box": [
+          199,
+          96,
+          70,
+          111
+        ]
+      },
+      {
+        "file": "03_Date/03_Date_Ring_Right.png",
+        "name": "Date_Ring_Right",
+        "box": [
+          352,
+          100,
+          70,
+          109
+        ]
+      },
+      {
+        "file": "03_Date/04_Date_Hanging_Tag.png",
+        "name": "Date_Hanging_Tag",
+        "box": [
+          360,
+          318,
+          210,
+          208
+        ]
+      },
+      {
+        "file": "03_Date/05_Date_Connector_Ring.png",
+        "name": "Date_Connector_Ring",
+        "box": [
+          350,
+          317,
+          58,
+          62
+        ]
+      },
+      {
+        "file": "03_Date/06_Date_Iridescent_Cross.png",
+        "name": "Date_Iridescent_Cross",
+        "box": [
+          76,
+          420,
+          83,
+          84
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Name",
+    "layers": [
+      {
+        "file": "04_Name/01_Name_Rear_Person.png",
+        "name": "Name_Rear_Person",
+        "box": [
+          86,
+          167,
+          185,
+          264
+        ]
+      },
+      {
+        "file": "04_Name/02_Name_Front_Person.png",
+        "name": "Name_Front_Person",
+        "box": [
+          154,
+          114,
+          292,
+          359
+        ]
+      },
+      {
+        "file": "04_Name/03_Name_Badge_Disc.png",
+        "name": "Name_Badge_Disc",
+        "box": [
+          328,
+          341,
+          165,
+          163
+        ]
+      },
+      {
+        "file": "04_Name/04_Name_Plus.png",
+        "name": "Name_Plus",
+        "box": [
+          364,
+          372,
+          94,
+          95
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Due_Date",
+    "layers": [
+      {
+        "file": "05_Due_Date/01_Due_Date_Calendar.png",
+        "name": "Due_Date_Calendar",
+        "box": [
+          106,
+          165,
+          381,
+          326
+        ]
+      },
+      {
+        "file": "05_Due_Date/02_Due_Date_Ring_Left.png",
+        "name": "Due_Date_Ring_Left",
+        "box": [
+          205,
+          124,
+          69,
+          87
+        ]
+      },
+      {
+        "file": "05_Due_Date/03_Due_Date_Ring_Right.png",
+        "name": "Due_Date_Ring_Right",
+        "box": [
+          340,
+          126,
+          64,
+          91
+        ]
+      },
+      {
+        "file": "05_Due_Date/04_Due_Date_Balloon_String.png",
+        "name": "Due_Date_Balloon_String",
+        "box": [
+          435,
+          12,
+          124,
+          242
+        ]
+      },
+      {
+        "file": "05_Due_Date/05_Due_Date_Large_Sparkle.png",
+        "name": "Due_Date_Large_Sparkle",
+        "box": [
+          43,
+          17,
+          198,
+          199
+        ]
+      },
+      {
+        "file": "05_Due_Date/06_Due_Date_Small_Sparkle.png",
+        "name": "Due_Date_Small_Sparkle",
+        "box": [
+          495,
+          243,
+          67,
+          66
+        ]
+      },
+      {
+        "file": "05_Due_Date/07_Due_Date_Iridescent_Cross.png",
+        "name": "Due_Date_Iridescent_Cross",
+        "box": [
+          67,
+          395,
+          114,
+          99
+        ]
+      },
+      {
+        "file": "05_Due_Date/08_Due_Date_Page_Sparkle.png",
+        "name": "Due_Date_Page_Sparkle",
+        "box": [
+          192,
+          260,
+          146,
+          133
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Address",
+    "layers": [
+      {
+        "file": "06_Address/01_Address_Map.png",
+        "name": "Address_Map",
+        "box": [
+          91,
+          335,
+          390,
+          154
+        ]
+      },
+      {
+        "file": "06_Address/02_Address_Pin.png",
+        "name": "Address_Pin",
+        "box": [
+          163,
+          98,
+          236,
+          295
+        ]
+      },
+      {
+        "file": "06_Address/03_Address_Flag.png",
+        "name": "Address_Flag",
+        "box": [
+          389,
+          229,
+          139,
+          149
+        ]
+      },
+      {
+        "file": "06_Address/04_Address_Green_Sparkle.png",
+        "name": "Address_Green_Sparkle",
+        "box": [
+          88,
+          77,
+          99,
+          104
+        ]
+      },
+      {
+        "file": "06_Address/05_Address_Silver_Sparkle.png",
+        "name": "Address_Silver_Sparkle",
+        "box": [
+          418,
+          98,
+          54,
+          57
+        ]
+      }
+    ]
+  }
+]

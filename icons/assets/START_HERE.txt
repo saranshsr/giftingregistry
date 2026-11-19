@@ -1,0 +1,16 @@
+GR — separated animation elements
+
+45 transparent PNG parts across six folders. Reconstructed using the built-in image generation tool, with alpha cleanup and individual crops. These are regenerated assets, not pixel-exact extraction of the originals. Occluded surfaces have been inferred. Tiny embedded relief details such as calendar buttons and the canister star remain part of their parent object.
+
+AFTER EFFECTS
+1. Extract this entire ZIP, keeping its folders intact.
+2. In AE choose File > Scripts > Run Script File, then Import_All_Assets_Into_After_Effects.jsx.
+3. Six 600 x 600, 30 fps, 10-second compositions are created with named layers and a disabled original reference guide.
+4. Fine-tune alignment and scale against the reference before animation. Placement is approximate because repaired shapes differ from the source.
+
+You can also import the PNGs directly as footage with Straight alpha. Parts have transparent padding. The JSX has been statically checked but was not executed in After Effects here.
+
+No animation is baked in. No native .aep or layered PSD is included.
+
+NAMING
+Six numbered folders match your six original images. Each PNG includes its icon name and element name. The Name set keeps each person’s head and body together. Original images are in Original_References.

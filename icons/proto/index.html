@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gift Registry icons</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #fff; font: 13px/1.3 -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; color: #1d2539; }
+  /* the 600 x 600 lottie comp, shown at 360 px */
+  #stage { position: relative; width: 360px; height: 360px; margin: 0 auto; overflow: hidden; background: #fff; }
+  #comp { position: absolute; left: 0; top: 0; width: 600px; height: 600px; transform: scale(0.6); transform-origin: 0 0; }
+  .L, .tx, .ty, .rs { position: absolute; left: 0; top: 0; width: 600px; height: 600px; }
+  .rs img { position: absolute; display: block; user-select: none; -webkit-user-drag: none; }
+  /* reviewer controls (hidden in the spec preview) */
+  #bar { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 12px 16px 24px; }
+  #bar button { border: 1px solid #e3e5ec; background: #fff; border-radius: 999px; padding: 7px 12px; font: inherit; color: inherit; cursor: pointer; }
+  #bar button[aria-pressed="true"] { background: #1d2539; border-color: #1d2539; color: #fff; }
+  #bar .spec { border-style: dashed; }
+  body.spec #bar { display: none; }
+  body:not(.spec) { display: flex; flex-direction: column; justify-content: center; }
+</style>
+</head>
+<body>
+<div id="stage"><div id="comp"></div></div>
+<div id="bar"></div>
+<script>
+// Plays each icon from motion.json: the same keys, values and bezier influences as the After Effects comps
+// (icons/gen/motion.py is the one motion source). Per layer: .tx (move X) > .ty (move Y) > .rs (scale, rotation,
+// opacity about the pivot) > img, which is AE's anchor/position/scale/rotation order.
+(function () {
+  const SPEC = new URLSearchParams(location.search).has('spec');
+  if (SPEC) document.body.classList.add('spec');
+  const NAMES = { occasion: '1.1 Occasion', whose: '2.3 Whose', 'name-your-registry': 'Name your registry', when: '1.3 When',
+                  'due-date': '2.5 Due date', delivery: '1.4 Delivery' };
+  let M = null, loaded = false, current = null;
+  const comp = document.getElementById('comp');
+
+  // AE temporal ease with zero speed: out influence o (key i), in influence n (key i+1) -> cubic-bezier(o, 0, 1 - n, 1)
+  const ease = (o, n) => `cubic-bezier(${(o / 100).toFixed(3)}, 0, ${(1 - n / 100).toFixed(3)}, 1)`;
+  const FMT = {
+    dx: (v) => ({ translate: `${v}px 0px` }), dy: (v) => ({ translate: `0px ${v}px` }),
+    sc: (v) => ({ scale: `${v[0] / 100} ${v[1] / 100}` }), rot: (v) => ({ rotate: `${v}deg` }), op: (v) => ({ opacity: v / 100 }),
+  };
+  function frames(keys, fmt, dur) {
+    const out = keys.map((k, i) => Object.assign({ offset: Math.min(1, k[0] / dur), easing: i + 1 < keys.length ? ease(k[3], keys[i + 1][2]) : 'linear' }, fmt(k[1])));
+    if (keys[keys.length - 1][0] < dur) out.push(Object.assign({ offset: 1 }, fmt(keys[keys.length - 1][1])));
+    return out;
+  }
+  function build(icon) {
+    comp.textContent = '';
+    const els = [];
+    for (let i = icon.layers.length - 1; i >= 0; i--) {          // layers are listed front -> back
+      const L = icon.layers[i];
+      const wrap = document.createElement('div'); wrap.className = 'L'; wrap.dataset.layer = L.name;
+      const tx = document.createElement('div'); tx.className = 'tx';
+      const ty = document.createElement('div'); ty.className = 'ty';
+      const rs = document.createElement('div'); rs.className = 'rs'; rs.dataset.part = L.name;
+      rs.style.transformOrigin = `${L.pivot[0]}px ${L.pivot[1]}px`;
+      const img = new Image(); img.src = L.img; img.alt = ''; img.width = L.w; img.height = L.h;
+      img.style.left = `${L.x}px`; img.style.top = `${L.y}px`; img.style.width = `${L.w}px`; img.style.height = `${L.h}px`;
+      rs.appendChild(img); ty.appendChild(rs); tx.appendChild(ty); wrap.appendChild(tx); comp.appendChild(wrap);
+      els.push({ L, tx, ty, rs });
+    }
+    return els;
+  }
+  function play(slug) {
+    const icon = M.icons.find((x) => x.slug === slug) || M.icons[0];
+    current = icon.slug;
+    const dur = M.dur * 1000, T = M.dur;
+    for (const { L, tx, ty, rs } of build(icon)) {
+      const tgt = { dx: tx, dy: ty, sc: rs, rot: rs, op: rs };
+      for (const [k, keys] of Object.entries(L.tracks)) tgt[k].animate(frames(keys, FMT[k], T), { duration: dur, fill: 'both' });
+    }
+    document.querySelectorAll('#bar [data-slug]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.slug === current)));
+    return icon.slug;
+  }
+  function bar() {
+    const b = document.getElementById('bar');
+    for (const ic of M.icons) {
+      const x = document.createElement('button'); x.textContent = NAMES[ic.slug] || ic.slug; x.dataset.slug = ic.slug;
+      x.onclick = () => { history.replaceState(null, '', `?icon=${ic.slug}`); play(ic.slug); };
+      b.appendChild(x);
+    }
+    const s = document.createElement('a'); s.href = '/spec/?v=1'; s.innerHTML = '<button class="spec">Spec Sheet</button>'; b.appendChild(s);
+    document.getElementById('stage').onclick = () => play(current);
+  }
+  fetch('motion.json').then((r) => r.json()).then((m) => {
+    M = m;
+    const imgs = [...new Set(m.icons.flatMap((i) => i.layers.map((l) => l.img)))];
+    return Promise.all(imgs.map((u) => new Promise((res) => { const i = new Image(); i.onload = i.onerror = res; i.src = u; })));
+  }).then(() => {
+    loaded = true;
+    if (!SPEC) { bar(); play(new URLSearchParams(location.search).get('icon') || 'occasion'); }
+  });
+  window.proto = { ready: () => loaded, play, get current() { return current; }, names: NAMES };
+})();
+</script>
+</body>
+</html>

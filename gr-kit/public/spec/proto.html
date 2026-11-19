@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, interactive-widget=overlays-content" />
+<title>noon Flow Kit · Gift Registry · spec harness</title>
+<!--
+  Spec-sheet harness (spec only; the prototype's code is untouched for normal visitors). The spec sheet records the
+  prototype on a virtual clock, but motion/react and React capture requestAnimationFrame / setTimeout / clearTimeout when
+  their modules are evaluated, i.e. before the sheet can patch the frame, so their springs would run on real frames and the
+  recording would lag the playhead. This page installs one-line indirections for those four first, flags the app as a spec
+  run (`__NK_SPEC__`: main.tsx then leaves out the review shell), sets the route to the flow's own URL and loads the app's
+  own /index.html scripts and styles (dev server or build alike). Opened without ?spec= it simply forwards to the prototype.
+-->
+<script>
+  const FLOW = '/gift-registry';
+  if (!new URLSearchParams(location.search).has('spec')) location.replace(FLOW);   // the header's back link: the prototype
+  else {
+    for (const n of ['requestAnimationFrame', 'cancelAnimationFrame', 'setTimeout', 'clearTimeout']) {
+      const real = window[n].bind(window), shim = (...a) => (window[n] === shim ? real(...a) : window[n](...a));
+      window[n] = shim;
+    }
+    window.__NK_SPEC__ = true;
+  }
+</script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  (() => {
+    if (!new URLSearchParams(location.search).has('spec')) return;
+    history.replaceState(null, '', FLOW);                        // the app reads its route from the URL
+    const x = new XMLHttpRequest(); x.open('GET', '/index.html', false); x.send();
+    const src = new DOMParser().parseFromString(x.responseText, 'text/html');
+    // head links / scripts, then body scripts (the dev server keeps the entry module in <body>; a build moves it to <head>).
+    // Inline scripts (the dev server's React refresh preamble) keep their text; async = false keeps document order.
+    const go = () => {
+      for (const el of [...src.head.children, ...src.body.querySelectorAll('script')]) {
+        if (!/^(LINK|SCRIPT)$/.test(el.tagName) || (el.tagName === 'LINK' && el.rel === 'preconnect')) continue;
+        const c = document.createElement(el.tagName.toLowerCase());
+        for (const a of el.attributes) c.setAttribute(a.name, a.value);
+        if (el.tagName === 'SCRIPT') { c.async = false; if (el.textContent.trim()) c.textContent = el.textContent; }
+        (el.parentElement === src.body ? document.body : document.head).appendChild(c);
+      }
+    };
+    // The app starts only once the spec sheet has put this frame on its virtual clock (it replaces performance.now right
+    // after this page's load event), so no timer of the app (the Account teaser's) is ever set on the real clock. Opened
+    // on its own (no sheet around it, e.g. scripts/measure.mjs), it starts 400 ms after load.
+    const rt = window.setTimeout.bind(window), native = /\[native code\]/;
+    addEventListener('load', () => { const t0 = Date.now(); (function wait() { if (!native.test(String(performance.now)) || Date.now() - t0 > 400) go(); else rt(wait, 5); })(); });
+  })();
+</script>
+</body>
+</html>

@@ -148,7 +148,11 @@ function pulseFile(src: string): Promise<PulseFile | null> {
         const b = PULSE_TO + shift;
         for (const l of anim.layers) if (l.op >= op) l.op = b + 1;
         anim.op = b + 1;
-        const url = URL.createObjectURL(new Blob([JSON.stringify(anim)], { type: 'application/json' }));
+        // the spec sheet redraws the file after its recording page is gone, which takes a blob: URL with it
+        const text = JSON.stringify(anim);
+        const url = (window as unknown as { __NK_SPEC__?: boolean }).__NK_SPEC__
+          ? `data:application/json,${encodeURIComponent(text)}`
+          : URL.createObjectURL(new Blob([text], { type: 'application/json' }));
         return { url, rest: op - 1, a: op, b };
       })
       .catch(() => null)

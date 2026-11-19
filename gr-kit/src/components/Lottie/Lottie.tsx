@@ -25,6 +25,25 @@ export const lotties = {
 
 export type LottieName = keyof typeof lotties;
 
+/** set by public/spec/proto.html: the app is being recorded by the Animation Spec Sheet */
+const SPEC = typeof window !== 'undefined' && !!(window as unknown as { __NK_SPEC__?: boolean }).__NK_SPEC__;
+
+/**
+ * Spec sheet only: its preview is a script-free copy of the page, where a <canvas> stays blank. So the player's canvas
+ * carries its file (`data-spec-lottie`) and the frame it shows (`data-lf`, every drawn frame); the sheet redraws that
+ * frame with lottie-web on top of the copy's canvas.
+ */
+function specTag(d: DotLottie, src: string | undefined) {
+  const tag = () => {
+    const c = d.canvas as HTMLCanvasElement | null;
+    if (!c || !(c instanceof HTMLCanvasElement) || !src) return;
+    c.setAttribute('data-spec-lottie', new URL(src, location.href).href);
+    c.setAttribute('data-lf', String(Math.round(d.currentFrame * 100) / 100));
+  };
+  for (const ev of ['load', 'frame', 'play', 'stop', 'pause', 'complete', 'loop'] as const) d.addEventListener(ev, tag);
+  tag();
+}
+
 /**
  * Where a held (reduced-motion) Lottie rests, as a share of its length: `'auto'` (default) = the last frame for a
  * one-shot, the middle for a loop, but never a blank frame (many one-shots end empty, e.g. the account country /
@@ -123,7 +142,8 @@ export function useLottieReducedMotion({ loop = false, autoplay = true, speed = 
  */
 export function Lottie({ name, src, loop = false, autoplay = true, size, style, speed = 1, onComplete, onLoad, onPlayer, reducedMotionFrame = 'auto', worker = false, maxDpr }: { name?: LottieName; src?: string; loop?: boolean; autoplay?: boolean; size?: number; style?: CSSProperties; speed?: number; onComplete?: () => void; onLoad?: () => void; /** the DotLottie player, for callers that drive frames themselves (seek, cross-fade at the same frame) */ onPlayer?: (d: DotLottie) => void; /** reduced motion: the frame to hold, as a share 0–1 of the length (default `'auto'`: last / middle, never blank) */ reducedMotionFrame?: LottiePoster; /** opt-in: render in a Web Worker (OffscreenCanvas) so the wasm never blocks the main thread; same player API, its methods resolve asynchronously */ worker?: boolean; /** opt-in: cap the canvas resolution (device pixel ratio), e.g. 2 on 3× phones */ maxDpr?: number }) {
   const rm = useLottieReducedMotion({ loop, autoplay, speed, onComplete, poster: reducedMotionFrame });
-  const Player = worker ? DotLottieWorkerReact : DotLottieReact;
+  // the spec sheet runs the app on a virtual clock: a worker player would keep real time there, so it stays on the main thread
+  const Player = worker && !SPEC ? DotLottieWorkerReact : DotLottieReact;
   const renderConfig = maxDpr && typeof window !== 'undefined' ? { devicePixelRatio: Math.min(window.devicePixelRatio || 1, maxDpr) } : undefined;
   return (
     <Player
@@ -141,6 +161,7 @@ export function Lottie({ name, src, loop = false, autoplay = true, size, style, 
         if (onLoad) d.addEventListener('load', onLoad);
         onPlayer?.(d);
         rm.attach(d);
+        if (SPEC) specTag(d, src ?? (name ? lotties[name] : undefined));
       }}
     />
   );
