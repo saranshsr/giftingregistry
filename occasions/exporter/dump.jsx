@@ -1,5 +1,9 @@
 // Read-only dumper: writes one raw JSON per comp under "Occasion sets" into exporter/dump/. ASCII only. Never modifies the project.
-var OUT = "/Users/ssrawat/claude/gifting-registry-lottie/occasions/exporter/dump/";
+// $.global.DUMP_ROOT = folder name (exact, default "Occasion sets"; the icon heroes: "Occasion sets (icons 18 Nov)")
+// $.global.DUMP_OUT  = output folder (default exporter/dump/). A precomp layer's source comp is dumped into d.precomps.
+var OUT = (typeof $.global.DUMP_OUT !== "undefined" && $.global.DUMP_OUT) ? $.global.DUMP_OUT : "/Users/ssrawat/claude/gifting-registry-lottie/occasions/exporter/dump/";
+var ROOTNAME = (typeof $.global.DUMP_ROOT !== "undefined" && $.global.DUMP_ROOT) ? $.global.DUMP_ROOT : "Occasion sets";
+var PRE = null;
 var ONLY = (typeof $.global.DUMP_ONLY !== "undefined") ? $.global.DUMP_ONLY : null;
 function Q(s) {
   var o = '"';
@@ -73,7 +77,14 @@ function dumpLayer(L) {
   r.kind = r.isShape ? "shape" : (r.isNull ? "null" : "other");
   try {
     if (!r.isShape && !r.isNull && L.source) {
-      if (L.source instanceof CompItem) r.kind = "precomp";
+      if (L.source instanceof CompItem) {
+        r.kind = "precomp"; r.src = L.source.name; r.srcW = L.source.width; r.srcH = L.source.height;
+        if (PRE && !PRE.hasOwnProperty(L.source.name)) {
+          var pc = { name: L.source.name, w: L.source.width, h: L.source.height, fps: L.source.frameRate, dur: L.source.duration, layers: [] };
+          PRE[L.source.name] = pc;
+          for (var pj = 1; pj <= L.source.numLayers; pj++) pc.layers.push(dumpLayer(L.source.layer(pj)));
+        }
+      }
       else if (L.source instanceof FootageItem) {
         r.kind = "footage"; r.srcW = L.source.width; r.srcH = L.source.height;
         r.file = (L.source.mainSource instanceof FileSource && L.source.file) ? L.source.file.fsName : null;
@@ -91,15 +102,17 @@ function collect(f, out) {
 }
 function safe(n) { return n.replace(/[^A-Za-z0-9 _.-]/g, "_"); }
 var rootF = null, i, j;
-for (i = 1; i <= app.project.numItems; i++) { var q = app.project.item(i); if (q instanceof FolderItem && q.name.indexOf("Occasion sets") >= 0) rootF = q; }
+for (i = 1; i <= app.project.numItems; i++) { var q = app.project.item(i); if (q instanceof FolderItem && q.name === ROOTNAME) rootF = q; }
 var comps = []; collect(rootF, comps);
 new Folder(OUT).create();
 var done = [];
 for (i = 0; i < comps.length; i++) {
   var C = comps[i];
   if (ONLY && ONLY !== C.name) continue;
+  PRE = {};
   var d = { name: C.name, w: C.width, h: C.height, fps: C.frameRate, dur: C.duration, frameDuration: C.frameDuration, numLayers: C.numLayers, folder: C.parentFolder.name, layers: [] };
   for (j = 1; j <= C.numLayers; j++) d.layers.push(dumpLayer(C.layer(j)));
+  d.precomps = PRE;
   var f = new File(OUT + safe(C.name) + ".json"); f.encoding = "UTF-8"; f.open("w"); f.write(S(d)); f.close();
   done.push(C.name);
 }

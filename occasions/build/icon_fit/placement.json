@@ -1,0 +1,212 @@
+{
+ "1.1 Occasion": {
+  "page": "p5",
+  "icon_comp": "GR icon 1.1 Occasion",
+  "s": 0.7533448779781794,
+  "tx": 330.5985155412089,
+  "ty": -13.48462045785391,
+  "pos": [
+   556.725,
+   212.642
+  ],
+  "scale": 75.3345,
+  "sift_s": 0.7520614466772025,
+  "sift_rot_deg": -0.06382968797005943,
+  "sift_matches": 142,
+  "sift_inliers": 101,
+  "kp_rms_px": 1.348444938659668,
+  "kp_median_px": 0.964445173740387,
+  "mean_diff_main": 17.522001266479492,
+  "mean_diff_union": 20.400775909423828,
+  "alpha_iou_main": 0.9438085049478471,
+  "alpha_iou_all": 0.9408917518353246,
+  "icon_bbox": [
+   379,
+   16,
+   723,
+   414
+  ],
+  "old_bbox": [
+   379,
+   14,
+   723,
+   413
+  ],
+  "composite_vs_ae_median": 5.333333492279053
+ },
+ "1.3 When is it": {
+  "page": "p1",
+  "icon_comp": "GR icon 1.3 When",
+  "s": 0.7568534047043833,
+  "tx": 319.4183692143327,
+  "ty": -11.16451373136487,
+  "pos": [
+   546.596,
+   216.013
+  ],
+  "scale": 75.6853,
+  "sift_s": 0.7586979406410741,
+  "sift_rot_deg": 0.30359024261230827,
+  "sift_matches": 95,
+  "sift_inliers": 35,
+  "kp_rms_px": 2.1980605125427246,
+  "kp_median_px": 1.5593470335006714,
+  "mean_diff_main": 22.32924461364746,
+  "mean_diff_union": 24.18759536743164,
+  "alpha_iou_main": 0.9643681739175551,
+  "alpha_iou_all": 0.9643681739175551,
+  "icon_bbox": [
+   377,
+   61,
+   743,
+   383
+  ],
+  "old_bbox": [
+   380,
+   63,
+   747,
+   383
+  ],
+  "composite_vs_ae_median": 7.0
+ },
+ "1.4 Delivery details": {
+  "page": "p2",
+  "icon_comp": "GR icon 1.4 Delivery",
+  "s": 0.7583493393188483,
+  "tx": 333.35830748267904,
+  "ty": 8.53250719354801,
+  "pos": [
+   560.984,
+   236.158
+  ],
+  "scale": 75.8349,
+  "sift_s": 0.7557557582749985,
+  "sift_rot_deg": 0.263985833614184,
+  "sift_matches": 76,
+  "sift_inliers": 36,
+  "kp_rms_px": 1.429658055305481,
+  "kp_median_px": 1.2022720575332642,
+  "mean_diff_main": 30.85610580444336,
+  "mean_diff_union": 34.967376708984375,
+  "alpha_iou_main": 0.8767860802175897,
+  "alpha_iou_all": 0.8755384063173008,
+  "icon_bbox": [
+   404,
+   71,
+   730,
+   370
+  ],
+  "old_bbox": [
+   402,
+   69,
+   730,
+   376
+  ],
+  "composite_vs_ae_median": 6.0
+ },
+ "2.3 Whose is it": {
+  "page": "p3",
+  "icon_comp": "GR icon 2.3 Whose",
+  "s": 0.7563173428639725,
+  "tx": 333.95177026911904,
+  "ty": -10.910705076247666,
+  "pos": [
+   560.969,
+   216.106
+  ],
+  "scale": 75.6317,
+  "sift_s": 0.7602897773316023,
+  "sift_rot_deg": -0.8179191599269843,
+  "sift_matches": 43,
+  "sift_inliers": 14,
+  "kp_rms_px": 1.6713707447052002,
+  "kp_median_px": 1.2974517345428467,
+  "mean_diff_main": 24.301353454589844,
+  "mean_diff_union": 26.438796997070312,
+  "alpha_iou_main": 0.9269920073236858,
+  "alpha_iou_all": 0.9269920073236858,
+  "icon_bbox": [
+   406,
+   76,
+   703,
+   367
+  ],
+  "old_bbox": [
+   400,
+   76,
+   702,
+   367
+  ],
+  "composite_vs_ae_median": 8.1098051071167
+ },
+ "2.5 Due date": {
+  "page": "p4",
+  "icon_comp": "GR icon 2.5 Due date",
+  "s": 0.7598916178459998,
+  "tx": 326.9592274471596,
+  "ty": 18.376840352518357,
+  "pos": [
+   555.047,
+   246.464
+  ],
+  "scale": 75.9892,
+  "sift_s": 0.7510645384571883,
+  "sift_rot_deg": 0.05535564879721659,
+  "sift_matches": 81,
+  "sift_inliers": 36,
+  "kp_rms_px": 2.4457008838653564,
+  "kp_median_px": 2.276181936264038,
+  "mean_diff_main": 28.05425262451172,
+  "mean_diff_union": 32.33235549926758,
+  "alpha_iou_main": 0.9272619179294326,
+  "alpha_iou_all": 0.9191030446504899,
+  "icon_bbox": [
+   369,
+   28,
+   747,
+   389
+  ],
+  "old_bbox": [
+   364,
+   29,
+   751,
+   390
+  ],
+  "composite_vs_ae_median": 6.666666507720947
+ },
+ "Name your registry": {
+  "page": "p6",
+  "icon_comp": "GR icon Name your registry",
+  "s": 0.7539623648224908,
+  "tx": 320.8083487837379,
+  "ty": -10.366326695990438,
+  "pos": [
+   547.12,
+   215.945
+  ],
+  "scale": 75.3962,
+  "sift_s": 0.7501282991078312,
+  "sift_rot_deg": -0.15805061147043584,
+  "sift_matches": 79,
+  "sift_inliers": 48,
+  "kp_rms_px": 1.7752748727798462,
+  "kp_median_px": 1.2064008712768555,
+  "mean_diff_main": 22.359830856323242,
+  "mean_diff_union": 24.38986587524414,
+  "alpha_iou_main": 0.9386549320696075,
+  "alpha_iou_all": 0.9374274229566771,
+  "icon_bbox": [
+   357,
+   31,
+   739,
+   357
+  ],
+  "old_bbox": [
+   358,
+   27,
+   738,
+   360
+  ],
+  "composite_vs_ae_median": 2.6666667461395264
+ }
+}

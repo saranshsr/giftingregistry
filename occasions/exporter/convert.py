@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 """AE dump (exporter/dump/*.json) -> optimized Lottie .json + dotLottie .lottie per comp.
-usage: convert.py [--only SUBSTR]"""
+usage: convert.py [--only SUBSTR] [--dump DIR] [--sizes FILE]
+  --dump dump_icons  the icon heroes ("Occasion sets (icons 18 Nov)", 20 Nov 2026): the nested icon comp becomes a precomp
+                     asset with its own layers; its parts are resampled to the largest size they are drawn at in the hero
+                     (kept at full size when that is not smaller); output names drop the " \u00b7 icons" suffix, so they are
+                     the same files as the flat-illustration heroes."""
 import json, glob, os, sys, io, re, base64, zipfile
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DUMP = os.path.join(HERE, 'dump')
+DUMP = os.path.join(HERE, sys.argv[sys.argv.index('--dump') + 1] if '--dump' in sys.argv else 'dump')
+SUFFIX = ' \u00b7 icons'
+PRE_MARGIN = 300      # precomp canvas grown by this on every side (inner layers shifted, anchor shifted): AE collapses the
+                      # icon layer, so nothing is clipped at the icon's 600x600 edge there; lottie clips a precomp to w x h
 OUT = os.path.join(os.path.dirname(HERE), 'export')
 FPS = 60.0
 
@@ -154,20 +161,88 @@ def conv_items(contents):
 
 def slugs(name):
     n = name.replace('GR hero ', '')
+    if n.endswith(SUFFIX): n = n[:-len(SUFFIX)]
     screen, occ = n.rsplit(' - ', 1)
     sslug = re.sub(r'[^a-z0-9]+', '-', screen.lower()).strip('-')
     return sslug, occ
+
+def _vals(prop):
+    return [prop['k']] if not prop['a'] else [k['s'] for k in prop['k']]
+
+
+def _map_prop(prop, fn):
+    if prop['a']:
+        for k in prop['k']: k['s'] = fn(k['s'])
+    else: prop['k'] = fn(prop['k'])
+
+
+def shift_pos(ks, dx, dy):
+    p = ks['p']
+    if p.get('s'):
+        _map_prop(p['x'], lambda v: [v[0] + dx] if isinstance(v, list) else v + dx)
+        _map_prop(p['y'], lambda v: [v[0] + dy] if isinstance(v, list) else v + dy)
+    else: _map_prop(p, lambda v: [v[0] + dx, v[1] + dy] + list(v[2:]))
+
+
+def max_scale(ks): return max(max(abs(v[0]), abs(v[1])) for v in _vals(ks['s'])) / 100.0
+
+
+def icon_png(path, f):
+    """Smallest PNG of the part: the file as is (already compressed in place) or resampled by f (anchor * f, scale / f)."""
+    raw = open(path, 'rb').read(); im = Image.open(path)
+    best = (raw, im.size, 1.0)
+    if f < 0.999:
+        r = im.convert('RGBA').resize((max(1, round(im.width * f)), max(1, round(im.height * f))), Image.LANCZOS)
+        b = io.BytesIO(); r.save(b, 'PNG', optimize=True)
+        if len(b.getvalue()) < len(raw): best = (b.getvalue(), r.size, r.size[0] / im.size[0])
+    return best
+
+
+def conv_precomp(pc, outer_scale, nid):
+    """Nested icon comp (footage layers only) -> lottie precomp asset + its image assets."""
+    lay_out, files = [], {}
+    for L in pc['layers']:
+        assert L['kind'] == 'footage' and L['startTime'] == 0 and L['stretch'] == 100 and L['blendNormal'] and not L['threeD'], L['name']
+        assert not L['hasTrackMatte'] and not L['isTrackMatte'] and not L['parent'] and L['numMasks'] == 0 and L['numEffects'] == 0, L['name']
+        ks = conv_transform(L['transform'])
+        files[L['file']] = max(files.get(L['file'], 0), min(1.0, max_scale(ks) * outer_scale))
+        lay_out.append((L, ks))
+    imgs, aid, fac = [], {}, {}
+    for fp, f in files.items():
+        raw, (w, h), g = icon_png(fp, f); fac[fp] = g
+        aid[fp] = '%s_%d' % (nid, len(imgs) + 1)
+        imgs.append({'id': aid[fp], 'w': w, 'h': h, 'u': '', 'p': 'data:image/png;base64,' + base64.b64encode(raw).decode(), 'e': 1,
+                     '_png': base64.b64encode(raw).decode(), '_srcbytes': os.path.getsize(fp)})
+    layers = []
+    for L, ks in lay_out:
+        g = fac[L['file']]
+        if g != 1.0:
+            _map_prop(ks['a'], lambda v: [x * g for x in v]); _map_prop(ks['s'], lambda v: [x / g for x in v])
+        shift_pos(ks, PRE_MARGIN, PRE_MARGIN)
+        lay = {'ddd': 0, 'ind': L['index'], 'ty': 2, 'nm': L['name'], 'sr': 1, 'ks': ks, 'ao': 0, 'refId': aid[L['file']],
+               'ip': frames(L['inPoint']), 'op': frames(L['outPoint']), 'st': 0, 'bm': 0}
+        if not L['en']: lay['hd'] = True
+        layers.append(lay)
+    return imgs, {'id': nid, 'nm': pc['name'], 'fr': 60, 'layers': layers}
+
 
 def convert(path):
     d = json.load(open(path))
     sslug, occ = slugs(d['name'])
     folder, oslug = OCC[occ]
-    assets, aid = [], {}
+    assets, aid, pre = [], {}, []
     layers = []
     for L in d['layers']:
-        assert L['startTime'] == 0 and L['stretch'] == 100 and L['blendNormal'] and not L['threeD']
+        assert (L['startTime'] == 0 or L['kind'] == 'precomp') and L['stretch'] == 100 and L['blendNormal'] and not L['threeD']
         ks = conv_transform(L['transform'])
-        lay = {'ddd': 0, 'ind': L['index'], 'ty': {'shape': 4, 'null': 3, 'footage': 2}[L['kind']], 'nm': L['name'], 'sr': 1, 'ks': ks, 'ao': 0}
+        lay = {'ddd': 0, 'ind': L['index'], 'ty': {'shape': 4, 'null': 3, 'footage': 2, 'precomp': 0}[L['kind']], 'nm': L['name'], 'sr': 1, 'ks': ks, 'ao': 0}
+        if L['kind'] == 'precomp':
+            assert L['collapse'] and not L['timeRemap'] and L['numMasks'] == 0 and L['numEffects'] == 0, L['name']
+            nid = 'comp_%d' % (len(pre) + 1)
+            imgs, pa = conv_precomp(d['precomps'][L['src']], max_scale(ks), nid)
+            assets.extend(imgs); pre.append(pa)
+            lay['refId'] = nid; lay['w'] = L['srcW'] + 2 * PRE_MARGIN; lay['h'] = L['srcH'] + 2 * PRE_MARGIN
+            _map_prop(ks['a'], lambda v: [v[0] + PRE_MARGIN, v[1] + PRE_MARGIN] + list(v[2:]))
         if L['parent']: lay['parent'] = L['parent']
         if L['kind'] == 'footage':
             f = L['file']
@@ -179,7 +254,7 @@ def convert(path):
             lay['refId'] = aid[f]
         if L['kind'] == 'shape':
             lay['shapes'] = conv_items(L['contents'])
-        lay.update({'ip': frames(L['inPoint']), 'op': frames(L['outPoint']), 'st': 0, 'bm': 0})
+        lay.update({'ip': frames(L['inPoint']), 'op': frames(L['outPoint']), 'st': frames(L['startTime']), 'bm': 0})
         if L['isTrackMatte']: lay['td'] = 1
         if L['hasTrackMatte']:
             assert L['matteType'] == 'ALPHA'
@@ -190,14 +265,18 @@ def convert(path):
     for n, lay in enumerate(layers):
         if lay.get('tt'): assert layers[n - 1].get('td') == 1 and layers[n - 1]['ind'] == lay['tp'], d['name']
     anim = {'v': '5.7.0', 'fr': 60, 'ip': 0, 'op': round(d['dur'] * FPS), 'w': d['w'], 'h': d['h'], 'nm': d['name'], 'ddd': 0,
-            'assets': assets, 'layers': layers, 'meta': {'g': '@lottiefiles/toolkit-js 0.76.0'}}
+            'assets': assets + pre, 'layers': layers, 'meta': {'g': '@lottiefiles/toolkit-js 0.76.0'}}
     return anim, folder, 'gr-hero-%s-%s' % (sslug, oslug)
 
 def dumps(o):
     return json.dumps(rnd(o), separators=(',', ':'), ensure_ascii=True)
 
 def to_webp(asset):
-    src = asset['_src']; b = io.BytesIO()
+    b = io.BytesIO()
+    if asset.get('_png'):
+        Image.open(io.BytesIO(base64.b64decode(asset['_png']))).convert('RGBA').save(b, 'WEBP', lossless=True, quality=100, method=6, exact=False)
+        return 'data:image/webp;base64,' + base64.b64encode(b.getvalue()).decode()
+    src = asset['_src']
     if src.lower().endswith('.png'):
         im = Image.open(io.BytesIO(png_bytes(src))).convert('RGBA'); im.save(b, 'WEBP', lossless=True, quality=100, method=6, exact=False)
     else:
@@ -213,17 +292,22 @@ def main():
         anim, folder, base = convert(path)
         od = os.path.join(OUT, folder); os.makedirs(od, exist_ok=True)
         a1 = json.loads(json.dumps(anim))
-        for a in a1['assets']: a.pop('_src')
+        for a in a1['assets']:
+            for k in ('_src', '_png', '_srcbytes'): a.pop(k, None)
         js = dumps(a1)
         open(os.path.join(od, base + '.json'), 'w').write(js)
         a2 = json.loads(json.dumps(anim))
-        for a in a2['assets']: a['p'] = to_webp(a); a['_src'] = None; a.pop('_src')
+        for a in a2['assets']:
+            if 'layers' in a: continue
+            a['p'] = to_webp(a)
+            for k in ('_src', '_png', '_srcbytes'): a.pop(k, None)
         js2 = dumps(a2)
         manifest = '{"generator":"LottieFiles dotLottie Exporter 0.1","animations":[{"loop":false,"themeColor":"#ffcc00","speed":1.0,"id":"%s"}],"version":"1.0","author":"LottieFiles"}' % base
         with zipfile.ZipFile(os.path.join(od, base + '.lottie'), 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
             z.writestr('manifest.json', manifest); z.writestr('animations/%s.json' % base, js2)
         rows.append((folder, base, len(js), os.path.getsize(os.path.join(od, base + '.lottie'))))
         print(folder, base, len(js), rows[-1][3], '%.0f%%' % (100.0 * rows[-1][3] / len(js)))
-    json.dump(rows, open(os.path.join(HERE, 'sizes.json'), 'w')) if not only else None
+    sizes = sys.argv[sys.argv.index('--sizes') + 1] if '--sizes' in sys.argv else 'sizes.json'
+    json.dump(rows, open(os.path.join(HERE, sizes), 'w')) if not only else None
 
 main()

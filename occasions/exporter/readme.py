@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Regenerate ../export/README.md from the files on disk (+ pre-TinyPNG totals from sizes_before_tinypng.json)."""
+"""Regenerate ../export/README.md from the files on disk (+ the flat-illustration set totals from sizes.json)."""
 import os, json, glob
 HERE = os.path.dirname(os.path.abspath(__file__)); EXP = os.path.join(os.path.dirname(HERE), 'export')
-old = json.load(open(os.path.join(HERE, 'sizes_before_tinypng.json')))
+old = json.load(open(os.path.join(HERE, 'sizes.json')))          # the flat-illustration set (17 Nov)
 oj = sum(r[2] for r in old); ol = sum(r[3] for r in old)
 L = ['# Gift Registry hero lotties, per occasion', '',
      '37 hero animations, one `.json` (minified, images embedded base64) and one `.lottie` (dotLottie v1, images as WebP) per comp, grouped by occasion.', '',
@@ -15,6 +15,12 @@ L = ['# Gift Registry hero lotties, per occasion', '',
      '  when the rig rotation lands on exactly 0 (that switch was a ~1 px pop at frame 80); the star bits on 1.1 and 2.5 got',
      '  the same +0.25 deg (scale keys untouched, so the app\'s star pulse is unchanged). Title gradient per occasion:',
      '  #000000 -> occasion colour (Figma themes board 575:158585; `../gen/title_grad_occ.py`); Default keeps its blue.',
+     '- 20 Nov 2026: every hero now uses the layered 18 Nov icon animation instead of the flat illustration (AE comps',
+     '  "Occasion sets (icons 18 Nov)/<NN>/... \u00b7 icons", built by `../gen/gen_occ_icons.py`, placed by `../gen/fit_icons.py`).',
+     '  The icon comp is a precomp asset inside each file (same file names as before). Its parts are embedded as they are',
+     '  (the footage was compressed in place) or resampled to the size they are drawn at, whichever is smaller; no TinyPNG.',
+     '  Export: dump.jsx (DUMP_ROOT) -> convert.py --dump dump_icons; verified with render.mjs + diff.py (TAG=icons) and',
+     '  render_dotlottie.mjs (ThorVG).',
      '- `_test/` holds the approved one-off test export, not part of the set.', '']
 tj = tl = 0
 for d in sorted(os.listdir(EXP)):
@@ -26,6 +32,6 @@ for d in sorted(os.listdir(EXP)):
         sj, sl = os.path.getsize(f), os.path.getsize(lo); tj += sj; tl += sl
         L.append('| `%s` | %.1f KB | %.1f KB |' % (b, sj / 1024, sl / 1024))
 L += ['', 'Total: %.2f MB json, %.2f MB lottie (%d%% of json).' % (tj / 2**20, tl / 2**20, round(100 * tl / tj)),
-      'Before TinyPNG: %.2f MB json, %.2f MB lottie. After: json -%d%%, lottie -%d%%.' % (oj / 2**20, ol / 2**20, round(100 * (1 - tj / oj)), round(100 * (1 - tl / ol))), '']
+      'Flat-illustration set (17 Nov): %.2f MB json, %.2f MB lottie. Icon set: json x%.2f, lottie x%.2f.' % (oj / 2**20, ol / 2**20, tj / oj, tl / ol), '']
 open(os.path.join(EXP, 'README.md'), 'w').write('\n'.join(L))
 print(tj, tl, oj, ol)

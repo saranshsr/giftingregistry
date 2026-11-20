@@ -8,7 +8,7 @@ const HERE = path.dirname(new URL(import.meta.url).pathname);
 const EXP = path.join(HERE, '..', 'export');
 const R = process.argv[2] || 'canvas';
 const ONLY = process.argv[3] || '';
-const OUT = path.join(HERE, 'lw_' + R); fs.mkdirSync(OUT, { recursive: true });
+const OUT = path.join(HERE, 'lw_' + R + (process.env.LW_TAG ? '_' + process.env.LW_TAG : '')); fs.mkdirSync(OUT, { recursive: true });   // LW_TAG=icons -> lw_canvas_icons
 const FR = (process.env.FR ? process.env.FR.split(",").map(Number) : [27, 45, 60, 96, 203]);
 const lw = fs.readFileSync('/Users/ssrawat/claude/duo-fullscreen-sheet/node_modules/lottie-web/build/player/lottie.min.js', 'utf8');
 function readLottie(f) { // minimal zip reader (deflate) via python for robustness
