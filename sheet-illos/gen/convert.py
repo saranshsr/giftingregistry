@@ -14,15 +14,21 @@ OUT = os.path.join(ROOT, 'export')
 FPS = 60.0
 
 NAMES = {'GR sheet \u00b7 Collection': 'gr-sheet-collection', 'GR sheet \u00b7 Gift registry': 'gr-sheet-registry',
-         'GR card \u00b7 Collection (portrait)': 'gr-card-portrait-collection', 'GR card \u00b7 Gift registry (portrait)': 'gr-card-portrait-registry'}
+         'GR card \u00b7 Collection (portrait)': 'gr-card-portrait-collection', 'GR card \u00b7 Gift registry (portrait)': 'gr-card-portrait-registry',
+         # dev spec 20 Nov (own opaque background, 164 wide): these replace the four files above
+         'GR sheet \u00b7 Collection \u00b7 164 bg': 'gr-sheet-collection', 'GR sheet \u00b7 Gift registry \u00b7 164 bg': 'gr-sheet-registry',
+         'GR card \u00b7 Collection (portrait) \u00b7 full card': 'gr-card-portrait-collection',
+         'GR card \u00b7 Gift registry (portrait) \u00b7 full card': 'gr-card-portrait-registry'}
 
-def rnd(o):
+def rnd(o, nd=3):
     if isinstance(o, float):
-        r = round(o, 3)
+        r = round(o, nd)
         if r == 0: return 0
         return int(r) if r == int(r) else r
-    if isinstance(o, list): return [rnd(x) for x in o]
-    if isinstance(o, dict): return {k: rnd(v) for k, v in o.items()}
+    if isinstance(o, list): return [rnd(x, nd) for x in o]
+    if isinstance(o, dict):
+        if o.get('ty') in ('fl', 'gf'): nd = max(nd, 5)      # colours: 3 decimals = 0.26 of a level, too coarse for a flat background
+        return {k: rnd(v, nd) for k, v in o.items()}
     return o
 
 def frames(sec): return sec * FPS
@@ -155,6 +161,27 @@ def conv_items(contents):
             raise Exception('unsupported shape item ' + mn)
     return items
 
+def bg_shapes(spec):
+    """'lottie-bg:' layer comment (gen_build_164.py) -> lottie shapes: one rect per item with a solid or gradient fill.
+    In AE the same background is drawn as solid rings / bands (AE scripts can't set gradient colours)."""
+    # renderers turn 0..1 colours into 8-bit levels by truncation (lottie-web) or rounding: nudge up 0.3 of a level so both land on it
+    nudge = lambda c: [min(1.0, v + 0.3 / 255) for v in c]
+    items = []
+    for it in spec['items']:
+        x, y, w, h = it['rect']
+        rc = {'ty': 'rc', 'nm': 'rect', 'd': 1, 's': {'a': 0, 'k': [w, h]}, 'p': {'a': 0, 'k': [x + w / 2.0, y + h / 2.0]}, 'r': {'a': 0, 'k': 0}}
+        if 'solid' in it:
+            c = nudge(it['solid']); fl = {'ty': 'fl', 'nm': 'fill', 'c': {'a': 0, 'k': [c[0], c[1], c[2], 1]}, 'o': {'a': 0, 'k': 100}, 'r': 1, 'bm': 0}
+        else:
+            g = it['grad']; st = [[s_[0]] + nudge(s_[1:4]) + [s_[4]] for s_ in g['stops']]
+            k = [v for s in st for v in (s[0], s[1], s[2], s[3])] + [v for s in st for v in (s[0], s[4])]
+            fl = {'ty': 'gf', 'nm': 'gradient', 'o': {'a': 0, 'k': 100}, 'r': 1, 'bm': 0, 'g': {'p': len(st), 'k': {'a': 0, 'k': k}},
+                  's': {'a': 0, 'k': g['s']}, 'e': {'a': 0, 'k': g['e']}, 't': g['t'], 'h': {'a': 0, 'k': 0}, 'a': {'a': 0, 'k': 0}}
+        tr = {'ty': 'tr', 'a': {'a': 0, 'k': [0, 0]}, 'p': {'a': 0, 'k': [0, 0]}, 's': {'a': 0, 'k': [100, 100]}, 'r': {'a': 0, 'k': 0},
+              'o': {'a': 0, 'k': 100}, 'sk': {'a': 0, 'k': 0}, 'sa': {'a': 0, 'k': 0}}
+        items.append({'ty': 'gr', 'nm': it.get('name', 'bg'), 'it': [rc, fl, tr]})
+    return items
+
 def convert(path):
     global FPS
     d = json.load(open(path))
@@ -175,7 +202,9 @@ def convert(path):
                 aid[f] = str(len(assets) + 1)
                 assets.append({'id': aid[f], 'w': im.size[0], 'h': im.size[1], 'u': '', 'p': 'data:%s;base64,%s' % (mime, base64.b64encode(png_bytes(f) if mime == 'image/png' else open(f, 'rb').read()).decode()), 'e': 1, '_src': f})
             lay['refId'] = aid[f]
-        if L['kind'] == 'shape':
+        if L['kind'] == 'shape' and (L.get('comment') or '').startswith('lottie-bg:'):
+            lay['shapes'] = bg_shapes(json.loads(L['comment'][len('lottie-bg:'):]))
+        elif L['kind'] == 'shape':
             lay['shapes'] = conv_items(L['contents'])
         lay.update({'ip': frames(L['inPoint']), 'op': frames(L['outPoint']), 'st': 0, 'bm': 0})
         if L['isTrackMatte']: lay['td'] = 1

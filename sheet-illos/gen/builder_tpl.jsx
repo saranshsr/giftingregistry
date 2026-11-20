@@ -66,10 +66,11 @@ function buildComp_s(C, folder, artFolder) {
   var comp = compIn_s(folder, C.comp);
   if (comp && comp.comment !== TAG_s) throw new Error("comp '" + C.comp + "' exists and was not made by this script; stopping");
   var dur = C.t_end;
-  if (!comp) { comp = app.project.items.addComp(C.comp, SPEC.w, SPEC.h, 1, dur, SPEC.fps); comp.comment = TAG_s; }
+  var CW = C.w || SPEC.w, CH = C.h || SPEC.h, OX = C.ox || 0, OY = C.oy || 0;   // per-comp size + content offset (164 bg / full card)
+  if (!comp) { comp = app.project.items.addComp(C.comp, CW, CH, 1, dur, SPEC.fps); comp.comment = TAG_s; }
   comp.parentFolder = folder;
   for (var i = comp.numLayers; i >= 1; i--) comp.layer(i).remove();
-  comp.width = SPEC.w; comp.height = SPEC.h; comp.pixelAspect = 1; comp.frameRate = SPEC.fps; comp.duration = dur;
+  comp.width = CW; comp.height = CH; comp.pixelAspect = 1; comp.frameRate = SPEC.fps; comp.duration = dur;
   comp.workAreaStart = 0; comp.workAreaDuration = dur;
   // markers: intro (0 -> entrance end), idle (entrance end -> comp end)
   var mp = comp.markerProperty;
@@ -78,19 +79,34 @@ function buildComp_s(C, folder, artFolder) {
   var m2 = new MarkerValue("idle"); m2.duration = dur - C.t_in; mp.setValueAtTime(C.t_in, m2);
 
   var P = C.pieces, R = C.rig;
+  // background shape layers (bottom of the stack): groups listed top -> bottom, each a solid-filled rect / ellipse
+  for (var bi = 0; C.bg && bi < C.bg.length; bi++) {
+    var BG = C.bg[bi], sl = comp.layers.addShape(); sl.name = BG.name; sl.comment = BG.comment || TAG_s;
+    sl.inPoint = 0; sl.outPoint = dur;
+    tr_s(sl, "ADBE Anchor Point").setValue([0, 0]); tr_s(sl, "ADBE Position").setValue([0, 0]);
+    var root = sl.property("ADBE Root Vectors Group");
+    for (var gi = 0; gi < BG.groups.length; gi++) {
+      var G = BG.groups[gi], grp = root.addProperty("ADBE Vector Group"), vv = grp.property("ADBE Vectors Group");
+      var shp = vv.addProperty(G.kind === "ellipse" ? "ADBE Vector Shape - Ellipse" : "ADBE Vector Shape - Rect");
+      shp.property(G.kind === "ellipse" ? "ADBE Vector Ellipse Size" : "ADBE Vector Rect Size").setValue(G.s);
+      shp.property(G.kind === "ellipse" ? "ADBE Vector Ellipse Position" : "ADBE Vector Rect Position").setValue(G.c);
+      var fl = vv.addProperty("ADBE Vector Graphic - Fill");
+      fl.property("ADBE Vector Fill Color").setValue(G.color); fl.property("ADBE Vector Fill Opacity").setValue(G.op);
+    }
+  }
   var rig = comp.layers.addNull(); rig.name = "rig (entrance + float)"; rig.comment = TAG_s;
   rig.inPoint = 0; rig.outPoint = dur;
-  tr_s(rig, "ADBE Anchor Point").setValue([50, 50]); tr_s(rig, "ADBE Position").setValue(R.pivot);
+  tr_s(rig, "ADBE Anchor Point").setValue([50, 50]); tr_s(rig, "ADBE Position").setValue([R.pivot[0] + OX, R.pivot[1] + OY]);
   var local = function (p) { return [p[0] - R.pivot[0] + 50, p[1] - R.pivot[1] + 50]; };
   var made = [];
   for (var li = 0; li < C.layers.length; li++) {
     var S = C.layers[li], pc = P[S.piece];
-    var item = importArt_s(pc.path || (SPEC.piece_dir + "/" + C.card + "/" + pc.file), artFolder);
+    var item = importArt_s(pc.path || ((C.piece_dir || SPEC.piece_dir) + "/" + C.card + "/" + pc.file), artFolder);
     var sc = pc.sc || 1;   // a piece drawn at sc x its pixel size (one sparkle image used at two sizes)
     var L = comp.layers.add(item); L.name = S.name; L.comment = TAG_s;
     L.startTime = 0; L.inPoint = 0; L.outPoint = dur;
     var pv = S.pivot || [pc.x + pc.w / 2, pc.y + pc.h / 2];
-    var loc = S.noparent ? function (p) { return [p[0], p[1]]; } : local;
+    var loc = S.noparent ? function (p) { return [p[0] + OX, p[1] + OY]; } : local;
     if (!S.noparent) L.parent = rig;
     tr_s(L, "ADBE Anchor Point").setValue([(pv[0] - pc.x) / sc, (pv[1] - pc.y) / sc]);
     tr_s(L, "ADBE Position").setValue(loc(pv));
@@ -120,7 +136,9 @@ function buildComp_s(C, folder, artFolder) {
   rig.moveToBeginning();
   setKeys_s(tr_s(rig, "ADBE Scale"), R.scale);
   var rp = tr_s(rig, "ADBE Position"); rp.dimensionsSeparated = true;
-  setKeys_s(tr_s(rig, "ADBE Position_1"), R.y);
+  var ry = [];
+  for (var q3 = 0; q3 < R.y.length; q3++) ry.push([R.y[q3][0], R.y[q3][1] + OY, R.y[q3][2], R.y[q3][3]]);
+  setKeys_s(tr_s(rig, "ADBE Position_1"), ry);
   // layers were added bottom-first; AE puts each new layer on top, so the stack already matches
   comp.time = C.t_in;
   w_s(C.comp + ": " + comp.numLayers + " layers (" + made.join(", ") + "), " + dur + " s, intro " + C.t_in);

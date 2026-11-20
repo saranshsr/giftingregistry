@@ -3,6 +3,8 @@ import { WishlistScreen } from '../wishlist/WishlistScreen';
 import { useNav } from '../../kit/Navigator';
 import type { ScreenProps } from '../../kit/types';
 import { RegistryStrip } from './components/RegistryStrip';
+import { EmptyListCards } from './components/EmptyListCards';
+import { grStore } from './store';
 import { copy } from './data';
 import { haptics, prepareHaptics } from './haptics';
 import { savedItems } from './products';
@@ -17,6 +19,8 @@ import ftuxLottie from '@assets/giftregistry/lottie/gr-ftux-explainer.lottie?url
  */
 export function ListsScreen({ params }: ScreenProps<{ collections?: 'none' }>) {
   const nav = useNav();
+  const created = grStore.useStore((g) => g.created);
+  const empty = params.collections === 'none' && !created.length;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   // the Create sheet's card lotties and the FTUX explainer lottie are fetched here, so they are cached before the sheet opens
   useEffect(() => (prepareHaptics(), warmLottie(colLottie, regLottie, ftuxLottie), nav.preload('giftregistry/create', 'giftregistry/steps')), []);
@@ -25,7 +29,8 @@ export function ListsScreen({ params }: ScreenProps<{ collections?: 'none' }>) {
       params={params}
       title={copy.lists.title}
       onCreate={() => (haptics.tap(), nav.sheet('giftregistry/create'))}
-      lead={<RegistryStrip />}
+      // no lists yet (?collections=none, and nothing created this session): Figma Option 3's two portrait cards
+      lead={empty ? <EmptyListCards /> : <RegistryStrip />}
       collections={[]}
       items={savedItems}
       hideCartPill

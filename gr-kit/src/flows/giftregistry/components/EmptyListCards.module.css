@@ -1,0 +1,88 @@
+/* Figma 843:772844: 16 side inset, two 164 × 200 cards 15 apart (343 wide on a 375 screen; they share the width) */
+.row {
+  display: flex;
+  gap: 15px;
+  /* the strip it sits in pads 12; Figma insets the cards 16 (164 + 15 + 164 on 375) */
+  flex: 0 0 100%;
+  width: 100%;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+.card {
+  position: relative;
+  flex: 1 1 0;
+  height: 200px;
+  border-radius: var(--nk-radius-r16);
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, #fcfcfd 3%, #efe2ff 100%);
+}
+.card[data-kind='registry'] {
+  background: linear-gradient(180deg, #fcfcfd 3%, #c8dbff 100%);
+}
+/* the lottie: the whole card (comp 492 × 600), opaque; copy, + and border sit above it */
+.visuals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.title,
+.sub {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--nk-color-text-primary);
+  white-space: nowrap;
+}
+.title {
+  top: 20px;
+  font: var(--nk-type-text16-bold-lh20);
+  letter-spacing: -0.16px;
+}
+.sub {
+  top: 42px;
+  font: var(--nk-type-text14-regular-lh20);
+  font-size: 13px;
+  letter-spacing: -0.1px;
+}
+/* 40 pt white circle, coloured soft shadow (Figma drop shadow 0 3.33 20) */
+.plus {
+  position: absolute;
+  left: calc(50% - 20px);
+  top: 80px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3.33px 20px rgb(158 119 239 / 0.32);
+  z-index: 1;
+}
+.card[data-kind='registry'] .plus {
+  box-shadow: 0 3.33px 20px rgb(116 171 253 / 0.24);
+}
+/* dashed 1 pt border, drawn over everything (#E6DAFF lavender / #D7EAFF light blue) */
+.border {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+.border rect {
+  fill: none;
+  stroke: #e6daff;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+}
+.card[data-kind='registry'] .border rect {
+  stroke: #d7eaff;
+}

@@ -7,6 +7,7 @@ import { NanoButton } from './components/NanoButton';
 import { NewTag } from './components/NewTag';
 import { haptics } from './haptics';
 import { useNav } from '../../kit/Navigator';
+import type { ScreenProps } from '../../kit/types';
 import { useReduceMotion } from '../../motion/reducedMotion';
 import { heroLottie, warmLottie } from './assets';
 import { copy } from './data';
@@ -14,8 +15,6 @@ import { arrive, fade, leave, MOVE, STAGGER_OUT } from './motion';
 import { resetAnswers } from './store';
 import { decodeSoon } from './warm';
 import { registerMorph } from './transitions';
-import colGlow from '@assets/giftregistry/create/col-glow.svg?url';
-import regGlow from '@assets/giftregistry/create/reg-glow.svg?url';
 import colLottie from '@assets/giftregistry/lottie/gr-sheet-collection.lottie?url';
 import regLottie from '@assets/giftregistry/lottie/gr-sheet-registry.lottie?url';
 import ftuxLottie from '@assets/giftregistry/lottie/gr-ftux-explainer.lottie?url';
@@ -38,17 +37,15 @@ type Piece = { src: string; x: number; y: number; w: number; h: number; at: numb
  */
 const CARDS: Record<'collection' | 'registry', Piece[]> = {
   collection: [
-    { src: colGlow, x: 32, y: -50, w: 220, h: 220, at: 0, kind: 'glow' },
   ],
   registry: [
-    { src: regGlow, x: 27, y: -42, w: 220, h: 220, at: 60, kind: 'glow' },
   ],
 };
 
 /**
  * The illustration itself (object + sparkles) is a lottie per card: sheet-illos/export, AE comps "GR sheet · …",
- * 600 × 360 = the 200 × 120 Visuals box at 3x, transparent; cloud, object and sparkles are in it, only the radial glow
- * stays code. Markers: "intro" plays once from `at` (ms after the sheet starts rising, so it is landing with the sheet),
+ * 492 × 360 = a 164 × 120 window pinned to the card's right edge (dev spec), opaque: it paints the card fill, the radial
+ * glow, cloud, object and sparkles. Markers: "intro" plays once from `at` (ms after the sheet starts rising, so it is landing with the sheet),
  * then "idle" loops seamlessly.
  */
 const ILLO: Record<keyof typeof CARDS, { src: string; at: number; idleShare: number }> = {
@@ -87,9 +84,10 @@ const explainerH = (w: number) => Math.round(w * FTUX_RATIO + CTA_BAND);
 /** card press (reference .tap:active: scale .97 + brightness .97, 180 ms), on the kit press spring */
 const CARD_PRESS = { scale: 0.97, filter: 'brightness(0.97)' };
 
-export function CreateSheet() {
+export function CreateSheet({ params }: ScreenProps<{ start?: 'explainer' }>) {
   const nav = useNav();
-  const [mode, setMode] = useState<'cards' | 'explainer'>('cards');
+  // My Lists' empty-state Gift registry card opens the sheet straight on the explainer
+  const [mode, setMode] = useState<'cards' | 'explainer'>(params?.start === 'explainer' ? 'explainer' : 'cards');
   // the explainer's height follows the sheet's width (the FTUX lottie scales to it)
   const panel = useRef<HTMLDivElement>(null);
   const [w, setW] = useState(351);
@@ -180,7 +178,7 @@ function SheetCard({ kind, title, sub, shimmer, onPress }: { kind: keyof typeof 
 }
 
 /** plays the card's lottie: "intro" once after `at`, then loops "idle"; reduced motion holds the intro's last frame */
-function SheetIllo({ src, at, idleShare, maxDpr = 3 }: { src: string; at: number; idleShare: number; maxDpr?: number }) {
+export function SheetIllo({ src, at, idleShare, maxDpr = 3 }: { src: string; at: number; idleShare: number; maxDpr?: number }) {
   const reduce = useReduceMotion();
   const player = useRef<DotLottie | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
