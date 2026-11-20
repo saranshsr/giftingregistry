@@ -187,6 +187,43 @@ def shift_pos(ks, dx, dy):
 def max_scale(ks): return max(max(abs(v[0]), abs(v[1])) for v in _vals(ks['s'])) / 100.0
 
 
+
+# ---- TinyPNG for the nested icon parts (--tiny; key from env TINIFY_KEY only, never stored). Same helper and quality
+# guard as icons/exporter/convert_icons.py, own cache tiny_cache_icons/ (keyed by the md5 of the PNG sent).
+import hashlib as _hl, urllib.request as _ur, urllib.error as _ue
+TINY_ICONS = '--tiny' in sys.argv
+_TC = os.path.join(HERE, 'tiny_cache_icons'); _TR = os.path.join(_TC, 'report.json')
+_TREPI = json.load(open(_TR)) if os.path.exists(_TR) else {}
+TINY_SENT = []
+def tinify_part(raw):
+    import numpy as _np
+    os.makedirs(_TC, exist_ok=True)
+    h = _hl.md5(raw).hexdigest(); out = os.path.join(_TC, h + '.png')
+    if os.environ.get('TINY_DRY'):   # count only: what a --tiny run would send
+        if not os.path.exists(out) and h not in TINY_SENT: TINY_SENT.append(h)
+        return raw
+    if not os.path.exists(out):
+        key = os.environ.get('TINIFY_KEY')
+        if not key: sys.exit('TINIFY_KEY is not set')
+        auth = 'Basic ' + base64.b64encode(('api:' + key).encode()).decode()
+        try:
+            with _ur.urlopen(_ur.Request('https://api.tinify.com/shrink', data=raw, headers={'Authorization': auth}), timeout=120) as r:
+                url = json.loads(r.read())['output']['url']; cnt = r.headers.get('Compression-Count')
+        except _ue.HTTPError as e:
+            if e.code == 429: sys.exit('TinyPNG monthly limit reached (429).')
+            raise
+        with _ur.urlopen(_ur.Request(url, headers={'Authorization': auth}), timeout=120) as r: open(out, 'wb').write(r.read())
+        TINY_SENT.append(h); print('  tinypng', h[:8], 'compressions this month:', cnt, flush=True)
+    if h not in _TREPI:
+        A = _np.asarray(Image.open(io.BytesIO(raw)).convert('RGBA')).astype(_np.float32)
+        B = _np.asarray(Image.open(out).convert('RGBA')).astype(_np.float32)
+        d = _np.abs(A[..., :3] * A[..., 3:] / 255 - B[..., :3] * B[..., 3:] / 255).mean(-1)
+        am = float(_np.abs(A[..., 3] - B[..., 3]).max())
+        _TREPI[h] = {'orig': len(raw), 'tiny': os.path.getsize(out), 'mean': float(d.mean()), 'amax': am,
+                     'keep_orig': float(d.mean()) > 2 or am > 24 or os.path.getsize(out) >= len(raw)}
+        json.dump(_TREPI, open(_TR, 'w'), indent=1)
+    return raw if _TREPI[h]['keep_orig'] else open(out, 'rb').read()
+
 def icon_png(path, f):
     """Smallest PNG of the part: the file as is (already compressed in place) or resampled by f (anchor * f, scale / f)."""
     raw = open(path, 'rb').read(); im = Image.open(path)
@@ -195,6 +232,7 @@ def icon_png(path, f):
         r = im.convert('RGBA').resize((max(1, round(im.width * f)), max(1, round(im.height * f))), Image.LANCZOS)
         b = io.BytesIO(); r.save(b, 'PNG', optimize=True)
         if len(b.getvalue()) < len(raw): best = (b.getvalue(), r.size, r.size[0] / im.size[0])
+    if TINY_ICONS: best = (tinify_part(best[0]),) + best[1:]
     return best
 
 
@@ -311,3 +349,4 @@ def main():
     json.dump(rows, open(os.path.join(HERE, sizes), 'w')) if not only else None
 
 main()
+if TINY_ICONS: print('tinypng parts sent this run:', len(TINY_SENT))

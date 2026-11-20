@@ -34,11 +34,12 @@ export interface HeroCue {
 export function HeroLottie({ src, playKey, delay = 0, cue }: { src: string; playKey: string; delay?: number; cue?: HeroCue }) {
   const shared = useRef<Shared>({ live: { key: '', d: null }, waiting: new Set(), players: new Set(), pulse: null });
   // how the layer on screen leaves: held under the next file when the same step swaps files, the shrink-fade on a new step
-  const last = useRef(playKey);
-  const mode: Mode = last.current === playKey ? 'swap' : 'step';
-  useEffect(() => {
-    last.current = playKey;
-  }, [playKey]);
+  // decided once per change, not per render: a re-render right after a step change (the date step closes its pad) must
+  // not turn the leaving layer's shrink-fade into a swap hold (it would then vanish the moment the new step reveals)
+  const last = useRef({ playKey, src, mode: 'step' as Mode });
+  if (last.current.playKey !== playKey) last.current = { playKey, src, mode: 'step' };
+  else if (last.current.src !== src) last.current = { playKey, src, mode: 'swap' };
+  const mode = last.current.mode;
   // unmounting mid-pulse: stop the shared clock (its waiters resolve, so no recolour hold is left behind)
   useEffect(() => () => stopPulse(shared.current), []);
   useEffect(warmPulseFiles, []);
