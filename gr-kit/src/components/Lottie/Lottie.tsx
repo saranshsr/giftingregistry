@@ -33,7 +33,20 @@ const SPEC = typeof window !== 'undefined' && !!(window as unknown as { __NK_SPE
  * carries its file (`data-spec-lottie`) and the frame it shows (`data-lf`, every drawn frame); the sheet redraws that
  * frame with lottie-web on top of the copy's canvas.
  */
+const counted = new WeakSet<DotLottie>();
 function specTag(d: DotLottie, src: string | undefined) {
+  // players still loading hold the sheet's virtual clock (public/spec/index.html advanceTo), so a lottie that mounts
+  // mid-recording starts on time instead of whenever its file and the wasm arrive in real time
+  if (!counted.has(d) && !d.isLoaded) {
+    counted.add(d);
+    const w = window as unknown as { __NK_LOTTIE_PENDING__?: number };
+    w.__NK_LOTTIE_PENDING__ = (w.__NK_LOTTIE_PENDING__ || 0) + 1;
+    let done = false;
+    const settle = () => { if (!done) { done = true; w.__NK_LOTTIE_PENDING__ = Math.max(0, (w.__NK_LOTTIE_PENDING__ || 1) - 1); } };
+    d.addEventListener('load', settle);
+    d.addEventListener('loadError', settle);
+    d.addEventListener('destroy', settle);
+  }
   const tag = () => {
     const c = d.canvas as HTMLCanvasElement | null;
     if (!c || !(c instanceof HTMLCanvasElement) || !src) return;
@@ -144,7 +157,10 @@ export function Lottie({ name, src, loop = false, autoplay = true, size, style, 
   const rm = useLottieReducedMotion({ loop, autoplay, speed, onComplete, poster: reducedMotionFrame });
   // the spec sheet runs the app on a virtual clock: a worker player would keep real time there, so it stays on the main thread
   const Player = worker && !SPEC ? DotLottieWorkerReact : DotLottieReact;
-  const renderConfig = maxDpr && typeof window !== 'undefined' ? { devicePixelRatio: Math.min(window.devicePixelRatio || 1, maxDpr) } : undefined;
+  // spec sheet: never freeze off-screen (a sheet's lottie mounts below the fold and the IntersectionObserver that would
+  // unfreeze it reports in real time, long after the virtual clock has moved on)
+  const dpr = maxDpr && typeof window !== 'undefined' ? { devicePixelRatio: Math.min(window.devicePixelRatio || 1, maxDpr) } : undefined;
+  const renderConfig = SPEC ? { ...dpr, freezeOnOffscreen: false } : dpr;
   return (
     <Player
       src={src ?? (name ? lotties[name] : undefined)}

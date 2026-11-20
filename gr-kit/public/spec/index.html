@@ -591,7 +591,7 @@ window.SPEC = (() => {
     regCard: '[aria-label="Create your gift registry"]', colCard: '[aria-label="Create new collection"]',
     colGlow: '[aria-label="Create new collection"] img[class*="_piece_"]:nth-child(1)', colCloud: '[aria-label="Create new collection"] img[class*="_piece_"]:nth-child(2)', colArt: '[aria-label="Create new collection"] img[class*="_piece_"]:nth-child(3)',
     regGlow: '[aria-label="Create your gift registry"] img[class*="_piece_"]:nth-child(1)', regCloud: '[aria-label="Create your gift registry"] img[class*="_piece_"]:nth-child(2)', regArt: '[aria-label="Create your gift registry"] img[class*="_piece_"]:nth-child(3)',
-    sparkles: '[aria-label="Create your gift registry"] img[class*="_piece_"]:nth-child(n+4)', regShimmer: '[aria-label="Create your gift registry"] [class*="_shimmer_"]',
+    colLottie: '[aria-label="Create new collection"] canvas', regLottie: '[aria-label="Create your gift registry"] canvas', regShimmer: '[aria-label="Create your gift registry"] [class*="_shimmer_"]',
     heroBg: '[class*="_heroBg_"]', heroLottie: '[class*="_heroLottie_"]', ico: '[class*="_explainer_"] [class*="_ico_"]', num: '[class*="_explainer_"] [class*="_num_"]',
     txt: '[class*="_explainer_"] [class*="_txt_"]', divider: '[class*="_explainer_"] [class*="_divider_"]', exCta: '[class*="_explainer_"] [class*="_cta_"]', exAway: '[class*="_explainer_"] [data-away]',
     stepsScreen: R('steps'), frame: `${R('steps')} [class*="_frame_"]`, wash: `${R('steps')} [data-theme-bg]`, hero: `${R('steps')} [data-hero-src]`,
@@ -716,21 +716,16 @@ window.SPEC = (() => {
       hap('grTap', '+ Create', '[class*="_createPill_"]', 0, `tap: ${WEB.light}.`),
       { icon: 'opacity', prop: 'Opacity', layer: 'Scrim', sel: L.scrim, delay: 0, dur: 250, from: '0', to: '1', ease: C('cssOut'), note: 'The kit Origin sheet scrim, 0.25 s. Drag the sheet down and the scrim follows (1 − dy / h); past 30% or a 600 pt/s flick it closes.' },
       { icon: 'move', prop: 'Move Y', layer: 'Create sheet', sel: L.sheet, delay: 0, dur: land('open', 338), from: '338px', to: '0px', ease: S('open'), note: 'The sheet (grabber, 12 pt inset, r16) rises its own height on SHEET_OPEN (300 / 28).' },
-      { grp: 'Collection card art', at: 160, note: 'Figma "Visuals" layers pop in as the sheet settles (reference buildSheetCard): glow → cloud → object, 40–60 ms apart.' },
-      { icon: 'opacity', prop: 'Opacity', layer: 'Collection · glow', sel: L.colGlow, delay: 160, dur: 500, from: '0', to: '1', ease: C('out'), note: 'The glow blooms: MOVE scale with a long 0.5 s ease-out fade.' },
-      { icon: 'scale', prop: 'Scale', layer: 'Collection · glow', sel: L.colGlow, delay: 160, dur: land('move', 0.4), from: '60%', to: '100%', ease: S('move'), note: 'From 0.6.' },
-      { icon: 'opacity', prop: 'Opacity', layer: 'Collection · cloud', sel: L.colCloud, delay: 200, dur: 500, from: '0', to: '0.55', ease: C('out'), note: 'The cloud settles to 55%…' },
-      { icon: 'move', prop: 'Move Y', layer: 'Collection · cloud', sel: L.colCloud, delay: 200, dur: land('move', 8), from: '8px', to: '0px', ease: S('move'), note: '…from 0.8 and 8 pt below, on MOVE.' },
-      { icon: 'opacity', prop: 'Opacity', layer: 'Collection · art', sel: L.colArt, delay: 260, dur: 200, from: '0', to: '1', ease: C('out'), note: 'The object pops: 0.2 s fade…' },
-      { icon: 'scale', prop: 'Scale', layer: 'Collection · art', sel: L.colArt, delay: 260, dur: land('pop', 0.4), from: '60%', to: '100%', ease: S('pop'), note: '…from 0.6, 12 pt below and −6° on the reward POP spring (300 / 22), swelling ~4% past rest and settling once.' },
-      { grp: 'Registry card art', at: 220, note: 'The registry card runs the same pop 60 ms behind, then its two sparkles.' },
-      { icon: 'opacity', prop: 'Opacity', layer: 'Registry · glow', sel: L.regGlow, delay: 220, dur: 500, from: '0', to: '1', ease: C('out'), note: 'As the collection glow.' },
-      { icon: 'scale', prop: 'Scale', layer: 'Registry · glow', sel: L.regGlow, delay: 220, dur: land('move', 0.4), from: '60%', to: '100%', ease: S('move'), note: 'From 0.6 on MOVE.' },
-      { icon: 'opacity', prop: 'Opacity', layer: 'Registry · cloud', sel: L.regCloud, delay: 260, dur: 500, from: '0', to: '0.55', ease: C('out'), note: 'As the collection cloud.' },
-      { icon: 'move', prop: 'Move Y', layer: 'Registry · cloud', sel: L.regCloud, delay: 260, dur: land('move', 8), from: '8px', to: '0px', ease: S('move'), note: 'From 0.8 / 8 pt.' },
-      { icon: 'opacity', prop: 'Opacity', layer: 'Registry · gift', sel: L.regArt, delay: 320, dur: 200, from: '0', to: '1', ease: C('out'), note: 'The gift pops…' },
-      { icon: 'scale', prop: 'Scale', layer: 'Registry · gift', sel: L.regArt, delay: 320, dur: land('pop', 0.4), from: '60%', to: '100%', ease: S('pop'), note: '…from 0.6 / 12 pt / −4.02° to its drawn 1.98° on POP.' },
-      { icon: 'scale', prop: 'Scale', layer: 'Sparkles', sel: L.sparkles, delay: 440, dur: land('pop', 1), from: '0%', to: '100%', ease: S('pop'), stagger: { n: 2, step: 60, order: 'left → right' }, note: 'Two sparkles pop from 0 and −60° on POP, fading to 90% / 70% over 0.2 s.' },
+      { grp: 'Collection card art', at: 0, note: 'Starts with the sheet, so the art is landing as the sheet settles: the radial glow (code) blooms, and the card lottie (cloud, basket, sparkles) plays its intro, then loops its idle.' },
+      { icon: 'opacity', prop: 'Opacity', layer: 'Collection · glow', sel: L.colGlow, delay: 0, dur: 500, from: '0', to: '1', ease: C('out'), note: 'The radial glow is the only code layer: MOVE scale with a long 0.5 s ease-out fade.' },
+      { icon: 'scale', prop: 'Scale', layer: 'Collection · glow', sel: L.colGlow, delay: 0, dur: land('move', 0.4), from: '60%', to: '100%', ease: S('move'), note: 'From 0.6.' },
+      lottieRow('Collection · lottie (intro)', L.colLottie, 0, 'gr-sheet-collection.lottie', 1100, { note: 'gr-sheet-collection.lottie, marker "intro" (f0–66, 60 fps): the cloud blooms (to 55%), then the basket springs up at 0.1 s, ribbons unfurl, lamp bobs, heart pops, star and dashes burst. Transparent, 600 × 360 = the 200 × 120 Visuals box at 3x.' }),
+      lottieRow('Collection · lottie (idle loop)', L.colLottie, 1100, 'gr-sheet-collection.lottie', 3500, { note: 'Marker "idle" (f66–276) loops seamlessly: basket floats, ribbons sway, cloud breathes, star twinkles.' }),
+      { grp: 'Registry card art', at: 60, note: 'The registry card runs 60 ms behind.' },
+      { icon: 'opacity', prop: 'Opacity', layer: 'Registry · glow', sel: L.regGlow, delay: 60, dur: 500, from: '0', to: '1', ease: C('out'), note: 'As the collection glow.' },
+      { icon: 'scale', prop: 'Scale', layer: 'Registry · glow', sel: L.regGlow, delay: 60, dur: land('move', 0.4), from: '60%', to: '100%', ease: S('move'), note: 'From 0.6 on MOVE.' },
+      lottieRow('Registry · lottie (intro)', L.regLottie, 60, 'gr-sheet-registry.lottie', 1167, { note: 'gr-sheet-registry.lottie, marker "intro" (f0–70): cloud blooms, box springs in at 0.1 s, lid tips open and settles, heart and arrow badge float out, sparkles spin in.' }),
+      lottieRow('Registry · lottie (idle loop)', L.regLottie, 1227, 'gr-sheet-registry.lottie', 3500, { note: 'Marker "idle" (f70–280) loops: box floats, heart and badge drift, sparkles twinkle, lid peeks.' }),
       { grp: 'Registry title shimmer', at: ms(0.86), note: 'One sweep across "Create your gift registry" once its art has landed.' },
       { icon: 'move', prop: 'Background X', layer: 'Registry title shimmer', sel: L.regShimmer, delay: ms(0.86), dur: ms(0.9), from: '100%', to: '0%', ease: C('io'), note: 'motion tween on background-position, 0.9 s cubic in-out (reference: 1 s at 1 s). No NEW tag (Figma 843:755739 has none).' },
     ] },
@@ -1448,6 +1443,17 @@ window.SPEC = (() => {
     function advanceTo(T, fr = FR) {
       const run = async () => {
         while (vt < T - 1e-6) {
+          // a Lottie still loading (file + player, real network / wasm) holds the clock, as if it were already loaded
+          // (the app counts its players in __NK_LOTTIE_PENDING__, spec mode only); capped at 5 s real time per wait
+          // while held, time stands still but due timers and animation-frame callbacks still run at the same instant
+          // (the player finishes loading through them)
+          for (const t0 = Date.now(); (w.__NK_LOTTIE_PENDING__ || 0) > 0 && Date.now() - t0 < 5000; ) {
+            await realWait(8);
+            for (let tm; (tm = nextTimer(vt)); ) { timers.delete(tm.id); try { tm.fn(...tm.args); } catch (e) { console.warn('[preview]', e); } }
+            const q = rq; rq = [];
+            for (const r of q) { try { r.cb(vt); } catch (e) { console.warn('[preview]', e); } }
+            await flush();
+          }
           const next = Math.min(T, vt + fr);
           for (let g = 0; g < 400; g++) {                       // timers + animation ends inside this frame, in order
             const tm = nextTimer(next), ae = nextEnd(next);
