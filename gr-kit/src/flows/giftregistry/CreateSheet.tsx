@@ -1,6 +1,6 @@
 import type { DotLottie } from '@lottiefiles/dotlottie-react';
 import { AnimatePresence, animate, motion, type Transition } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { easing } from '../../motion/presets';
 import { Lottie, OriginIcon, Pressable, SheetBody } from '../../components';
 import { NanoButton } from './components/NanoButton';
@@ -8,9 +8,9 @@ import { NewTag } from './components/NewTag';
 import { haptics } from './haptics';
 import { useNav } from '../../kit/Navigator';
 import { useReduceMotion } from '../../motion/reducedMotion';
-import { art, explainerHero, heroLottie, warmLottie } from './assets';
+import { heroLottie, warmLottie } from './assets';
 import { copy } from './data';
-import { arrive, fade, leave, MOVE, STAGGER_IN, STAGGER_OUT } from './motion';
+import { arrive, fade, leave, MOVE, STAGGER_OUT } from './motion';
 import { resetAnswers } from './store';
 import { decodeSoon } from './warm';
 import { registerMorph } from './transitions';
@@ -18,9 +18,7 @@ import colGlow from '@assets/giftregistry/create/col-glow.svg?url';
 import regGlow from '@assets/giftregistry/create/reg-glow.svg?url';
 import colLottie from '@assets/giftregistry/lottie/gr-sheet-collection.lottie?url';
 import regLottie from '@assets/giftregistry/lottie/gr-sheet-registry.lottie?url';
-// a copy of the Figma export with its baked dark top corners filled with the blue, so the sheet's own r16 clip is the
-// only corner (the original export showed a dark crescent inside the card's curve)
-import heroBg from '@assets/giftregistry/create/hero-bg-full.jpg';
+import ftuxLottie from '@assets/giftregistry/lottie/gr-ftux-explainer.lottie?url';
 import stepBg from '@assets/giftregistry/themes/bg-default.jpg';
 import styles from './CreateSheet.module.css';
 
@@ -77,17 +75,35 @@ const TAG_AT = 1.46;
 
 /** Figma drawer card 843:756642: 12 + 120 + 12 + 120 + 12 */
 const CARDS_H = 276;
-/** Figma explainer card 843:763418: 481.45 */
-const EXPLAINER_H = 482;
+/**
+ * FTUX lottie (ftux/export, AE "GR FTUX · What is a Gift Registry"): everything on the explainer but the CTA, 1053 × 1252
+ * = Figma card 843:763418's 351 × 417.33 pt at 3x, scaled to the sheet's width. Markers: "intro" f0–90, "idle" f90–330.
+ * The CTA (dev-built) sits right under it, as in Figma (top 417.45 of 481.45: 64 pt to the card's bottom).
+ */
+const FTUX_RATIO = 1252 / 1053;
+const FTUX_IDLE = 90 / 329;
+const CTA_BAND = 481.45 - 417.33;
+const explainerH = (w: number) => Math.round(w * FTUX_RATIO + CTA_BAND);
 /** card press (reference .tap:active: scale .97 + brightness .97, 180 ms), on the kit press spring */
 const CARD_PRESS = { scale: 0.97, filter: 'brightness(0.97)' };
 
 export function CreateSheet() {
   const nav = useNav();
   const [mode, setMode] = useState<'cards' | 'explainer'>('cards');
+  // the explainer's height follows the sheet's width (the FTUX lottie scales to it)
+  const panel = useRef<HTMLDivElement>(null);
+  const [w, setW] = useState(351);
+  useLayoutEffect(() => {
+    const el = panel.current;
+    if (!el) return;
+    setW(el.offsetWidth || 351);
+    const ro = new ResizeObserver(() => setW(el.offsetWidth || 351));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return (
     <SheetBody inset={false} className={styles.body}>
-      <motion.div className={styles.panel} initial={false} animate={{ height: mode === 'cards' ? CARDS_H : EXPLAINER_H }} transition={MOVE}>
+      <motion.div ref={panel} className={styles.panel} initial={false} animate={{ height: mode === 'cards' ? CARDS_H : explainerH(w) }} transition={MOVE}>
         {/* no initial={false} here: it would reach every motion child of the cards and skip the art's pop-in */}
         <AnimatePresence>
           {mode === 'cards' ? (
@@ -96,7 +112,7 @@ export function CreateSheet() {
               <SheetCard kind="registry" title={copy.create.registry.title} sub={copy.create.registry.sub} shimmer onPress={() => (haptics.lift(), setMode('explainer'))} />
             </motion.div>
           ) : (
-            <Explainer key="explainer" />
+            <Explainer key="explainer" ftuxH={w * FTUX_RATIO} />
           )}
         </AnimatePresence>
       </motion.div>
@@ -164,7 +180,7 @@ function SheetCard({ kind, title, sub, shimmer, onPress }: { kind: keyof typeof 
 }
 
 /** plays the card's lottie: "intro" once after `at`, then loops "idle"; reduced motion holds the intro's last frame */
-function SheetIllo({ src, at, idleShare }: { src: string; at: number; idleShare: number }) {
+function SheetIllo({ src, at, idleShare, maxDpr = 3 }: { src: string; at: number; idleShare: number; maxDpr?: number }) {
   const reduce = useReduceMotion();
   const player = useRef<DotLottie | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -188,11 +204,11 @@ function SheetIllo({ src, at, idleShare }: { src: string; at: number; idleShare:
     if (d.isLoaded) start();
     else d.addEventListener('load', start);
   };
-  return <Lottie src={src} autoplay={reduce} reducedMotionFrame={idleShare} onPlayer={onPlayer} maxDpr={3} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />;
+  return <Lottie src={src} autoplay={reduce} reducedMotionFrame={idleShare} onPlayer={onPlayer} maxDpr={maxDpr} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />;
 }
 
-/** "What is a Gift Registry" (Figma v2 sheet 843:763414): hero lottie over its background, three columns, Continue */
-function Explainer() {
+/** "What is a Gift Registry" (Figma v2 sheet 843:763414): the FTUX lottie (hero, rays, three columns), then Continue */
+function Explainer({ ftuxH }: { ftuxH: number }) {
   const nav = useNav();
   const reduce = useReduceMotion();
   const root = useRef<HTMLDivElement>(null);
@@ -205,27 +221,10 @@ function Explainer() {
     decodeSoon([stepBg], 2000);
   }, []);
 
-  // the content starts while the panel is still growing (reference: +260 ms, once its cards had gone)
+  // the content starts while the panel is still growing (reference: +260 ms, once its cards had gone); the CTA rises
+  // as the lottie's last column lands (its f0–90 intro: columns at 0.20 / 0.26 / 0.32 s, dividers drawn by ~0.7 s)
   const t0 = 0.18;
-  // each column: number + icon pop, text slides in +50, divider +120 (reference: numbers at 460 + i × 110 after t0;
-  // here 200 + i × 60, the kit's stagger, so the three columns read as one beat)
-  const col = (i: number) => t0 + 0.2 + i * STAGGER_IN;
-  const ctaAt = col(2) + 0.18; // after the last divider (reference: 820 after t0)
-  // the hero lottie (art, arc and title in one) starts with the content, not on mount behind the outgoing cards
-  const player = useRef<DotLottie | null>(null);
-  const playTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const mountedAt = useRef(performance.now());
-  useEffect(() => () => clearTimeout(playTimer.current), []);
-  const onPlayer = (d: DotLottie) => {
-    if (reduce || player.current === d) return;
-    player.current = d;
-    const start = () => {
-      clearTimeout(playTimer.current);
-      playTimer.current = setTimeout(() => d.play(), Math.max(0, t0 * 1000 - (performance.now() - mountedAt.current)));
-    };
-    if (d.isLoaded) start();
-    else d.addEventListener('load', start);
-  };
+  const ctaAt = t0 + 0.5;
 
   const onContinue = () => {
     if (leaving) return;
@@ -242,54 +241,29 @@ function Explainer() {
       const k = L.width / layer.offsetWidth || 1; // the preview may scale the phone
       registerMorph({ top: (C.top - L.top) / k, right: (L.right - C.right) / k, bottom: (L.bottom - C.bottom) / k, left: (C.left - L.left) / k, radius: 16 });
     }
-    // rows and the button step aside while the card grows (reference: y14, 220 ms + i × 12)
-    if (el && !reduce) el.querySelectorAll<HTMLElement>('[data-away]').forEach((n, i) => animate(n, { opacity: 0, y: 14 }, leave(i * (STAGGER_OUT / 3))));
+    // the lottie fades and the button steps aside while the card grows (reference: y14, 220 ms + i × 12)
+    if (el && !reduce) {
+      el.querySelectorAll<HTMLElement>('[data-fade]').forEach((n) => animate(n, { opacity: 0 }, leave()));
+      el.querySelectorAll<HTMLElement>('[data-away]').forEach((n, i) => animate(n, { opacity: 0, y: 14 }, leave(i * (STAGGER_OUT / 3))));
+    }
     nav.replace('giftregistry/steps', { morph: '1' }, { presentation: 'modal', transition: 'gr-morph' });
   };
 
-  const enter = (from: Record<string, number>, transition: Transition) => ({
-    initial: reduce ? false : { opacity: 0, ...from },
-    animate: { opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, scaleY: 1 },
-    transition,
-  });
-  const rise = (delay: number, from: Record<string, number>) => enter(from, arrive(delay, 0.28));
-
   return (
     <motion.div ref={root} className={styles.explainer} initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: fade(0.15) }}>
-      {/* Figma 843:763419: a 206-tall hero that clips the 375 × 235 Onboarding background (843:763446), centred on
-          the card; the lottie (art, arc and title, AE comp 351 × 206) sits centred on top, as in the v2 proto */}
-      <div className={styles.hero}>
-        <motion.img className={styles.heroBg} src={heroBg} alt="" initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={fade(0.42, t0)} />
-        <div className={styles.heroLottie}>
-          {/* reduced motion: autoplay lets the kit Lottie hold its representative frame */}
-          <Lottie src={explainerHero} autoplay={reduce} onPlayer={onPlayer} worker maxDpr={2} style={{ width: '100%', height: '100%' }} />
-        </div>
+      <div data-fade className={styles.ftux} style={{ height: ftuxH }}>
+        <SheetIllo src={ftuxLottie} at={t0 * 1000} idleShare={FTUX_IDLE} maxDpr={2} />
       </div>
-      {copy.explainer.cols.map((c, i) => (
-        <div key={i} className={styles.col} style={{ left: `calc(${i} * 100% / 3)` }}>
-          {/* icon and number pop together (reference: number .4 / −10° → 1.12 / 3° → 1, 520 ms) */}
-          <motion.img data-away className={styles.ico} src={art(`explainer/ico${i + 1}.png`)} alt="" {...enter({ scale: 0.7, y: 6 }, pop(col(i)))} />
-          <motion.img
-            data-away
-            className={styles.num}
-            data-n={i + 1}
-            src={art(`explainer/num${i + 1}.png`)}
-            alt={`0${i + 1}`}
-            {...enter({ scale: 0.5, rotate: -8 }, pop(col(i) + 0.03))}
-          />
-          {/* text slides in from the right (reference x18, 440 ms ease-out @+50) */}
-          <motion.p data-away className={styles.txt} {...rise(col(i) + 0.05, { x: 14 })}>
-            {c.lead}
-            <b>{c.bold}</b>
-            {c.tail}
-          </motion.p>
-          {/* divider draws down from the top (reference: scale from .6, 380 ms @+120) */}
-          {i < 2 && <motion.span data-away className={styles.divider} style={{ originY: 0 }} {...rise(col(i) + 0.12, { scaleY: 0.6 })} />}
-        </div>
-      ))}
-      {/* CTA rises last (reference y16, 480 ms): Figma's "nano button · Continue" (843:763470) = nano Button v3 primary,
-          the guide's neutral black (no occasion is picked yet) */}
-      <motion.div data-away className={styles.cta} {...rise(ctaAt, { y: 16 })}>
+      {/* CTA (dev-built) rises last (reference y16, 480 ms): Figma's "nano button · Continue" (843:763470) = nano Button v3
+          primary, the guide's neutral black (no occasion is picked yet); 12 pt below the lottie's bottom edge */}
+      <motion.div
+        data-away
+        className={styles.cta}
+        style={{ top: ftuxH + 0.12 }}
+        initial={reduce ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={arrive(ctaAt, 0.28)}
+      >
         <NanoButton variant="primary" onClick={onContinue}>
           {copy.explainer.cta}
         </NanoButton>

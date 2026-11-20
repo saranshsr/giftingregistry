@@ -118,7 +118,14 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: 482px;
+  height: 100%;
+}
+/* the FTUX lottie box: full sheet width, height = width × 1252 / 1053 (set inline) */
+.ftux {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
 }
 /* 843:763419: 206 tall, clips the background */
 .hero {

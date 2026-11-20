@@ -592,7 +592,7 @@ window.SPEC = (() => {
     colGlow: '[aria-label="Create new collection"] img[class*="_piece_"]:nth-child(1)', colCloud: '[aria-label="Create new collection"] img[class*="_piece_"]:nth-child(2)', colArt: '[aria-label="Create new collection"] img[class*="_piece_"]:nth-child(3)',
     regGlow: '[aria-label="Create your gift registry"] img[class*="_piece_"]:nth-child(1)', regCloud: '[aria-label="Create your gift registry"] img[class*="_piece_"]:nth-child(2)', regArt: '[aria-label="Create your gift registry"] img[class*="_piece_"]:nth-child(3)',
     colLottie: '[aria-label="Create new collection"] canvas', regLottie: '[aria-label="Create your gift registry"] canvas', regShimmer: '[aria-label="Create your gift registry"] [class*="_shimmer_"]',
-    heroBg: '[class*="_heroBg_"]', heroLottie: '[class*="_heroLottie_"]', ico: '[class*="_explainer_"] [class*="_ico_"]', num: '[class*="_explainer_"] [class*="_num_"]',
+    ftux: '[class*="_ftux_"]', heroBg: '[class*="_heroBg_"]', heroLottie: '[class*="_heroLottie_"]', ico: '[class*="_explainer_"] [class*="_ico_"]', num: '[class*="_explainer_"] [class*="_num_"]',
     txt: '[class*="_explainer_"] [class*="_txt_"]', divider: '[class*="_explainer_"] [class*="_divider_"]', exCta: '[class*="_explainer_"] [class*="_cta_"]', exAway: '[class*="_explainer_"] [data-away]',
     stepsScreen: R('steps'), frame: `${R('steps')} [class*="_frame_"]`, wash: `${R('steps')} [data-theme-bg]`, hero: `${R('steps')} [data-hero-src]`,
     back: `${R('steps')} [class*="_back_"]`, progress: `${R('steps')} [class*="_progress_"]`, fill: `${R('steps')} [class*="_progressFill_"]`,
@@ -731,31 +731,26 @@ window.SPEC = (() => {
     ] },
 
     { id: 4, name: 'Explainer opens', trig: 'Tap "Create your gift registry"', rows: () => {
-      const t0 = 180, col = (i) => t0 + 200 + i * STAGGER_IN, ctaAt = col(2) + 180;
+      const t0 = 180, ctaAt = t0 + 500;
       return [
         hap('lift', '"Create your gift registry" card', L.regCard, 0, `lift: ${WEB.light}.`),
         { icon: 'opacity', prop: 'Opacity', layer: 'Cards', sel: L.cards, delay: 0, dur: 160, from: '1', to: '0', ease: C('in'), note: 'The two cards step back: leave() = MOVE with a 0.16 s ease-in fade…' },
         { icon: 'scale', prop: 'Scale', layer: 'Cards', sel: L.cards, delay: 0, dur: land('move', 0.03), from: '100%', to: '97%', ease: S('move'), note: '…shrinking to 0.97…' },
         { icon: 'move', prop: 'Move Y', layer: 'Cards', sel: L.cards, delay: 0, dur: land('move', 10), from: '0px', to: '10px', ease: S('move'), note: '…and sinking 10 pt.' },
-        { icon: 'size', prop: 'Height', layer: 'Sheet panel', sel: L.panel, delay: 0, dur: land('move', 206), from: '276px', to: '482px', ease: S('move'), note: 'The same sheet grows in place from the cards (276) to the explainer card (482, Figma 843:763418) on MOVE: the sheet top rises 206 pt.' },
+        { icon: 'size', prop: 'Height', layer: 'Sheet panel', sel: L.panel, delay: 0, dur: land('move', 223), from: '276px', to: '499px', ease: S('move'), note: 'The same sheet grows in place from the cards (276) to the explainer (the FTUX lottie scaled to the sheet width + the 64 pt CTA band: 499 on a 366 pt sheet; Figma card 843:763418 is 481.45 at 351) on MOVE.' },
         { grp: 'Explainer content', at: t0, note: 'Starts while the panel is still growing (t0 = 180 ms; the reference waited 260 ms for its cards to go).' },
-        { icon: 'opacity', prop: 'Opacity', layer: 'Hero background', sel: L.heroBg, delay: t0, dur: 420, from: '0', to: '1', ease: C('out'), note: 'The blue onboarding background fades in, 0.42 s ease-out.' },
-        { icon: 'flag', prop: 'Lottie', layer: 'Hero lottie (art, arc, title)', sel: L.heroLottie, delay: t0, dur: 3400, from: '0f', to: '204f', ease: C('lin'), note: `gift-hero-v2-nobg.json (351 × 206 comp, 60 fps, 3.4 s), started with the content, not on mount behind the outgoing cards. ${canvas}` },
-        { icon: 'scale', prop: 'Scale', layer: 'Column icons', sel: L.ico, delay: col(0), dur: land('pop', 0.3), from: '70%', to: '100%', ease: S('pop'), stagger: { n: 3, step: STAGGER_IN, order: 'left → right' }, note: 'Each column: the icon pops from 0.7 and 6 pt below on POP, with a 0.2 s ease-out fade.' },
-        { icon: 'scale', prop: 'Scale', layer: 'Column numbers', sel: L.num, delay: col(0) + 30, dur: land('pop', 0.5), from: '50%', to: '100%', ease: S('pop'), stagger: { n: 3, step: STAGGER_IN, order: 'left → right' }, note: '30 ms later the number pops from 0.5 and −8° on POP (0.2 s fade).' },
-        { icon: 'opacity', prop: 'Opacity', layer: 'Column text', sel: L.txt, delay: col(0) + 50, dur: 280, from: '0', to: '1', ease: C('out'), stagger: { n: 3, step: STAGGER_IN, order: 'left → right' }, note: 'The text slides in from the right…' },
-        { icon: 'move', prop: 'Move X', layer: 'Column text', sel: L.txt, delay: col(0) + 50, dur: land('move', 14), from: '14px', to: '0px', ease: S('move'), stagger: { n: 3, step: STAGGER_IN, order: 'left → right' }, note: '…14 pt on MOVE (arrive: 0.28 s fade).' },
-        { icon: 'scale', prop: 'Scale Y', layer: 'Dividers', sel: L.divider, delay: col(0) + 120, dur: land('move', 0.4), from: '60%', to: '100%', ease: S('move'), stagger: { n: 2, step: STAGGER_IN, order: 'left → right' }, note: 'The dividers draw down from the top (origin y 0), with a 0.28 s fade.' },
-        { icon: 'opacity', prop: 'Opacity', layer: 'Continue button', sel: L.exCta, delay: ctaAt, dur: 280, from: '0', to: '1', ease: C('out'), note: 'The nano Continue rises last, after the last divider…' },
+        lottieRow('FTUX lottie (intro)', L.ftux, t0, 'gr-ftux-explainer.lottie', 1500, { note: 'gr-ftux-explainer.lottie, marker "intro" (f0–90, 60 fps): everything on the card but the CTA, in one lottie (1053 × 1252 = 351 × 417.33 pt at 3x, scaled to the sheet width). Sky fades in 0–0.42 s while the light rays fan up out of the gift; the hero art plays from 0.1 s; the columns pop 60 ms apart from 0.2 s (icon + number, text slides in from x +14, divider draws down).' }),
+        lottieRow('FTUX lottie (idle loop)', L.ftux, t0 + 1500, 'gr-ftux-explainer.lottie', 4000, { note: 'Marker "idle" (f90–330) loops seamlessly: rays sweep, the gift floats, lid and hearts bob, stars twinkle; icons and text hold still.' }),
+        { icon: 'opacity', prop: 'Opacity', layer: 'Continue button', sel: L.exCta, delay: ctaAt, dur: 280, from: '0', to: '1', ease: C('out'), note: 'The Continue (dev-built, not in the lottie) rises as the lottie\'s last column lands, placed right under the lottie (Figma top 417.45 pt)…' },
         { icon: 'move', prop: 'Move Y', layer: 'Continue button', sel: L.exCta, delay: ctaAt, dur: land('move', 16), from: '16px', to: '0px', ease: S('move'), note: '…16 pt on MOVE. It is the guide\'s neutral black (no occasion yet).' },
       ];
     } },
 
     { id: 5, name: 'Card grows into step 1', trig: 'Tap Continue (touch-up)', rows: () => [
       ...release('Continue button', L.exCta),
-      { icon: 'opacity', prop: 'Opacity', layer: 'Explainer rows', sel: L.exAway, delay: 0, dur: 160, from: '1', to: '0', ease: C('in'), stagger: { n: 12, step: Math.round(STAGGER_OUT / 3), order: 'icons, numbers, text, dividers, CTA' },
-        note: 'Every row and the button step aside while the card grows (reference y14, 220 ms + i × 12): leave(i × 13.3 ms).' },
-      { icon: 'move', prop: 'Move Y', layer: 'Explainer rows', sel: L.exAway, delay: 0, dur: land('move', 14), from: '0px', to: '14px', ease: S('move'), stagger: { n: 12, step: Math.round(STAGGER_OUT / 3), order: 'in DOM order' }, note: '14 pt down on MOVE.' },
+      { icon: 'opacity', prop: 'Opacity', layer: 'FTUX lottie', sel: L.ftux, delay: 0, dur: 160, from: '1', to: '0', ease: C('in'), note: 'The FTUX lottie fades while the card grows (leave: 0.16 s ease-in).' },
+      { icon: 'opacity', prop: 'Opacity', layer: 'Continue button', sel: L.exAway, delay: 0, dur: 160, from: '1', to: '0', ease: C('in'), note: 'The button steps aside (reference y14, 220 ms)…' },
+      { icon: 'move', prop: 'Move Y', layer: 'Continue button', sel: L.exAway, delay: 0, dur: land('move', 14), from: '0px', to: '14px', ease: S('move'), note: '…14 pt down on MOVE.' },
       { icon: 'opacity', prop: 'Opacity', layer: 'Scrim + sheet', sel: `${L.scrim}, ${L.sheet}`, delay: 0, dur: 250, from: '1', to: '0', ease: C('out'), note: 'dissolveOnReplace: replaced from inside, the sheet and its scrim dissolve (0.25 s ease-out) instead of dropping, so My Lists never sits under a dark band.' },
       { icon: 'size', prop: 'Clip', layer: 'Steps screen', sel: L.stepsScreen, delay: 0, dur: waapi('morph'), from: 'card rect r16', to: 'full screen r0', ease: S('morph'),
         note: 'gr-morph: the steps screen is revealed by a clip-path inset that starts on the explainer card\'s measured box (≈ inset 328 12 34 12, r16) and opens to the full screen on the calmer critically damped spring (response 0.5 s), the one surface that travels the whole screen.' },

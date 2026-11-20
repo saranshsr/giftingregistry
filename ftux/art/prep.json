@@ -1,0 +1,136 @@
+{
+ "scale": 3,
+ "card_pt": [
+  351,
+  481.4545
+ ],
+ "cta_top_pt": 417.4545,
+ "pieces": {
+  "hero_bg": {
+   "file": "hero_bg.png",
+   "export_as": "hero_bg.jpg",
+   "x": 0,
+   "y": 0,
+   "w": 1053,
+   "h": 618,
+   "filled_px": 3220,
+   "grey_left": 0
+  },
+  "ico1": {
+   "file": "ico1.png",
+   "x": 86,
+   "y": 672,
+   "w": 180,
+   "h": 174,
+   "err_over_white": 0.083
+  },
+  "num1": {
+   "file": "num1.png",
+   "x": 128,
+   "y": 864,
+   "w": 95,
+   "h": 90,
+   "err_over_white": 0.218
+  },
+  "txt1": {
+   "file": "txt1.png",
+   "x": 30,
+   "y": 974,
+   "w": 291,
+   "h": 154,
+   "err_over_white": 0.019
+  },
+  "ico2": {
+   "file": "ico2.png",
+   "x": 437,
+   "y": 672,
+   "w": 180,
+   "h": 174,
+   "err_over_white": 0.016
+  },
+  "num2": {
+   "file": "num2.png",
+   "x": 475,
+   "y": 864,
+   "w": 104,
+   "h": 90,
+   "err_over_white": 0.209
+  },
+  "txt2": {
+   "file": "txt2.png",
+   "x": 381,
+   "y": 974,
+   "w": 291,
+   "h": 154,
+   "err_over_white": 0.02
+  },
+  "ico3": {
+   "file": "ico3.png",
+   "x": 788,
+   "y": 672,
+   "w": 180,
+   "h": 174,
+   "err_over_white": 0.073
+  },
+  "num3": {
+   "file": "num3.png",
+   "x": 826,
+   "y": 864,
+   "w": 103,
+   "h": 90,
+   "err_over_white": 0.211
+  },
+  "txt3": {
+   "file": "txt3.png",
+   "x": 732,
+   "y": 974,
+   "w": 291,
+   "h": 154,
+   "err_over_white": 0.019
+  },
+  "ray_a": {
+   "file": "ray_a.png",
+   "w": 866,
+   "h": 432
+  },
+  "ray_b": {
+   "file": "ray_b.png",
+   "w": 452,
+   "h": 554
+  },
+  "ray_c": {
+   "file": "ray_c.png",
+   "w": 722,
+   "h": 567
+  },
+  "ray_d": {
+   "file": "ray_d.png",
+   "w": 254,
+   "h": 519
+  }
+ },
+ "dividers": [
+  {
+   "x": 351,
+   "y0": 695.181816,
+   "y1": 1115.1818159999998,
+   "w": 3,
+   "color": [
+    242,
+    243,
+    247
+   ]
+  },
+  {
+   "x": 702,
+   "y0": 695.181816,
+   "y1": 1115.1818159999998,
+   "w": 3,
+   "color": [
+    242,
+    243,
+    247
+   ]
+  }
+ ]
+}

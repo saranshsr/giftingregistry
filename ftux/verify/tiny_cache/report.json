@@ -1,0 +1,245 @@
+{
+ "060b749e5b6fe9d62742167b1df1bea5": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/ray_d.png",
+  "orig": 12732,
+  "tiny": 6733,
+  "mean": 0.3930371105670929,
+  "p995": 3.2941181659698486,
+  "amax": 11.0,
+  "keep_orig": false
+ },
+ "1c5eb8e3c516cf77638bd7fba63e0005": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/num3.png",
+  "orig": 4894,
+  "tiny": 2409,
+  "mean": 0.08264230936765671,
+  "p995": 1.7821052074432373,
+  "amax": 12.0,
+  "keep_orig": false
+ },
+ "1fa445b742ee6f8e2a9226b421f90efa": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_star_green.png",
+  "orig": 2840,
+  "tiny": 2760,
+  "mean": 0.055155541747808456,
+  "p995": 3.321568727493286,
+  "amax": 6.0,
+  "keep_orig": false
+ },
+ "216901a92a3d87bf64be4d4dbfa558aa": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_spark4.png",
+  "orig": 1620,
+  "tiny": 1330,
+  "mean": 0.2511628270149231,
+  "p995": 3.044766664505005,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "2a19299cd311954c5ef44f64e8ac64b6": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_box_front_a.png",
+  "orig": 1698,
+  "tiny": 1434,
+  "mean": 0.06336873024702072,
+  "p995": 4.0,
+  "amax": 8.0,
+  "keep_orig": false
+ },
+ "2db030be5f17e127f374bea55d2bec9e": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/ray_b.png",
+  "orig": 24100,
+  "tiny": 9139,
+  "mean": 0.2927689552307129,
+  "p995": 4.4130706787109375,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "33de713de8af3601ea8532ae057256e1": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/txt3.png",
+  "orig": 7423,
+  "tiny": 2838,
+  "mean": 0.005988175515085459,
+  "p995": 0.3712417185306549,
+  "amax": 2.0,
+  "keep_orig": false
+ },
+ "37558068075d2907c522e4d5765b58c2": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_heart_big.png",
+  "orig": 4256,
+  "tiny": 4113,
+  "mean": 0.13800786435604095,
+  "p995": 4.333333492279053,
+  "amax": 24.0,
+  "keep_orig": false
+ },
+ "5212e28bcd40799c1c6a87a1d7b8192d": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_spark1.png",
+  "orig": 1586,
+  "tiny": 1372,
+  "mean": 0.14336331188678741,
+  "p995": 2.539057493209839,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "56a86af98e8f76245934c6abde75e393": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/ico1.png",
+  "orig": 35714,
+  "tiny": 14694,
+  "mean": 0.27415376901626587,
+  "p995": 2.015185594558716,
+  "amax": 6.0,
+  "keep_orig": false
+ },
+ "5ab066b8b8241143700d3adda83c1ad7": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_lid_a.png",
+  "orig": 2370,
+  "tiny": 2109,
+  "mean": 0.0600895956158638,
+  "p995": 5.0,
+  "amax": 7.0,
+  "keep_orig": false
+ },
+ "6b504566ebaffcf4f6dcc827a963dc9b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_swoosh.png",
+  "orig": 6037,
+  "tiny": 4562,
+  "mean": 0.07750998437404633,
+  "p995": 2.0,
+  "amax": 11.0,
+  "keep_orig": false
+ },
+ "6bae65fdff576b0b806aa9e81775391c": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_heart_small.png",
+  "orig": 2478,
+  "tiny": 2333,
+  "mean": 0.1941133737564087,
+  "p995": 3.592158079147339,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "6c41e3676ab192e7933aa0a5562710a0": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/txt2.png",
+  "orig": 7990,
+  "tiny": 3181,
+  "mean": 0.005870301276445389,
+  "p995": 0.3503267765045166,
+  "amax": 2.0,
+  "keep_orig": false
+ },
+ "7bfa65378d4386ba4550b81ca700b158": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/ico2.png",
+  "orig": 20259,
+  "tiny": 6343,
+  "mean": 0.1352735012769699,
+  "p995": 1.545097827911377,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "7c5157b7d20fa24bd9baad13a89dc789": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_star_grey.png",
+  "orig": 2166,
+  "tiny": 1958,
+  "mean": 0.09463199973106384,
+  "p995": 3.4745094776153564,
+  "amax": 11.0,
+  "keep_orig": false
+ },
+ "8ef2109eff2de14fa93ae7c03ea3e00a": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/num1.png",
+  "orig": 4022,
+  "tiny": 1859,
+  "mean": 0.0897485688328743,
+  "p995": 1.9570156335830688,
+  "amax": 13.0,
+  "keep_orig": false
+ },
+ "9135ea9df6024f259b3b20e4cbb1be27": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_box_back_a.png",
+  "orig": 819,
+  "tiny": 796,
+  "mean": 0.02961132861673832,
+  "p995": 3.0,
+  "amax": 9.0,
+  "keep_orig": false
+ },
+ "928ff160f0f558a14651d4cd89362423": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/ico3.png",
+  "orig": 35972,
+  "tiny": 13017,
+  "mean": 0.31187501549720764,
+  "p995": 2.1561126708984375,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "99ee410e7f9f7cb03d5766c05966cc47": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_title_grad.png",
+  "orig": 577,
+  "tiny": 577,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 0.0,
+  "keep_orig": true
+ },
+ "a1ad784bb5c0e10c234c442206bf67c8": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_spark2.png",
+  "orig": 1543,
+  "tiny": 1330,
+  "mean": 0.16886970400810242,
+  "p995": 2.5743136405944824,
+  "amax": 4.0,
+  "keep_orig": false
+ },
+ "a3986c9067e31e80bf8e9b4282e69850": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/num2.png",
+  "orig": 4809,
+  "tiny": 2380,
+  "mean": 0.0816434696316719,
+  "p995": 1.7785826921463013,
+  "amax": 11.0,
+  "keep_orig": false
+ },
+ "b3225578fca02c7949c7e963e64f627b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/txt1.png",
+  "orig": 7355,
+  "tiny": 2903,
+  "mean": 0.006135478150099516,
+  "p995": 0.39215683937072754,
+  "amax": 2.0,
+  "keep_orig": false
+ },
+ "cdd7b07020ac7cf5a41273956a34a928": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_title_shadow.png",
+  "orig": 1703,
+  "tiny": 1703,
+  "mean": 0.0,
+  "p995": 0.0,
+  "amax": 0.0,
+  "keep_orig": true
+ },
+ "d404fad75c5b4ca5b169f4b7d9b54610": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/ray_c.png",
+  "orig": 44346,
+  "tiny": 14200,
+  "mean": 0.5086752772331238,
+  "p995": 3.409151792526245,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "d569f43726b644fc53f28cb5e8fad60b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/ftux/art/ray_a.png",
+  "orig": 22243,
+  "tiny": 6904,
+  "mean": 0.19879595935344696,
+  "p995": 2.9490201473236084,
+  "amax": 17.0,
+  "keep_orig": false
+ },
+ "e05dbd3db44880342acc19cac9907e91": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/v2/art/gr2_spark3.png",
+  "orig": 491,
+  "tiny": 465,
+  "mean": 0.08703246712684631,
+  "p995": 4.199662208557129,
+  "amax": 8.0,
+  "keep_orig": false
+ }
+}
