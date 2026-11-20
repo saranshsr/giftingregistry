@@ -3,17 +3,18 @@
 (images as WebP) in ../export/. Adapted from occasions/exporter/convert.py: same layer/keyframe conversion, plus comp markers
 ('intro', 'idle') and fps read from the dump. PNGs go through the occasions TinyPNG cache only if they were tinified there
 (tinify_sheet.py, needs env TINIFY_KEY); otherwise the original PNG bytes are embedded.
-usage: convert.py [--only SUBSTR]"""
+usage: convert.py [--only SUBSTR] [--dump DIRNAME]   (portrait cards: --dump dump_portrait)"""
 import json, glob, os, sys, io, re, base64, zipfile
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-DUMP = os.path.join(ROOT, 'verify', 'dump')
+DUMP = os.path.join(ROOT, 'verify', sys.argv[sys.argv.index('--dump') + 1] if '--dump' in sys.argv else 'dump')
 OUT = os.path.join(ROOT, 'export')
 FPS = 60.0
 
-NAMES = {'GR sheet \u00b7 Collection': 'gr-sheet-collection', 'GR sheet \u00b7 Gift registry': 'gr-sheet-registry'}
+NAMES = {'GR sheet \u00b7 Collection': 'gr-sheet-collection', 'GR sheet \u00b7 Gift registry': 'gr-sheet-registry',
+         'GR card \u00b7 Collection (portrait)': 'gr-card-portrait-collection', 'GR card \u00b7 Gift registry (portrait)': 'gr-card-portrait-registry'}
 
 def rnd(o):
     if isinstance(o, float):
@@ -222,6 +223,6 @@ def main():
             z.writestr('manifest.json', manifest); z.writestr('animations/%s.json' % base, js2)
         rows.append((folder, base, len(js), os.path.getsize(os.path.join(od, base + '.lottie'))))
         print(base, 'json', len(js), 'lottie', rows[-1][3], '%.0f%%' % (100.0 * rows[-1][3] / len(js)), 'markers', anim['markers'])
-    json.dump(rows, open(os.path.join(ROOT, 'verify', 'sizes.json'), 'w')) if not only else None
+    json.dump(rows, open(os.path.join(ROOT, 'verify', 'sizes.json' if os.path.basename(DUMP) == 'dump' else 'sizes_%s.json' % os.path.basename(DUMP)), 'w')) if not only else None
 
 main()

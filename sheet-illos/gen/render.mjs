@@ -20,8 +20,9 @@ const jobs = [];
 for (const f of fs.readdirSync(EXP).sort()) { if (!/\.(json|lottie)$/.test(f) || (ONLY && !f.includes(ONLY))) continue; const base = f.replace(/\.(json|lottie)$/, ''); const kind = f.endsWith('.json') ? 'json' : 'lottie';
   jobs.push({ base, kind, data: kind === 'json' ? fs.readFileSync(path.join(EXP, f), 'utf8') : readLottie(path.join(EXP, f)) }); }
 const browser = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new', args: ['--no-sandbox', '--allow-file-access-from-files'] });
-const page = await browser.newPage(); await page.setViewport({ width: 600, height: 360, deviceScaleFactor: 1 });
-await page.setContent(`<html><body style="margin:0;background:transparent"><div id="c" style="width:600px;height:360px"></div></body></html>`);
+const page = await browser.newPage(); const VW = +(process.env.W || 600), VH = +(process.env.H || 360);   // portrait cards: W=492
+await page.setViewport({ width: VW, height: VH, deviceScaleFactor: 1 });
+await page.setContent(`<html><body style="margin:0;background:transparent"><div id="c" style="width:${VW}px;height:${VH}px"></div></body></html>`);
 await page.addScriptTag({ content: lw });
 for (const j of jobs) {
   const ok = await page.evaluate(async (data, R) => {
@@ -34,7 +35,7 @@ for (const j of jobs) {
   }, j.data, R);
   for (const fr of FR) {
     await page.evaluate(async (fr) => { window.anim.goToAndStop(fr, true); await new Promise(r => setTimeout(r, 60)); }, fr);
-    const png = await page.screenshot({ type: 'png', omitBackground: true, clip: { x: 0, y: 0, width: 600, height: 360 } });
+    const png = await page.screenshot({ type: 'png', omitBackground: true, clip: { x: 0, y: 0, width: VW, height: VH } });
     fs.writeFileSync(path.join(OUT, `${j.base}__${j.kind}__f${fr}.png`), png);
   }
   console.log(j.base, j.kind, ok);

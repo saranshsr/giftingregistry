@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Bottom sheet lotties (copy of occasions/exporter/tinify.py, paths -> ../verify). Compress every unique PNG referenced by dump/*.json via TinyPNG. Key from env TINIFY_KEY only.
-Cache: tiny_cache/<md5>.png ; quality report: tiny_cache/report.json"""
+Cache: tiny_cache/<md5>.png ; quality report: tiny_cache/report.json
+usage: tinify_sheet.py [--dump DIRNAME]  (portrait cards: --dump dump_portrait). PNGs that are already palette PNGs (TinyPNG output,
+e.g. the landscape pieces, which were tinified in place) are skipped: sending them again only spends the monthly budget."""
 import json, glob, os, sys, hashlib, base64, io, urllib.request
 import numpy as np
 from PIL import Image
@@ -20,9 +22,10 @@ def premul(p):
     a = np.asarray(Image.open(p).convert('RGBA')).astype(np.float32)
     return a[..., :3] * (a[..., 3:4] / 255.0), a[..., 3]
 files = {}
-for p in glob.glob(os.path.join(V, 'dump', '*.json')):
+DUMPD = sys.argv[sys.argv.index('--dump') + 1] if '--dump' in sys.argv else 'dump'
+for p in glob.glob(os.path.join(V, DUMPD, '*.json')):
     for L in json.load(open(p))['layers']:
-        if L['kind'] == 'footage' and L['file'].lower().endswith('.png'): files[L['file']] = 1
+        if L['kind'] == 'footage' and L['file'].lower().endswith('.png') and Image.open(L['file']).mode != 'P': files[L['file']] = 1
 byhash = {}
 for f in sorted(files): byhash.setdefault(hashlib.md5(open(f, 'rb').read()).hexdigest(), []).append(f)
 print('unique png', len(byhash))
@@ -35,7 +38,7 @@ for n, (h, fl) in enumerate(sorted(byhash.items())):
         url = json.loads(body)['output']['url']
         data, _ = req(url)
         open(out, 'wb').write(data)
-        if count and count >= 440: print('STOP near limit', count); break
+        if count and count >= 495: print('STOP near limit', count); break
     pa, aa = premul(src); pb, ab = premul(out)
     d = np.abs(pa - pb).mean(axis=2)
     amax = float(np.abs(aa - ab).max())
@@ -43,5 +46,7 @@ for n, (h, fl) in enumerate(sorted(byhash.items())):
     r['keep_orig'] = r['mean'] > 2 or amax > 24 or r['tiny'] >= r['orig']
     rep[h] = r
     print(n, os.path.basename(src), r['orig'], '->', r['tiny'], 'mean %.2f p99.5 %.1f amax %d' % (r['mean'], r['p995'], amax), 'KEEP' if r['keep_orig'] else '', flush=True)
-json.dump(rep, open(os.path.join(CACHE, 'report.json'), 'w'), indent=1)
+_old = json.load(open(os.path.join(CACHE, 'report.json'))) if os.path.exists(os.path.join(CACHE, 'report.json')) else {}
+_old.update(rep)   # keep the entries of the other set (landscape / portrait)
+json.dump(_old, open(os.path.join(CACHE, 'report.json'), 'w'), indent=1)
 print('Compression-Count', count)

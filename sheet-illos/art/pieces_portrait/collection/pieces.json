@@ -1,0 +1,152 @@
+{
+ "canvas": [
+  492,
+  360
+ ],
+ "note": "x/y/pivots in comp px (492x360); pieces may run past the comp",
+ "k": 1.155725994435672,
+ "layers": [
+  {
+   "name": "ribbon_left",
+   "pivot": [
+    159.554,
+    242.289
+   ],
+   "file": "collection_portrait_ribbon_left.png",
+   "x": 59.0,
+   "y": 167.0,
+   "w": 130,
+   "h": 120
+  },
+  {
+   "name": "ribbon_right",
+   "pivot": [
+    353.716,
+    300.076
+   ],
+   "file": "collection_portrait_ribbon_right.png",
+   "x": 310.0,
+   "y": 230.0,
+   "w": 119,
+   "h": 125
+  },
+  {
+   "name": "base",
+   "file": "collection_portrait_base.png",
+   "x": 70.0,
+   "y": 115.0,
+   "w": 316,
+   "h": 291
+  },
+  {
+   "name": "lamp",
+   "anchor": [
+    252.012,
+    248.068
+   ],
+   "kind": "copy",
+   "file": "collection_portrait_lamp.png",
+   "x": 182.0,
+   "y": 113.0,
+   "w": 142,
+   "h": 136
+  },
+  {
+   "name": "heart",
+   "anchor": [
+    351.983,
+    333.014
+   ],
+   "kind": "copy",
+   "file": "collection_portrait_heart.png",
+   "x": 312.0,
+   "y": 295.0,
+   "w": 74,
+   "h": 81
+  },
+  {
+   "name": "star",
+   "anchor": [
+    339.847,
+    146.364
+   ],
+   "file": "collection_portrait_star.png",
+   "x": 311.0,
+   "y": 109.0,
+   "w": 68,
+   "h": 74
+  },
+  {
+   "name": "dash1",
+   "file": "collection_portrait_dash1.png",
+   "x": 348.0,
+   "y": 159.0,
+   "w": 44,
+   "h": 47
+  },
+  {
+   "name": "dash2",
+   "file": "collection_portrait_dash2.png",
+   "x": 363.0,
+   "y": 184.0,
+   "w": 48,
+   "h": 35
+  },
+  {
+   "name": "dash3",
+   "file": "collection_portrait_dash3.png",
+   "x": 372.0,
+   "y": 212.0,
+   "w": 44,
+   "h": 26
+  }
+ ],
+ "restack": {
+  "mean": 0.217,
+  "p99_9": 3.31,
+  "max": 44.33
+ },
+ "clouds": [
+  {
+   "name": "cloud_back",
+   "file": "collection_portrait_cloud_back.png",
+   "x": 87,
+   "y": 239,
+   "w": 390,
+   "h": 270,
+   "opacity": 0.550000011920929
+  },
+  {
+   "name": "cloud_front",
+   "file": "collection_portrait_cloud_front.png",
+   "x": 175,
+   "y": 286,
+   "w": 334,
+   "h": 231,
+   "opacity": 0.550000011920929
+  }
+ ],
+ "sparkles": [
+  {
+   "name": "sparkle1",
+   "file": "collection_portrait_sparkle.png",
+   "x": 45.0,
+   "y": 81.0,
+   "w": 28.0,
+   "h": 28.0,
+   "sc": 1.0,
+   "opacity": 0.8999999761581421
+  },
+  {
+   "name": "sparkle2",
+   "file": "collection_portrait_sparkle.png",
+   "x": 401.274,
+   "y": 68.213,
+   "w": 19.25,
+   "h": 19.25,
+   "sc": 0.687500034875059,
+   "opacity": 0.699999988079071
+  }
+ ],
+ "backdrop_note": "card gradient + glow are drawn by the front end; clouds baked against them"
+}

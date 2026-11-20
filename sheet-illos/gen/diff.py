@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Compare AE stills (../verify/ae_frames, saveFrameToPng = premultiplied RGB) with lottie-web renders (../verify/lw_<r>, straight
-alpha), both on black. Adapted from occasions/exporter/diff.py. usage: diff.py [renderer=canvas] -> table + ../verify/diff_<r>.json"""
+alpha), both on black. Adapted from occasions/exporter/diff.py. usage: diff.py [renderer=canvas] [portrait] -> table + ../verify/diff_<r>[_portrait].json"""
 import sys, os, json, re
 import numpy as np
 from PIL import Image
@@ -9,6 +9,11 @@ HERE = os.path.dirname(os.path.abspath(__file__)); VER = os.path.join(os.path.di
 R = sys.argv[1] if len(sys.argv) > 1 else 'canvas'
 FR = [4, 8, 12, 16, 20, 24, 32, 40, 48, 60, 66, 70, 120, 180, 240, 275]
 COMPS = {'GR sheet _ Collection': 'gr-sheet-collection', 'GR sheet _ Gift registry': 'gr-sheet-registry'}
+PORT = 'portrait' in sys.argv[2:]
+AEF = 'ae_frames_portrait' if PORT else 'ae_frames'
+if PORT:
+    FR = [4, 8, 12, 16, 20, 24, 32, 40, 48, 60, 66, 70, 100, 120, 150, 180, 210, 240, 276]
+    COMPS = {'GR card _ Collection _portrait_': 'gr-card-portrait-collection', 'GR card _ Gift registry _portrait_': 'gr-card-portrait-registry'}
 
 
 def ae(p):
@@ -25,7 +30,7 @@ for safe, base in COMPS.items():
     for kind in (('lottie',) if R == 'thorvg' else ('json', 'lottie')):
         rows = []
         for fr in FR:
-            pa = os.path.join(VER, 'ae_frames', '%s__f%d.png' % (safe, fr)); pb = os.path.join(VER, 'lw_' + R, '%s__%s__f%d.png' % (base, kind, fr))
+            pa = os.path.join(VER, AEF, '%s__f%d.png' % (safe, fr)); pb = os.path.join(VER, 'lw_' + R, '%s__%s__f%d.png' % (base, kind, fr))
             if not (os.path.exists(pa) and os.path.exists(pb)): continue
             (ca, aa), (cb, ab) = ae(pa), lw(pb)
             d = np.abs(ca - cb).mean(axis=2)
@@ -35,5 +40,5 @@ for safe, base in COMPS.items():
         bad = wm >= 1.0
         fail += bad
         print('%-22s %-6s worst mean %.3f/255  worst p99.5 %.2f  frames %d %s' % (base, kind, wm, wp, len(rows), 'FAIL' if bad else 'ok'))
-json.dump(res, open(os.path.join(VER, 'diff_%s.json' % R), 'w'), indent=1)
+json.dump(res, open(os.path.join(VER, 'diff_%s%s.json' % (R, '_portrait' if PORT else '')), 'w'), indent=1)
 print('fails', fail)

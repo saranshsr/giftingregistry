@@ -187,5 +187,194 @@
   "p995": 4.027616024017334,
   "amax": 14.0,
   "keep_orig": false
+ },
+ "01dd484ead28d757ed9dba76f968e6e2": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_heart.png",
+  "orig": 11793,
+  "tiny": 4877,
+  "mean": 0.7679576873779297,
+  "p995": 6.803391456604004,
+  "amax": 19.0,
+  "keep_orig": false
+ },
+ "02673645de2afac9400d10a3570b0125": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_cloud_front.png",
+  "orig": 19282,
+  "tiny": 7374,
+  "mean": 0.3359690010547638,
+  "p995": 5.995604515075684,
+  "amax": 15.0,
+  "keep_orig": false
+ },
+ "0aa7f599188838ea81c9b074fec879aa": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_card.png",
+  "orig": 15653,
+  "tiny": 8273,
+  "mean": 0.5020180940628052,
+  "p995": 2.976470947265625,
+  "amax": 9.0,
+  "keep_orig": false
+ },
+ "0df5203e7046105f828f66ef9dd327fc": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_dash2.png",
+  "orig": 3015,
+  "tiny": 2021,
+  "mean": 0.43128225207328796,
+  "p995": 2.975775718688965,
+  "amax": 7.0,
+  "keep_orig": false
+ },
+ "12a06dd63f96fc9bd250f06388b33b99": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_heart.png",
+  "orig": 11606,
+  "tiny": 4977,
+  "mean": 0.957922101020813,
+  "p995": 5.574292182922363,
+  "amax": 27.0,
+  "keep_orig": true
+ },
+ "17318624742fd039f2a70f28ba144e09": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_base.png",
+  "orig": 103327,
+  "tiny": 36951,
+  "mean": 0.44011685252189636,
+  "p995": 6.283660888671875,
+  "amax": 44.0,
+  "keep_orig": true
+ },
+ "1b484cea5aba1502da6eb8171956ed38": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_badge.png",
+  "orig": 17382,
+  "tiny": 7030,
+  "mean": 0.7420254945755005,
+  "p995": 5.952937602996826,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "1f263ae91004482e4bc2b23927924136": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_ribbon_right.png",
+  "orig": 14795,
+  "tiny": 5461,
+  "mean": 0.5728554725646973,
+  "p995": 6.138086795806885,
+  "amax": 17.0,
+  "keep_orig": false
+ },
+ "2b3ba6a01bd12ee0a59d266a49db0172": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_cloud.png",
+  "orig": 38823,
+  "tiny": 11643,
+  "mean": 0.28837478160858154,
+  "p995": 5.956301689147949,
+  "amax": 18.0,
+  "keep_orig": false
+ },
+ "3411b6b00a06d3f5640c9090c04900cb": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_dash1.png",
+  "orig": 3368,
+  "tiny": 2113,
+  "mean": 0.3576137125492096,
+  "p995": 2.6344189643859863,
+  "amax": 4.0,
+  "keep_orig": false
+ },
+ "574a1af5ab67b3343eea1f126202c41a": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_base.png",
+  "orig": 123814,
+  "tiny": 36568,
+  "mean": 1.0472967624664307,
+  "p995": 7.937255859375,
+  "amax": 34.0,
+  "keep_orig": true
+ },
+ "6e378d80cdae94eada05aa20f2622bab": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_ribbon_left.png",
+  "orig": 14251,
+  "tiny": 5303,
+  "mean": 0.5460533499717712,
+  "p995": 6.899377346038818,
+  "amax": 30.0,
+  "keep_orig": true
+ },
+ "73d1431d421646f49ba94e14c50d158c": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_star.png",
+  "orig": 6573,
+  "tiny": 3168,
+  "mean": 0.5431546568870544,
+  "p995": 4.930346965789795,
+  "amax": 12.0,
+  "keep_orig": false
+ },
+ "95ba43c0753791fb6b131860874789cd": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_cloud_back.png",
+  "orig": 28632,
+  "tiny": 9208,
+  "mean": 0.35059186816215515,
+  "p995": 6.339247703552246,
+  "amax": 18.0,
+  "keep_orig": false
+ },
+ "a32dff6fc8e8cfda13d6610bf964e76f": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_lamp.png",
+  "orig": 25308,
+  "tiny": 9550,
+  "mean": 0.7094829678535461,
+  "p995": 6.545861721038818,
+  "amax": 23.0,
+  "keep_orig": false
+ },
+ "ab39ab6cb3444f094dbfb5217ce0c195": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_dash3.png",
+  "orig": 1792,
+  "tiny": 1313,
+  "mean": 0.5589073896408081,
+  "p995": 2.8521652221679688,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "b3376a8c00367936bb7e3edaf285e051": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_sparkle.png",
+  "orig": 1586,
+  "tiny": 1316,
+  "mean": 0.3599206507205963,
+  "p995": 3.0187716484069824,
+  "amax": 4.0,
+  "keep_orig": false
+ },
+ "bd5b64f867ada274e7b21c5861ca71ad": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_dash1.png",
+  "orig": 2470,
+  "tiny": 1463,
+  "mean": 0.5116646885871887,
+  "p995": 2.727292060852051,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "bf40b504a017f970f302857172a020eb": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/collection/collection_portrait_dash3.png",
+  "orig": 2224,
+  "tiny": 1840,
+  "mean": 0.47081559896469116,
+  "p995": 2.5100884437561035,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "cce2c17bdff7d5b4c29ba4dfeb691758": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_lid.png",
+  "orig": 45839,
+  "tiny": 15282,
+  "mean": 0.5853418707847595,
+  "p995": 7.574960708618164,
+  "amax": 28.0,
+  "keep_orig": true
+ },
+ "f464f2c1ec7cf2365f44402855c393c5": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces_portrait/registry/registry_portrait_dash2.png",
+  "orig": 2457,
+  "tiny": 1433,
+  "mean": 0.4690570533275604,
+  "p995": 2.5155277252197266,
+  "amax": 5.0,
+  "keep_orig": false
  }
 }

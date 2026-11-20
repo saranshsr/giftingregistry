@@ -1,5 +1,5 @@
 // Gift Registry 'Create' bottom sheet lotties -> comps in 01 Hero lotties (export these)/Bottom sheet/.
-// Generated data in SPEC (gen_build.py). ASCII only. Never saves or closes the project. Only touches comps it made (comment tag).
+// Generated data in SPEC (gen_build.py, gen_build_portrait.py). ASCII only. Never saves or closes the project. Only touches comps it made (comment tag).
 var SPEC = /*SPEC*/null;
 var NL_s = String.fromCharCode(10);
 var LOG_s = new File(SPEC.log); LOG_s.encoding = "UTF-8"; LOG_s.open("w"); LOG_s.close();
@@ -85,16 +85,21 @@ function buildComp_s(C, folder, artFolder) {
   var made = [];
   for (var li = 0; li < C.layers.length; li++) {
     var S = C.layers[li], pc = P[S.piece];
-    var item = importArt_s(SPEC.piece_dir + "/" + C.card + "/" + pc.file, artFolder);
+    var item = importArt_s(pc.path || (SPEC.piece_dir + "/" + C.card + "/" + pc.file), artFolder);
+    var sc = pc.sc || 1;   // a piece drawn at sc x its pixel size (one sparkle image used at two sizes)
     var L = comp.layers.add(item); L.name = S.name; L.comment = TAG_s;
     L.startTime = 0; L.inPoint = 0; L.outPoint = dur;
     var pv = S.pivot || [pc.x + pc.w / 2, pc.y + pc.h / 2];
     var loc = S.noparent ? function (p) { return [p[0], p[1]]; } : local;
     if (!S.noparent) L.parent = rig;
-    tr_s(L, "ADBE Anchor Point").setValue([pv[0] - pc.x, pv[1] - pc.y]);
+    tr_s(L, "ADBE Anchor Point").setValue([(pv[0] - pc.x) / sc, (pv[1] - pc.y) / sc]);
     tr_s(L, "ADBE Position").setValue(loc(pv));
-    tr_s(L, "ADBE Scale").setValue([100, 100]);
-    if (S.scale) setKeys_s(tr_s(L, "ADBE Scale"), S.scale);
+    tr_s(L, "ADBE Scale").setValue([100 * sc, 100 * sc]);
+    if (S.scale) {
+      var sk = [];
+      for (var q0 = 0; q0 < S.scale.length; q0++) sk.push([S.scale[q0][0], [S.scale[q0][1][0] * sc, S.scale[q0][1][1] * sc], S.scale[q0][2], S.scale[q0][3]]);
+      setKeys_s(tr_s(L, "ADBE Scale"), sk);
+    }
     if (S.rot) setKeys_s(tr_s(L, "ADBE Rotate Z"), S.rot);
     if (S.opacity !== undefined) tr_s(L, "ADBE Opacity").setValue(S.opacity);
     if (S.op_keys) setKeys_s(tr_s(L, "ADBE Opacity"), S.op_keys);

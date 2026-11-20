@@ -1,0 +1,104 @@
+{
+ "canvas": [
+  492,
+  360
+ ],
+ "note": "x/y/pivots in comp px (492x360); pieces may run past the comp",
+ "k": 1.2404268417254685,
+ "layers": [
+  {
+   "name": "base",
+   "file": "registry_portrait_base.png",
+   "x": 48.0,
+   "y": 126.0,
+   "w": 394,
+   "h": 327
+  },
+  {
+   "name": "lid",
+   "pivot": [
+    187.639,
+    213.016
+   ],
+   "file": "registry_portrait_lid.png",
+   "x": 94.0,
+   "y": 95.0,
+   "w": 252,
+   "h": 165
+  },
+  {
+   "name": "card",
+   "kind": "copy",
+   "file": "registry_portrait_card.png",
+   "x": 186.0,
+   "y": 192.0,
+   "w": 141,
+   "h": 71
+  },
+  {
+   "name": "heart",
+   "anchor": [
+    142.984,
+    292.403
+   ],
+   "file": "registry_portrait_heart.png",
+   "x": 97.0,
+   "y": 213.0,
+   "w": 82,
+   "h": 87
+  },
+  {
+   "name": "badge",
+   "anchor": [
+    376.804,
+    266.974
+   ],
+   "file": "registry_portrait_badge.png",
+   "x": 330.0,
+   "y": 222.0,
+   "w": 96,
+   "h": 93
+  },
+  {
+   "name": "dash1",
+   "file": "registry_portrait_dash1.png",
+   "x": 341.0,
+   "y": 160.0,
+   "w": 33,
+   "h": 39
+  },
+  {
+   "name": "dash2",
+   "file": "registry_portrait_dash2.png",
+   "x": 353.0,
+   "y": 178.0,
+   "w": 40,
+   "h": 34
+  },
+  {
+   "name": "dash3",
+   "file": "registry_portrait_dash3.png",
+   "x": 359.0,
+   "y": 201.0,
+   "w": 36,
+   "h": 23
+  }
+ ],
+ "restack": {
+  "mean": 0.213,
+  "p99_9": 3.94,
+  "max": 57.56
+ },
+ "clouds": [
+  {
+   "name": "cloud",
+   "file": "registry_portrait_cloud.png",
+   "x": 141,
+   "y": 194,
+   "w": 390,
+   "h": 270,
+   "opacity": 0.550000011920929
+  }
+ ],
+ "backdrop_note": "card gradient + glow are drawn by the front end; clouds baked against them"
+}
