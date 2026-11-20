@@ -16,10 +16,8 @@ import { decodeSoon } from './warm';
 import { registerMorph } from './transitions';
 import colGlow from '@assets/giftregistry/create/col-glow.svg?url';
 import regGlow from '@assets/giftregistry/create/reg-glow.svg?url';
-import cloud from '@assets/giftregistry/create/cloud.png';
-import colArt from '@assets/giftregistry/create/col-art.png';
-import regArt from '@assets/giftregistry/create/reg-art.png';
-import sparkle from '@assets/giftregistry/create/sparkle.png';
+import colLottie from '@assets/giftregistry/lottie/gr-sheet-collection.lottie?url';
+import regLottie from '@assets/giftregistry/lottie/gr-sheet-registry.lottie?url';
 // a copy of the Figma export with its baked dark top corners filled with the blue, so the sheet's own r16 clip is the
 // only corner (the original export showed a dark crescent inside the card's curve)
 import heroBg from '@assets/giftregistry/create/hero-bg-full.jpg';
@@ -33,7 +31,7 @@ import styles from './CreateSheet.module.css';
  * gift registry" grows the same sheet into the explainer in place (reference expandCreateSheet), and its Continue
  * grows the white card into step 1 (reference morphToRegistry, here the `gr-morph` transition).
  */
-type Piece = { src: string; x: number; y: number; w: number; h: number; at: number; kind: 'glow' | 'cloud' | 'art' | 'sparkle'; opacity?: number; rotate?: number };
+type Piece = { src: string; x: number; y: number; w: number; h: number; at: number; kind: 'glow' | 'cloud'; opacity?: number; rotate?: number };
 /**
  * Figma "Visuals" layers (pt in the 200 × 120 box pinned to the card's top-right corner) and when each pops, ms after
  * the sheet starts rising. Reference order glow → cloud → object → sparkles; one 60 ms stagger per card, the
@@ -42,17 +40,22 @@ type Piece = { src: string; x: number; y: number; w: number; h: number; at: numb
  */
 const CARDS: Record<'collection' | 'registry', Piece[]> = {
   collection: [
-    { src: colGlow, x: 32, y: -50, w: 220, h: 220, at: 160, kind: 'glow' },
-    { src: cloud, x: 86, y: 46, w: 140, h: 103, at: 200, kind: 'cloud', opacity: 0.55 },
-    { src: colArt, x: 53, y: 12, w: 143, h: 95, at: 260, kind: 'art' },
+    { src: colGlow, x: 32, y: -50, w: 220, h: 220, at: 0, kind: 'glow' },
   ],
   registry: [
-    { src: regGlow, x: 27, y: -42, w: 220, h: 220, at: 220, kind: 'glow' },
-    { src: cloud, x: 87, y: 44, w: 140, h: 103, at: 260, kind: 'cloud', opacity: 0.55 },
-    { src: regArt, x: 55.7, y: 11.47, w: 151.61, h: 101.08, at: 320, kind: 'art', rotate: 1.98 },
-    { src: sparkle, x: 87, y: 14, w: 16, h: 16, at: 440, kind: 'sparkle', opacity: 0.9 },
-    { src: sparkle, x: 171, y: 12, w: 11, h: 11, at: 500, kind: 'sparkle', opacity: 0.7 },
+    { src: regGlow, x: 27, y: -42, w: 220, h: 220, at: 60, kind: 'glow' },
   ],
+};
+
+/**
+ * The illustration itself (object + sparkles) is a lottie per card: sheet-illos/export, AE comps "GR sheet · …",
+ * 600 × 360 = the 200 × 120 Visuals box at 3x, transparent; cloud, object and sparkles are in it, only the radial glow
+ * stays code. Markers: "intro" plays once from `at` (ms after the sheet starts rising, so it is landing with the sheet),
+ * then "idle" loops seamlessly.
+ */
+const ILLO: Record<keyof typeof CARDS, { src: string; at: number; idleShare: number }> = {
+  collection: { src: colLottie, at: 0, idleShare: 66 / 275 },
+  registry: { src: regLottie, at: 60, idleShare: 70 / 279 },
 };
 
 /**
@@ -111,16 +114,11 @@ function SheetCard({ kind, title, sub, shimmer, onPress }: { kind: keyof typeof 
           const d = p.at / 1000;
           const to = p.opacity ?? 1;
           const rest = p.rotate ?? 0;
-          // reference: glow .6 → 1; objects .5 / y14 / −6°; sparkles 0 / −90°. Objects start a touch fuller (.6 /
-          // y12) and sparkles turn a quarter less, so the pop reads as a settle rather than a bounce
+          // the radial glow blooms here; cloud, object and sparkles are the card's lottie (SheetIllo)
           const from =
             p.kind === 'glow'
               ? { opacity: 0, scale: 0.6 }
-              : p.kind === 'sparkle'
-                ? { opacity: 0, scale: 0, rotate: -60 }
-                : p.kind === 'cloud'
-                  ? { opacity: 0, scale: 0.8, y: 8 }
-                  : { opacity: 0, scale: 0.6, y: 12, rotate: rest - 6 };
+              : { opacity: 0, scale: 0.8, y: 8 };
           return (
             <motion.img
               key={i}
@@ -130,11 +128,11 @@ function SheetCard({ kind, title, sub, shimmer, onPress }: { kind: keyof typeof 
               style={{ left: p.x, top: p.y, width: p.w, height: p.h }}
               initial={reduce ? false : from}
               animate={{ opacity: to, scale: 1, y: 0, rotate: rest }}
-              // the glow and cloud bloom (MOVE + a long ease-out fade, reference 600 ms); the object and sparkles pop
-              transition={p.kind === 'glow' || p.kind === 'cloud' ? { ...MOVE, delay: d, opacity: { duration: 0.5, delay: d, ease: easing.out } } : pop(d)}
+              transition={{ ...MOVE, delay: d, opacity: { duration: 0.5, delay: d, ease: easing.out } }}
             />
           );
         })}
+        <SheetIllo {...ILLO[kind]} />
       </span>
       <span className={styles.cardTitle}>
         <span className={styles.titleText}>
@@ -163,6 +161,34 @@ function SheetCard({ kind, title, sub, shimmer, onPress }: { kind: keyof typeof 
       </span>
     </Pressable>
   );
+}
+
+/** plays the card's lottie: "intro" once after `at`, then loops "idle"; reduced motion holds the intro's last frame */
+function SheetIllo({ src, at, idleShare }: { src: string; at: number; idleShare: number }) {
+  const reduce = useReduceMotion();
+  const player = useRef<DotLottie | null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const mountedAt = useRef(performance.now());
+  useEffect(() => () => clearTimeout(timer.current), []);
+  const onPlayer = (d: DotLottie) => {
+    if (reduce || player.current === d) return;
+    player.current = d;
+    const start = () => {
+      d.setMarker('intro');
+      const idle = () => {
+        d.removeEventListener('complete', idle);
+        d.setMarker('idle');
+        d.setLoop(true);
+        d.play();
+      };
+      d.addEventListener('complete', idle);
+      clearTimeout(timer.current);
+      timer.current = setTimeout(() => d.play(), Math.max(0, at - (performance.now() - mountedAt.current)));
+    };
+    if (d.isLoaded) start();
+    else d.addEventListener('load', start);
+  };
+  return <Lottie src={src} autoplay={reduce} reducedMotionFrame={idleShare} onPlayer={onPlayer} maxDpr={3} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />;
 }
 
 /** "What is a Gift Registry" (Figma v2 sheet 843:763414): hero lottie over its background, three columns, Continue */

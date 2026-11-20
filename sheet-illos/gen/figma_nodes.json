@@ -1,0 +1,166 @@
+{
+ "_note": "Read from Figma Zs6qEAZ1Uaej4LcKst0sbp (main components of the 'Visuals' instances on 0.3 Create \u00b7 bottom sheet). Coordinates in the 200x120 Visuals box (pt).",
+ "collection": {
+  "image": {
+   "node": "893:323748",
+   "raw": "collection/raw3.png",
+   "hash": "84b523da134f36c4876abd2ba00fb90cac1947f5",
+   "w": 143,
+   "h": 95,
+   "rt": [
+    [
+     1,
+     0,
+     53
+    ],
+    [
+     0,
+     1,
+     12
+    ]
+   ],
+   "scaleMode": "FILL",
+   "imageTransform": [
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "filters": {
+    "exposure": 0.08
+   },
+   "export4x": "collection/export4x.png"
+  },
+  "cloud": {
+   "node": "893:323747",
+   "raw": "cloud/raw3.png",
+   "w": 140,
+   "h": 103,
+   "x": 86.0001,
+   "y": 46,
+   "scaleMode": "FIT",
+   "opacity": 0.55,
+   "blend": "OVERLAY"
+  },
+  "glow": {
+   "node": "893:323746",
+   "x": 32.00003,
+   "y": -50,
+   "r": 110.137,
+   "c0": [
+    0.6755082,
+    0.5167984,
+    0.9999812
+   ],
+   "c1": [
+    0.9764706,
+    0.9764706,
+    0.9843137
+   ],
+   "opacity": 1.0
+  }
+ },
+ "registry": {
+  "image": {
+   "node": "893:323849",
+   "raw": "registry/raw1.png",
+   "hash": "6f153790b5d0965410e6650bc282f21681e0b83e",
+   "w": 151.61181640625,
+   "h": 101.07454681396484,
+   "rt": [
+    [
+     0.9994001388549805,
+     -0.03463144600391388,
+     57.5
+    ],
+    [
+     0.03463144600391388,
+     0.9994001388549805,
+     8.884765625
+    ]
+   ],
+   "scaleMode": "CROP",
+   "imageTransform": [
+    [
+     1.3794665336608887,
+     0,
+     -0.18973326683044434
+    ],
+    [
+     0,
+     0.9196444153785706,
+     0.04017780348658562
+    ]
+   ],
+   "filters": {
+    "exposure": -0.19,
+    "contrast": 0.2667,
+    "highlights": 0.42,
+    "shadows": -0.16
+   },
+   "export4x": "registry/export4x.png"
+  },
+  "sparkles": [
+   {
+    "node": "893:323850",
+    "raw": "registry/sparkle_raw.png",
+    "w": 16,
+    "h": 16,
+    "x": 87,
+    "y": 14,
+    "opacity": 0.9,
+    "scaleMode": "FIT"
+   },
+   {
+    "node": "893:323851",
+    "raw": "registry/sparkle_raw.png",
+    "w": 11,
+    "h": 11,
+    "x": 171,
+    "y": 12,
+    "opacity": 0.7,
+    "scaleMode": "FIT"
+   }
+  ],
+  "cloud": {
+   "node": "893:323848",
+   "raw": "cloud/raw3.png",
+   "w": 140,
+   "h": 103,
+   "x": 87,
+   "y": 44,
+   "scaleMode": "FIT",
+   "opacity": 0.55,
+   "blend": "OVERLAY"
+  },
+  "glow": {
+   "node": "893:323847",
+   "x": 27,
+   "y": -42,
+   "r": 110.137,
+   "c0": [
+    0.6156863,
+    0.7411765,
+    0.9882353
+   ],
+   "c1": [
+    0.6801404,
+    0.7861809,
+    0.9949481
+   ],
+   "opacity": 0.6
+  }
+ },
+ "cloud_note": "Cloud: FIT image fill (hash 847c85..., 1462x1076), node opacity 0.55, blend OVERLAY over the Glow (radial, front end draws it). Glow: circle r=110 at node pos+110, stops c0 -> c1 (alpha 1 -> 0), node opacity.",
+ "card_fill": [
+  0.9764706,
+  0.9764706,
+  0.9843137
+ ]
+}

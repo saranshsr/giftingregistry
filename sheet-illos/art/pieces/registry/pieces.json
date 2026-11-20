@@ -1,0 +1,108 @@
+{
+ "canvas": [
+  600,
+  360
+ ],
+ "layers": [
+  {
+   "name": "base",
+   "file": "registry_base.png",
+   "x": 233,
+   "y": 32,
+   "w": 318,
+   "h": 297
+  },
+  {
+   "name": "lid",
+   "file": "registry_lid.png",
+   "x": 287,
+   "y": 40,
+   "w": 186,
+   "h": 132,
+   "pivot": [
+    346,
+    135
+   ]
+  },
+  {
+   "name": "card",
+   "file": "registry_card.png",
+   "x": 345,
+   "y": 118,
+   "w": 113,
+   "h": 57,
+   "kind": "copy"
+  },
+  {
+   "name": "heart",
+   "file": "registry_heart.png",
+   "x": 273,
+   "y": 135,
+   "w": 66,
+   "h": 70,
+   "anchor": [
+    310,
+    199
+   ]
+  },
+  {
+   "name": "badge",
+   "file": "registry_badge.png",
+   "x": 461,
+   "y": 142,
+   "w": 76,
+   "h": 75,
+   "anchor": [
+    498.5,
+    178.5
+   ]
+  },
+  {
+   "name": "dash1",
+   "file": "registry_dash1.png",
+   "x": 470,
+   "y": 92,
+   "w": 27,
+   "h": 32
+  },
+  {
+   "name": "dash2",
+   "file": "registry_dash2.png",
+   "x": 480,
+   "y": 107,
+   "w": 32,
+   "h": 27
+  },
+  {
+   "name": "dash3",
+   "file": "registry_dash3.png",
+   "x": 484,
+   "y": 125,
+   "w": 29,
+   "h": 19
+  },
+  {
+   "name": "sparkle1",
+   "file": "registry_sparkle1.png",
+   "x": 274,
+   "y": 55,
+   "w": 22,
+   "h": 22,
+   "opacity": 0.9
+  },
+  {
+   "name": "sparkle2",
+   "file": "registry_sparkle2.png",
+   "x": 522,
+   "y": 45,
+   "w": 15,
+   "h": 15,
+   "opacity": 0.7
+  }
+ ],
+ "restack": {
+  "mean": 0.097,
+  "p99_9": 3.94,
+  "max": 4.0
+ }
+}

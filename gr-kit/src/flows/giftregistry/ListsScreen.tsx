@@ -6,6 +6,9 @@ import { RegistryStrip } from './components/RegistryStrip';
 import { copy } from './data';
 import { haptics, prepareHaptics } from './haptics';
 import { savedItems } from './products';
+import { warmLottie } from './assets';
+import colLottie from '@assets/giftregistry/lottie/gr-sheet-collection.lottie?url';
+import regLottie from '@assets/giftregistry/lottie/gr-sheet-registry.lottie?url';
 
 /**
  * 02 My Lists: the kit's live Wishlist screen (src/flows/wishlist) titled "My Lists", its Create pill opening the
@@ -14,7 +17,8 @@ import { savedItems } from './products';
 export function ListsScreen({ params }: ScreenProps<{ collections?: 'none' }>) {
   const nav = useNav();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => (prepareHaptics(), nav.preload('giftregistry/create', 'giftregistry/steps')), []);
+  // the Create sheet's two card lotties are fetched here, so they are cached before the sheet opens
+  useEffect(() => (prepareHaptics(), warmLottie(colLottie, regLottie), nav.preload('giftregistry/create', 'giftregistry/steps')), []);
   return (
     <WishlistScreen
       params={params}

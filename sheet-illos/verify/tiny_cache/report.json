@@ -1,0 +1,191 @@
+{
+ "0aff511708d3035bfba88a2db2fced5d": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_dash2.png",
+  "orig": 2391,
+  "tiny": 1816,
+  "mean": 0.3504854738712311,
+  "p995": 2.129995107650757,
+  "amax": 3.0,
+  "keep_orig": false
+ },
+ "13e019ea83a915ae8e94fa51c8a14401": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_sparkle2.png",
+  "orig": 653,
+  "tiny": 571,
+  "mean": 0.38235586881637573,
+  "p995": 2.0922372341156006,
+  "amax": 3.0,
+  "keep_orig": false
+ },
+ "233843aa77a5dc1f0d1e0a3cf464eee9": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_dash1.png",
+  "orig": 2654,
+  "tiny": 1885,
+  "mean": 0.32240262627601624,
+  "p995": 2.4977831840515137,
+  "amax": 4.0,
+  "keep_orig": false
+ },
+ "463a5eaceeb18600cc053a7a231fd0b5": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_heart.png",
+  "orig": 8151,
+  "tiny": 3728,
+  "mean": 0.7207298874855042,
+  "p995": 6.280921459197998,
+  "amax": 20.0,
+  "keep_orig": false
+ },
+ "4d851b1bdc12ea062fa148292b174ec0": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_badge.png",
+  "orig": 11886,
+  "tiny": 5175,
+  "mean": 0.735858678817749,
+  "p995": 5.967868328094482,
+  "amax": 21.0,
+  "keep_orig": false
+ },
+ "505ab2396f5e4079fd781a887f2caf4e": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_dash3.png",
+  "orig": 1748,
+  "tiny": 1565,
+  "mean": 0.43147575855255127,
+  "p995": 2.3089258670806885,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "5d99280ed5b9bc6c3c03891d92b64e8c": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_ribbon_right.png",
+  "orig": 11093,
+  "tiny": 4570,
+  "mean": 0.5087197422981262,
+  "p995": 5.586813926696777,
+  "amax": 17.0,
+  "keep_orig": false
+ },
+ "65381b2d9d7010227eff1a4a52ae3a20": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_ribbon_left.png",
+  "orig": 10755,
+  "tiny": 4335,
+  "mean": 0.47171714901924133,
+  "p995": 5.228374481201172,
+  "amax": 21.0,
+  "keep_orig": false
+ },
+ "66bcbaa0bc2e717f4c9313d940a7cb2e": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_dash1.png",
+  "orig": 1753,
+  "tiny": 1081,
+  "mean": 0.4644230008125305,
+  "p995": 2.296647071838379,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "793bdfc250bd77b1f877846e5d9ec175": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_dash3.png",
+  "orig": 1280,
+  "tiny": 969,
+  "mean": 0.5559163093566895,
+  "p995": 2.7323532104492188,
+  "amax": 3.0,
+  "keep_orig": false
+ },
+ "83dc0bf6857bf1e19b230606d9cd5020": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_card.png",
+  "orig": 10673,
+  "tiny": 5375,
+  "mean": 0.5483131408691406,
+  "p995": 2.9568393230438232,
+  "amax": 2.0,
+  "keep_orig": false
+ },
+ "87ae78eb7bfb323b2385b8b5da66a6ce": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_cloud.png",
+  "orig": 27431,
+  "tiny": 6018,
+  "mean": 0.3421700894832611,
+  "p995": 6.773669242858887,
+  "amax": 16.0,
+  "keep_orig": false
+ },
+ "8b45d6ec37eed9ad70a02e726ce1554c": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_lamp.png",
+  "orig": 19728,
+  "tiny": 7806,
+  "mean": 0.7125572562217712,
+  "p995": 6.513248443603516,
+  "amax": 21.0,
+  "keep_orig": false
+ },
+ "929e588008c61ada147cdc39b33ed61e": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_base.png",
+  "orig": 71242,
+  "tiny": 25641,
+  "mean": 0.3794407844543457,
+  "p995": 5.316585063934326,
+  "amax": 24.0,
+  "keep_orig": false
+ },
+ "9cc750e273357d3f8adc8c938548f7db": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_cloud.png",
+  "orig": 24127,
+  "tiny": 5808,
+  "mean": 0.288763165473938,
+  "p995": 6.691501617431641,
+  "amax": 17.0,
+  "keep_orig": false
+ },
+ "9f482de56a7f964d286c0b00968b02e9": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_sparkle1.png",
+  "orig": 1116,
+  "tiny": 948,
+  "mean": 0.36491653323173523,
+  "p995": 2.3169848918914795,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "b324ef99188976adef9aa84ff1e6239a": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_heart.png",
+  "orig": 9123,
+  "tiny": 4074,
+  "mean": 0.9400100708007812,
+  "p995": 5.29150390625,
+  "amax": 27.0,
+  "keep_orig": true
+ },
+ "ce34d6a751888735addea938f12f003b": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_dash2.png",
+  "orig": 1732,
+  "tiny": 1057,
+  "mean": 0.4908420741558075,
+  "p995": 2.7293472290039062,
+  "amax": 5.0,
+  "keep_orig": false
+ },
+ "da9a428b803a0cb1450ae7eb6c5b5faa": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_base.png",
+  "orig": 96534,
+  "tiny": 28961,
+  "mean": 1.0438889265060425,
+  "p995": 7.894200325012207,
+  "amax": 33.0,
+  "keep_orig": true
+ },
+ "ebb18df08d5efe8411aa7f444620b087": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/registry/registry_lid.png",
+  "orig": 31426,
+  "tiny": 11148,
+  "mean": 0.5777243971824646,
+  "p995": 6.263903617858887,
+  "amax": 22.0,
+  "keep_orig": false
+ },
+ "f9abe861293dc6438672056a7b48d5b1": {
+  "src": "/Users/ssrawat/claude/gifting-registry-lottie/sheet-illos/art/pieces/collection/collection_star.png",
+  "orig": 5101,
+  "tiny": 2725,
+  "mean": 0.49921903014183044,
+  "p995": 4.027616024017334,
+  "amax": 14.0,
+  "keep_orig": false
+ }
+}

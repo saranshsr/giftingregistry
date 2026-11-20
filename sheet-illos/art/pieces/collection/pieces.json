@@ -1,0 +1,107 @@
+{
+ "canvas": [
+  600,
+  360
+ ],
+ "layers": [
+  {
+   "name": "ribbon_left",
+   "file": "collection_ribbon_left.png",
+   "x": 213,
+   "y": 100,
+   "w": 112,
+   "h": 103,
+   "pivot": [
+    300,
+    165
+   ]
+  },
+  {
+   "name": "ribbon_right",
+   "file": "collection_ribbon_right.png",
+   "x": 431,
+   "y": 155,
+   "w": 102,
+   "h": 107,
+   "pivot": [
+    468,
+    215
+   ]
+  },
+  {
+   "name": "base",
+   "file": "collection_base.png",
+   "x": 222,
+   "y": 55,
+   "w": 274,
+   "h": 252
+  },
+  {
+   "name": "lamp",
+   "file": "collection_lamp.png",
+   "x": 319,
+   "y": 53,
+   "w": 123,
+   "h": 118,
+   "anchor": [
+    380,
+    170
+   ],
+   "kind": "copy"
+  },
+  {
+   "name": "heart",
+   "file": "collection_heart.png",
+   "x": 432,
+   "y": 211,
+   "w": 64,
+   "h": 70,
+   "anchor": [
+    466.5,
+    243.5
+   ],
+   "kind": "copy"
+  },
+  {
+   "name": "star",
+   "file": "collection_star.png",
+   "x": 431,
+   "y": 50,
+   "w": 59,
+   "h": 64,
+   "anchor": [
+    456,
+    82
+   ]
+  },
+  {
+   "name": "dash1",
+   "file": "collection_dash1.png",
+   "x": 463,
+   "y": 93,
+   "w": 38,
+   "h": 41
+  },
+  {
+   "name": "dash2",
+   "file": "collection_dash2.png",
+   "x": 476,
+   "y": 114,
+   "w": 42,
+   "h": 31
+  },
+  {
+   "name": "dash3",
+   "file": "collection_dash3.png",
+   "x": 484,
+   "y": 139,
+   "w": 38,
+   "h": 22
+  }
+ ],
+ "restack": {
+  "mean": 0.133,
+  "p99_9": 2.98,
+  "max": 4.0
+ }
+}
